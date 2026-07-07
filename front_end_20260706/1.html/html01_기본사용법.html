@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 기본 사용법 가이드</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary-glow: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            --accent-color: #6366f1;
+            --accent-glow: #818cf8;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --code-bg: #1e293b;
+            --success: #34d399;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient background glow */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            left: -200px;
+            background: var(--primary-glow);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            bottom: -200px;
+            right: -200px;
+            background: var(--primary-glow);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 35px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: #fff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background: linear-gradient(to bottom, var(--accent-color), var(--accent-glow));
+            border-radius: 4px;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        /* Custom styling for tables, lists, code block */
+        pre {
+            background-color: var(--code-bg);
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 20px;
+        }
+
+        code {
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
+            color: var(--accent-glow);
+            background: rgba(99, 102, 241, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        .tag-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tag-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            transition: background 0.2s ease;
+        }
+
+        .tag-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tag-name {
+            font-weight: 700;
+            color: var(--accent-glow);
+            font-family: monospace;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        /* Dynamic Demo Box */
+        .demo-box {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px dashed var(--card-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .demo-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* Demo elements styles */
+        .demo-btn {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-glow) 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.1s ease;
+        }
+
+        .demo-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .demo-link {
+            color: var(--accent-glow);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .demo-link:hover {
+            border-color: var(--accent-glow);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>HTML5 기본 사용법</h1>
+        <p>웹 페이지의 뼈대를 구성하는 HTML의 핵심 개념과 필수 태그 가이드</p>
+    </header>
+
+    <main>
+        <!-- HTML 소개 구조 -->
+        <section class="card">
+            <h2>HTML이란 무엇인가요?</h2>
+            <p><strong>HTML(HyperText Markup Language)</strong>은 웹 페이지를 만들기 위한 표준 마크업 언어입니다. 제목, 단락, 목록, 이미지 등 브라우저가 화면에
+                표시할 구조적 콘텐츠를 정의합니다.</p>
+
+            <div class="demo-title">기본 골격 코드 구조</div>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;문서 제목&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello World!&lt;/h1&gt;
+    &lt;p&gt;첫 번째 문단입니다.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </section>
+
+        <!-- 핵심 태그 모음 -->
+        <section class="card">
+            <h2>자주 사용하는 핵심 태그</h2>
+            <p>HTML 문서 구성 시 가장 기본적이고 필수적으로 사용되는 엘리먼트들입니다.</p>
+
+            <ul class="tag-list">
+                <li class="tag-item">
+                    <div class="tag-name">&lt;h1&gt; ~ &lt;h6&gt;</div>
+                    <p>제목(Heading)을 나타내며, 숫자가 작을수록 중요한 핵심 제목을 의미합니다.</p>
+                </li>
+                <li class="tag-item">
+                    <div class="tag-name">&lt;p&gt;</div>
+                    <p>단락(Paragraph)을 정의하며, 본문 텍스트를 작성할 때 주로 사용합니다.</p>
+                </li>
+                <li class="tag-item">
+                    <div class="tag-name">&lt;a&gt;</div>
+                    <p>하이퍼링크를 생성합니다. <code>href</code> 속성을 통해 이동할 경로를 설정합니다.</p>
+                </li>
+                <li class="tag-item">
+                    <div class="tag-name">&lt;img&gt;</div>
+                    <p>이미지를 삽입합니다. <code>src</code>(경로)와 <code>alt</code>(대체 텍스트) 속성이 필수입니다.</p>
+                </li>
+                <li class="tag-item">
+                    <div class="tag-name">&lt;div&gt; / &lt;span&gt;</div>
+                    <p>스타일링이나 스크립트 적용을 위해 영역을 묶어주는 무색무취의 컨테이너 태그입니다.</p>
+                </li>
+                <li class="tag-item">
+                    <div class="tag-name">&lt;ul&gt; / &lt;ol&gt; / &lt;li&gt;</div>
+                    <p>순서가 없는 목록(ul)과 순서가 있는 목록(ol)을 각각 정의합니다.</p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 실시간 라이브 데모 영역 -->
+        <section class="card">
+            <h2>대화형 컴포넌트 예시 (Interactive Elements)</h2>
+            <p>HTML 기본 태그들과 CSS가 결합되어 웹에 나타나는 실제 모습입니다.</p>
+
+            <div class="demo-box">
+                <div class="demo-title">버튼과 링크 데모</div>
+                <button class="demo-btn" onclick="alert('HTML5 기본 사용법 학습을 환영합니다!')">클릭해보세요</button>
+                <span style="margin: 0 15px; color: var(--text-muted);">또는</span>
+                <a href="https://developer.mozilla.org/ko/docs/Web/HTML" target="_blank" class="demo-link">MDN HTML 공식
+                    문서 방문하기 &rarr;</a>
+            </div>
+        </section>
+
+        <section class="card">
+            <h1>HTML 파일 실행해보기</h1>
+            <p style="background-color: red;">중첩된 요소가 있을때는 <strong>바르게</strong> <br />
+                표현 &nbsp;&nbsp;&nbsp;&nbsp;해야 한다.</p>
+            <p style="background-color: red;">중첩된 요소가 있을때는 <strong>바르게</strong> <br />
+                표현 &nbsp;&nbsp;&nbsp;&nbsp;해야 한다.</p>
+            <div><span>형태가 없는 요소</span></div>
+            <span>형태가 없는 요소</span>
+            <span>형태가 없는 요소</span>
+            <span>형태가 없는 요소</span>
+            <span>형태가 없는 요소 </span>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 HTML5 Guide. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
