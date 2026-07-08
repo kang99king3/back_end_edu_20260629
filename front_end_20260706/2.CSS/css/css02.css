@@ -22,3 +22,53 @@ p {
     margin: 10px;
     padding: 10px;
 }
+
+/* 자식선택자 */
+#sub_title1>b {
+    color: yellow;
+}
+
+h1 b {
+    color: blueviolet;
+}
+
+/* 인접선택자 */
+h1+p {
+    border: 1px solid red;
+}
+
+h1~p {
+    width: 800px;
+    background-color: aquamarine;
+}
+
+p[title='축구관련기사'] {
+    color: red;
+}
+
+/* 가상의 요소를 선택해서 효과를 준다. */
+.a::after {
+    content: "";
+    display: block;
+    width: 800px;
+    height: 200px;
+    background-color: orange;
+}
+
+a:link {
+    background-color: chartreuse;
+}
+
+a:visited {
+    background-color: blue;
+}
+
+a:active {
+    color: red;
+    font-size: 20px;
+}
+
+p:hover {
+    background-color: yellow;
+    font-weight: bold;
+}
