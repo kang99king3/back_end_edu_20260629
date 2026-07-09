@@ -38,6 +38,72 @@
          * 5. footer (하단 영역)
          *    - display: flex를 설정하고 저작권 문구가 가로 및 세로 모두 정중앙에 정렬되도록 하세요.
          */
+        #wrapper {
+            /* 1. 전체 레이아웃 세로 정렬 코드 추가 */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            /* 2. 상단 헤더 양끝 정렬 코드 추가 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .login-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #content {
+            /* 3. 본문 가로 정렬 및 공간 차지 코드 추가 */
+            display: flex;
+            flex-grow: 1;
+            /* (또는 flex-direction: row;) */
+        }
+
+        #content>aside.left {
+            width: 200px;
+            background-color: #ecf0f1;
+            padding: 15px;
+        }
+
+        #content>main {
+            background-color: #ffffff;
+            padding: 20px;
+            /* 4. 메인 영역 확장 코드 추가 */
+            flex-grow: 1;
+        }
+
+        #content>aside.right {
+            width: 150px;
+            background-color: #e2e8f0;
+            padding: 15px;
+        }
+
+        footer {
+            background-color: #34495e;
+            color: white;
+            padding: 20px;
+            /* 5. 푸터 내용 정중앙 정렬 코드 추가 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 
