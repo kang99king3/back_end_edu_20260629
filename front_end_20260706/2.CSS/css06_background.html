@@ -11,11 +11,36 @@
             border: 1px solid gray;
             width: 300px;
             height: 300px;
-            background-color: bisque;
+            /* background-color: bisque;
+            background-image: url("img/images.jpg"),
+                url("img/images.jpg");
+            background-size: 100px 100px, 100px 100px;
+            background-repeat: no-repeat, no-repeat;
+            background-position: 20px 50px, 100px 100px; */
+            background: url("img/images.jpg") no-repeat 20px 50px / 100px 100px;
+        }
+
+        #box2 {
+            width: 300px;
+            height: 300px;
+            /* background-image: url(img/images.jpg); */
+            /* background-size: 300px 300px; */
+            /* opacity: 0.5; */
+            position: relative;
+            z-index: 10;
+        }
+
+        #box2::after {
+            content: "";
+            width: 300px;
+            height: 300px;
             background-image: url("img/images.jpg");
-            background-size: 200px 200px;
-            background-repeat: no-repeat;
-            background-position: 20px 50px;
+            background-size: 300px 300px;
+            opacity: 0.3;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: 0;
         }
     </style>
 </head>
@@ -23,6 +48,12 @@
 <body>
     <h1>배경속성</h1>
     <div id="box1"></div>
+    <div id="box2">
+        [korea] 먼저 2018 러시아 월드컵 직전 치른 북아일랜드 평가전 당시 발생한 '식사 누락'
+        문제를 언급했다. 기성용은 "손흥민 선수와 인터뷰를 마치고 라커룸에 들어갔는데
+        우리 둘만 김밥이 없었다"며 "경기에 져 기분도 좋지 않았고 바로 공항으로 이동해야
+        하는 상황이라 화를 냈다"고 당시 상황을 설명했다.
+    </div>
 </body>
 
 </html>
