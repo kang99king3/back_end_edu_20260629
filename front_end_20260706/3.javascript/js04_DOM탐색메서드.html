@@ -6,7 +6,18 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        function searchId() {
+            //id속성이름으로 탐색한 후 배경색을 지정
+            const p = document.getElementById("idTest");
+            console.log(typeof p);
 
+            p.style.backgroundColor = "red";
+            p.style.color = "white";
+            p.textContent = "id로 탐색이 되네?";
+            p.innerHTML = "<b>태그내부 html요소 접근</b>";
+        }
+    </script>
 </head>
 
 <body>
