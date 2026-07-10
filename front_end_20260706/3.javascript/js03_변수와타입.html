@@ -14,6 +14,39 @@
             console.log(variable);
         }
 
+        function test02() {
+            //지역변수선언
+            //var선언: 호이스팅현상->undefined
+            console.log(variable2);
+            var variable2 = 10;
+        }
+
+        //할당하기(타입)
+        var t1 = 6;//숫자타입
+        console.log(typeof t1);
+        t1 = "문자";//문자열 타입
+        console.log(typeof t1);
+
+        //js객체(json형태)
+        t1 = {
+            key1: 5,
+            key2: "값",
+            key3: function () {
+                console.log("함수객체")
+            }
+        }
+        console.log(typeof t1, t1.key2);
+        // 타입에 명확성 문제...
+        // -> typescript등장 let va:String = "값"
+
+        //재선언의 문제점
+        var a = 5;
+        var a = 10;
+        console.log(a);
+
+        //let은 재선언 문제점 개선
+        // let b = 10;
+        // let b = 15;(X)
     </script>
 </head>
 
@@ -25,7 +58,7 @@
     <p>4.예약어는 사용할 수 없다.</p>
     <h1>변수의 적용범위(Scope)</h1>
     <p onclick="test01()">1.전역변수</p>
-    <p>2.지역변수</p>
+    <p onclick="test02()">2.지역변수</p>
     <h1>변수의 선언과 할당</h1>
     <p>1. var 예약어를 사용해서 선언(전통적인 방식)</p>
     <p>ECMA Script(ES5에서 사용, ES6에서는 let, const추가)</p>
