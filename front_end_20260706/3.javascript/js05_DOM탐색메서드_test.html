@@ -6,7 +6,28 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        function idChk() {
+            document.getElementById("a").style.backgroundColor = "red";
+            document.getElementById("b").style.backgroundColor = "yellow";
+            document.getElementById("c").style.backgroundColor = "blue";
+        }
 
+        function nameChk() {
+            const inputs = document.getElementsByName("nameval01");// [input]
+
+            let id = inputs[0].value;//입력된 값은 value속성에 저장됨
+            let pw = inputs[1].value;
+            // 		inputs[1].value="12343";// 속성에 특정 값을 대입하면 set의 개념
+            let msg = "id:" + id + "/pwd:" + pw;
+            alert(msg);
+        }
+
+        function tagNameChk() {
+            var divs = document.getElementsByTagName("div");
+            divs[1].style.backgroundColor = "yellow";
+        }
+    </script>
 </head>
 
 <body>
