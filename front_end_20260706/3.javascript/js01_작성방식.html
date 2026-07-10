@@ -6,7 +6,9 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>1.js01_작성방식</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <script src='js/test.js'></script>
+    <script src='js/test.js'>
+        // let a="aa";(X) 이미 링크용으로 사용됨
+    </script>
     <script>
         function embedded() {
             alert("내부 작성 방식");
@@ -22,9 +24,12 @@
         <dd>내장객체:Number/String/Array...</dd>
         <dt onclick="embedded();">BOM</dt>
         <dd>window/location/navigator...</dd>
-        <dt>DOM</dt>
+        <dt onclick="linked()">DOM</dt>
         <dd>Document/Element/...</dd>
     </dl>
+    <script>
+        console.log("콘솔에 메시지 출력", "값1", "값2")
+    </script>
 </body>
 
 </html>
