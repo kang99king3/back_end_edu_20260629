@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        var variable = 10;//전역변수
+
+        function test01() {
+            variable = variable + 5;
+            console.log(variable);
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1>변수의 선언규칙</h1>
+    <p>1.대소문자 구별</p>
+    <p>2.영문자, _, $로 시작할 수 있다.</p>
+    <p>3.영문자, _, $, 숫자를 포함할 수 있다.</p>
+    <p>4.예약어는 사용할 수 없다.</p>
+    <h1>변수의 적용범위(Scope)</h1>
+    <p onclick="test01()">1.전역변수</p>
+    <p>2.지역변수</p>
+    <h1>변수의 선언과 할당</h1>
+    <p>1. var 예약어를 사용해서 선언(전통적인 방식)</p>
+    <p>ECMA Script(ES5에서 사용, ES6에서는 let, const추가)</p>
+    <p>2. 값을 할당할때 타입: 변수에 할당하는 값에 따라 타입이 결정</p>
+</body>
+
+</html>
