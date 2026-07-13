@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+
+<body>
+    <h1>1.숫자형 형변환 Number()함수</h1>
+    <input type="text" name="num" id="num1" value="1234" />
+    <button onclick="numTest()">확인</button>
+
+    <h1>2.정수형 형변환 parseInt()함수</h1>
+    <input type="text" name="int" id="int1" />
+    <button onclick="intTest(int1)">확인</button>
+
+    <h1>3.실수형 형변환 parsefloat()함수</h1>
+    <input type="text" name="float" id="float1" />
+    <button onclick="floatTest(float1)">확인</button>
+
+    <h1>4.검증함수 eval()함수</h1>
+    <p>문자열로 된 값을 자바스크립트 코드로 변환해서 실행시켜주는 함수</p>
+    <input type="text" name="evalue" id="evalue1" placeholder="입력예) 5+10" />
+    <button onclick="evalTest(evalue1)">확인</button>
+    <span>계산결과:</span><span id="result"></span>
+</body>
+
+</html>
