@@ -6,6 +6,36 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        function numTest() {
+            const inputObj = document.getElementById("num1");
+            // "1234"+20 --> concatenation이 발생
+            // 문자열을 +연산으로 만나면 문자열로 자동 변환해서 연산된다
+            console.log(typeof inputObj.value,
+                Number(inputObj.value) + 20
+            );
+        }
+
+        //파라미터로 객체를 전달할 수 도 있다
+        function intTest(inputObj) {
+            console.log(inputObj.nodeName)
+            let paramVal = parseInt(inputObj.value);
+            console.log(paramVal + 100);
+        }
+
+        function floatTest(inputObj) {
+            let parseVal = parseFloat(inputObj.value);
+            console.log(parseVal + 20);
+        }
+        function evalTest(inputObj) {
+            let eValue = inputObj.value;// "5+10"
+            console.log(eval(eValue));
+
+            //id가 result인 요소를 탐색해서 계산결과를 출력
+            document.querySelectorAll("#result")[0]
+                .textContent = eval(eValue);
+        }
+    </script>
 </head>
 
 <body>
