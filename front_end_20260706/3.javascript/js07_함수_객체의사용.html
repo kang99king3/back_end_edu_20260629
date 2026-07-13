@@ -40,7 +40,7 @@
         }
 
         //객체생성하기
-        //객체 리터럴 방식
+        //1.객체 리터럴 방식
         onload = function () {
             // [p,p,p,p]
             var pArray = document.getElementsByClassName("a");
@@ -67,7 +67,45 @@
 
                 console.log(jsonObj["subject"], jsonObj.credit, jsonObj.test);
                 //Clent와 Server간에 전송시 ; '{"a":"b","c":"d"...}' -> js객체 변환
-            }//onclick 종료
+
+                //ES6에서 추가된 새로운 기능
+                //1.화살표함수: 기존 예제 참고
+                //2.구조분해할당
+                // - 직접 구조 분해하고 할당하는 코드
+                let subjectLit = jsonObj.subject;
+                let testLit = jsonObj.test;
+
+                // - 구조분해할당 문법사용
+                let { subject, test } = jsonObj;
+
+                // - 템플릿 리터럴 문법 사용
+                console.log(`${subject}와${test}를 출력합니다.`);
+
+                // - spread 방식 -> 배열에서 확인
+
+            }//onclick 객체리터럴 방식 종료
+
+            //2.객체 생성자 함수 방식
+            pArray[1].onclick = () => {
+                const info = new Info();
+                console.log("생성자함수방식:", info.printout()
+                    , info.getTest());
+            }
+
+            //Info객체 정의
+            //생성자 함수는 화살표함수로 정의(X)
+            // const Info = () =>{ } 
+            // funciton() 익명함수 등과 구현하는 방식이 다르다.
+            //   --> 프로토타입이 없다
+            function Info() {
+                this.subject = "javascript";
+                this.credit = 2;
+                this.printout = () => {
+                    return this.subject + "," + this.credit + "학점";
+                }
+                let test = "일반 변수 선언";//외부에서 접근X(은닉화)
+                this.getTest = () => test;//내부에서 접근 가능
+            }
         }// onload 종료
 
     </script>
