@@ -80,6 +80,12 @@
             //"<br>키워드:수박<br/>키워드:바나나<br/>키워드:사과" -->span요소에 출력
             let prop = prompt("쉼표로 구분하여 키워드를 입력하세요", "예)수박,바나나,사과");
         }
+
+        //입력 키워드 개수를 제한하는 기능 구현
+        // 10개 제한 -> 개수를 저장하는 변수선언(전역변수? 지역변수?)
+        function numCount() {
+            // count변수에 제한 개수(숫자입력박스값)를 저장
+        }
     </script>
 </head>
 
@@ -103,6 +109,15 @@
     <span id="key">
 
     </span>
+    <hr>
+    <fieldset>
+        <label>최대입력수:</label>
+        <input type="number" id="num" min="1" />
+        <button onclick="numCount()">설정</button>
+        <br />
+        <small>사용자가 최대입력수를 입력하고 설정버튼을 클릭하면 적용:
+            설정버튼의 폰트색을 red로 변경</small>
+    </fieldset>
 </body>
 
 </html>
