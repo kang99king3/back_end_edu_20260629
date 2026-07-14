@@ -97,8 +97,8 @@
             // const Info = () =>{ } 
             // funciton() 익명함수 등과 구현하는 방식이 다르다.
             //   --> 프로토타입이 없다
-            function Info() {
-                this.subject = "javascript";
+            function Info(subject) {
+                this.subject = subject;//초기화
                 this.credit = 2;
                 this.printout = () => {
                     return this.subject + "," + this.credit + "학점";
@@ -106,6 +106,64 @@
                 let test = "일반 변수 선언";//외부에서 접근X(은닉화)
                 this.getTest = () => test;//내부에서 접근 가능
             }
+
+            //3.프로토타입 사용하기
+            pArray[2].onclick = function () {
+                const infoA = new Info("database");
+
+                Info.prototype.addFunc = function () {
+                    console.log(`기능추가:${this.subject}`);
+                }
+
+                const infoB = new Info("JAVA");
+
+                //새로 추가된 메서드를 사용할 수 있다
+                infoA.addFunc();
+                infoB.addFunc();
+
+                //이후에 모든 객체들에게 공통적으로 사용할 기능을 
+                //추가하고 싶다면 프로토타입으로 정의하면 된다.
+                //같은 메서드를 공유하고 있다.
+                console.log(infoA.addFunc === infoB.addFunc)
+            }
+
+            //4. 클로저: 상태유지 기법
+            pArray[3].onclick = function () {
+                // closureTest1();
+                // closureTest2()();
+                // closureTest2_2();
+                closureTest3();
+            };
+
+            let closureTest2_2 = closureTest2();
+
+            //기존 방식으로 상태유지 구현
+            let count = 0;
+            function closureTest1() {
+                count++;
+                console.log(count);
+            }
+
+            //클로저 함수 만들기
+            function closureTest2() {
+                let count = 0;
+                return function () { //익명함수를 리턴함
+                    count++;
+                    console.log(count);
+                }
+            }
+
+            //완성형 클로저 함수 
+            let closureTest3 = function () {
+                let count = 0;
+                return function () { //익명함수를 리턴함
+                    count++;
+                    console.log(count);
+                }
+            }();//()를 추가한 이유: 부모함수를 즉시 실행하기 위함
+            //바로 자식함수가 반환되면서 closureTest3에 할당
+
+
         }// onload 종료
 
     </script>
