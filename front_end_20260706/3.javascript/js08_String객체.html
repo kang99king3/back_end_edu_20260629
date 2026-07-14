@@ -22,7 +22,54 @@
             document.querySelectorAll(".result")[0].textContent = newString;
         }
 
+        function strTest02() {
+            //동등연산자  == (일반적인 비교) , === (엄격한 비교)
 
+            // == : 타입을 같게 변환시켜서 비교한다.
+            // a == b : 둘중 더 원시적이거나 기준이되는 값의 타입으로 알아서 변환
+            let numVal = 10;//숫자형
+
+            if (numVal == "10") {
+                console.log("==연산자사용:값이 같습니다.")
+            }
+
+            if (numVal === "10") {
+                console.log("===연산자사용:값이 같습니다.")
+            } else {
+                console.log("===연산자사용: 값이 같지 않습니다.")
+            }
+
+            //객체와 비교(String)
+            let strLit = "한경";
+            let strObj = new String("한경");// new 객체 정의
+
+            if (strLit == strObj) {
+                console.log("==같다");
+            }
+            // === : 타입변환을 하지 않고 비교한다.
+            if (strLit === strObj) {
+                console.log("===같다");
+            } else {
+                console.log("===다르다");
+            }
+        }
+
+        function strTest03() {
+            //"indexOf()메서드" "substring()메서드" 를 각각 추출
+            let strVal = "문자열 추출하기. 관련 메서드:indexOf()메서드, substring()메서드.";
+            let sIdx = strVal.indexOf(":");// ":"의 인덱스 위치 검색
+            let eIdx = strVal.lastIndexOf(".");// "."의 인덱스 위치 검색
+            let result = strVal.substring(sIdx + 1, eIdx);//"indexOf()메서드, substring()메서드"
+            let splitVal = result.split(",");//["inde.."," sub.."]
+            console.log(splitVal.toString())
+            let strVal01 = splitVal[0].trim();//앞뒤공백제거
+            let strVal02 = splitVal[1].trim();
+            console.log(strVal01, strVal02);
+
+            //요소에 출력하기
+            document.getElementById("re1").textContent = strVal01;
+            document.getElementById("re2").textContent = strVal02;
+        }       
     </script>
 </head>
 
