@@ -69,7 +69,17 @@
             //요소에 출력하기
             document.getElementById("re1").textContent = strVal01;
             document.getElementById("re2").textContent = strVal02;
-        }       
+        }
+
+        function strTest04() {
+            //문제: 입력 키워드 최대 6개로 제한
+            //입력된 문자열 각각의 키워드를 추출해서 <span>요소에 출력하세요
+            //(prompt()대화창으로 입력받은 키워드를 아래 문자열 형식으로 만들어서 
+            // 화면에 id=key인 span요소 내부에 출력하기)
+            //출력하는 형식: 
+            //"<br>키워드:수박<br/>키워드:바나나<br/>키워드:사과" -->span요소에 출력
+            let prop = prompt("쉼표로 구분하여 키워드를 입력하세요", "예)수박,바나나,사과");
+        }
     </script>
 </head>
 
@@ -87,6 +97,12 @@
         <button onclick="strTest03()">확인</button>
     </h2>
     <p class="result"><span id="re1"></span><br /><span id="re2"></span></p>
+
+    <hr />
+    <h2>키워드 나누기<button onclick="strTest04()">클릭</button></h2>
+    <span id="key">
+
+    </span>
 </body>
 
 </html>
