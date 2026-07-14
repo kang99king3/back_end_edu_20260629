@@ -52,6 +52,16 @@
             } else {
                 console.log("===다르다");
             }
+
+            //match 함수 사용 : 비교 패턴은 정규화표현식 사용
+            let strVal = prompt("당신의 회사명은?", "");
+            // isNaN()함수: 숫자인지 판단하는 함수
+            if (strVal.match(/[0-9]/)) { //0~9사이의 값이 포함되어 있으면 true
+                alert("숫자는 포함하면 안되요");
+            } else {
+                console.log(`회사명은 ${strVal}입니다.`);
+            }
+
         }
 
         function strTest03() {
@@ -71,6 +81,10 @@
             document.getElementById("re2").textContent = strVal02;
         }
 
+
+
+
+        let count = 5;
         function strTest04() {
             //문제: 입력 키워드 최대 6개로 제한
             //입력된 문자열 각각의 키워드를 추출해서 <span>요소에 출력하세요
@@ -79,12 +93,32 @@
             //출력하는 형식: 
             //"<br>키워드:수박<br/>키워드:바나나<br/>키워드:사과" -->span요소에 출력
             let prop = prompt("쉼표로 구분하여 키워드를 입력하세요", "예)수박,바나나,사과");
+            console.log(prop)
+            //split()사용
+            let props = prop.split(",");
+            if (props.length > count) {
+                alert(`${count}개까지만 입력 가능합니다.`);
+            } else {
+                let result = "";
+                for (let i = 0; i < props.length; i++) {
+                    result += `<br/>키워드:${props[i]}`;
+                }
+
+                //DOM탐색해서 만든 문자열을 요소 내부에 출력
+                // -> 문자열에 태그가 포함, 표현한다면 -> innerHTML
+                document.querySelectorAll("#key")[0].innerHTML = result;
+            }
         }
 
         //입력 키워드 개수를 제한하는 기능 구현
         // 10개 제한 -> 개수를 저장하는 변수선언(전역변수? 지역변수?)
         function numCount() {
             // count변수에 제한 개수(숫자입력박스값)를 저장
+            count = document.querySelectorAll("#num")[0].value;
+
+            document.querySelectorAll("fieldset > button")[0]
+                .style.color = "red";
+
         }
     </script>
 </head>
