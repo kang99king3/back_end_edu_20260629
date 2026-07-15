@@ -25,9 +25,12 @@
             this.lottoBalls = () => {
                 let count = 0;
                 while (count < 7) {
-                    let ball = this.makeBall();
-                    this.balls.push(ball);
-                    count++;
+                    let ball = this.makeBall();//랜덤숫자생성
+                    // if (this.balls.indexOf(ball) == -1) { //구버전과 호환성을 고려할 경우 사용
+                    if (!this.balls.includes(ball)) { //최신 자바스크립트 문법, 직관적인 해석
+                        this.balls.push(ball);//배열에 저장
+                        count++;
+                    }
                 }
             }
         }
@@ -37,6 +40,11 @@
             // lotto.makeBall();
             lotto.lottoBalls();
             console.log(lotto.balls.toString());
+            //실습문제: 7개 번호가 담긴 배열에서 
+            //        보너스번호 따로 저장, 그 이후에 6개를 정렬시키기
+            //  출력: 1-2-3-4-5-6  , 보너스번호 7
+            //활용 메서드: shift(), pop(), join()
+            //           DOM탐색메서드, innerHTML, textContent
         }
     </script>
 </head>
