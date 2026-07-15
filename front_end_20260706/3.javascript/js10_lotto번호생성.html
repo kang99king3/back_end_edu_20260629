@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <script>
+        //생성자함수로 만들기: this예약어 사용해서 선언..
+        function Lotto() {
+            //로또 번호를 저장할 배열을 선언
+            this.balls = [];
+
+            //로또번호 랜덤생성 메서드
+            this.makeBall = () => {
+                //1~45까지의 숫자를 랜덤생성하는 기능
+                //random(): 0~1사이의 실수를 랜덤하게 반환
+                console.log("랜덤생성:", Math.random());
+                return Math.floor(Math.random() * 45) + 1;
+            }
+
+            //배열에 저장하는 메서드
+            this.lottoBalls = () => {
+                let count = 0;
+                while (count < 7) {
+                    let ball = this.makeBall();
+                    this.balls.push(ball);
+                    count++;
+                }
+            }
+        }
+
+        function lottoPrint() {
+            const lotto = new Lotto();
+            // lotto.makeBall();
+            lotto.lottoBalls();
+            console.log(lotto.balls.toString());
+        }
+    </script>
+</head>
+
+<body>
+    <fieldset>
+        <legend>로또번호 생성하기</legend>
+        <span>로또번호:</span>
+        <span>예시)1-3-4-15-20-22</span>
+        <span>보너스번호:</span>
+        <span>예시)21</span>
+        <button onclick="lottoPrint()">생성</button>
+    </fieldset>
+</body>
+
+</html>
