@@ -6,6 +6,65 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        // 배열을 선언하는 방법
+        let arrayObj = new Array(3);//길이만 정의
+        console.log(arrayObj.length);// [,,] 자동초기화 X
+        let arrayObj2 = new Array(1, 2, 3, 4, 5);//값넣어서 정의
+
+        let arrayLit = [1, 2, "3", true];//리터럴 방식 권장
+        console.log(arrayLit.toString());
+        console.log("=========================");
+        //사전식 정렬
+        function sortTest01() {
+            const arrayTest = ["a", "b", "e", "d", "c"];
+            //sort()는 원본을 변경한다.
+            arrayTest.sort();//사전식 정렬(기본기능)
+            console.log(arrayTest.toString());
+            arrayTest.reverse();//역순정렬
+            console.log(arrayTest.toString());
+        }
+        //크기순 정렬
+        function sortTest02() {
+            let arrayTest = [1, 3, 2, 10, 7, 6, 4, 5, 9, 8];
+            // arrayTest.sort();//사전식 정렬 수행 상황
+            // arrayTest.sort(compareNum);
+            // arrayTest.sort(function (a, b) { return a - b; });
+            arrayTest.sort((a, b) => a - b);
+            console.log(arrayTest.toString());
+        }
+        //기본이 사전식정렬이라 크기순으로 비교할 수 있는 기능을 제공해야함
+        // 숫자 a와 b를 받아서 a-b > 0, a-b < 0
+        function compareNum(a, b) {
+            return a - b;//오름차순
+            // return b - a;//내림차순
+        }
+
+        //push(): 배열에 뒤에 차례로 값을 추가
+        //shift(): 앞에서 꺼내기
+        //pop(): 뒤에서 꺼내기
+        function pushAndShift() {
+            const queue = [];
+            queue.push("first");
+            queue.push("second");
+            queue.push("third");
+
+            //값을 잘라내기로 가져옴
+            let val = queue.shift();
+            let val2 = queue.pop();
+            console.log(queue.toString());
+        }
+
+        //문자열에 subString()과 유사하다.
+        //인덱스 범위로 값을 추출해서 새로운 배열로 반환
+        //배열에 값이 객체인 경우에는 원본배열이 변경될 수 있다.
+        //[[],[],[]]: 배열안에 배열인 형태
+        // [{k:v,k:v,k:v},{k:v,k:v,k:v},{k:v,k:v,k:v},{k:v,k:v,k:v}]
+        function sliceTest() {
+
+        }
+
+    </script>
 </head>
 
 <body>
