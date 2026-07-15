@@ -45,6 +45,19 @@
             //  출력: 1-2-3-4-5-6  , 보너스번호 7
             //활용 메서드: shift(), pop(), join()
             //           DOM탐색메서드, innerHTML, textContent
+
+            const balls = lotto.balls;
+            const bonus = balls.pop();// balls[1,2,3,4,5,6] bonus=7
+
+            //정렬 처리하기
+            balls.sort((a, b) => a - b);//크기순 정렬하기
+            //출력폼 만들기 -> 문자열로 변환
+            let strBalls = balls.join("-");//"1-2-3-4-5-6"
+            console.log(strBalls, bonus);
+
+            const spans = document.querySelectorAll("span");//[s,s,s,s]
+            spans[1].innerHTML = `<strong>${strBalls}</strong>`;
+            spans[3].innerHTML = `<strong>${bonus}</strong>`;
         }
     </script>
 </head>
