@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <h1>오늘 날짜 출력하기</h1>
+    <span id="today"></span><br />
+    <button onclick="testDate01()">오늘날짜</button>
+    <button onclick="testDate02()">오늘날짜(표현방식설정)</button>
+
+    <h1>특정 날짜 출력하기</h1>
+    <span id="specific"></span>
+    <button onclick="testDate03()">특정날짜</button>
+
+    <h1>경과날짜구하기</h1>
+    <label>현재날짜:</label><input type="text" id="dates" readonly="readonly" /><br />
+    <label>경과일:</label><input type="number" id="inputDate" min="1" />일<br />
+    <label>경과후 날짜:</label><input type="text" id="resultDate" readonly="readonly" /><br />
+    <button onclick="testDate04()">경과날짜조회</button>
+
+    <h1>D-Day기능</h1>
+    <label>현재날짜:</label><input type="text" id="dates2" readonly="readonly" /><br />
+    <label>수료일:</label><input type="date" id="d_day" /><br />
+    <label>남은 일수:</label><input type="text" id="period" readonly="readonly" /><br />
+    <button onclick="testDate05()">확인</button>
+</body>
+
+</html>
