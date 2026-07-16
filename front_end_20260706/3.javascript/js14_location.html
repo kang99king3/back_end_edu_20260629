@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <h1>Location객체</h1>
+    <script type="text/javascript">
+        document.write("hash:" + location.hash + "<br/>");// test.com#id=hk
+        document.write("search:" + location.search + "<br/>");//test.com?id=hk
+        document.write("host:" + location.host + "<br/>");
+        document.write("port:" + location.port + "<br/>");
+        document.write("pathname:" + location.pathname + "<br/>");
+        document.write("protocol:" + location.protocol + "<br/>");
+        document.write("href:" + location.href + "<br/>");
+    </script>
+    <a href="js14_location.html#id=hk&addr=seoul">요청</a>
+    <button onclick="subframe.location.href='js12_Date객체.html'">이동</button>
+    <pre>
+	location.assign(url); href와 동일한 기능
+	location.reload(); 새로고침
+	locatoin.replace(url); 페이지 이동 기능 --> 이력이 남지 않는다.
+</pre>
+    <iframe name="subframe" src="js13_pop.html" height="500px"></iframe>
+</body>
+
+</html>
