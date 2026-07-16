@@ -49,6 +49,27 @@
                 date.toLocaleDateString();
         }
 
+        function testDate05() {
+            const nowDate = new Date();//현재날짜 객체 생성
+            document.getElementById("dates2").value
+                = nowDate.toLocaleDateString();
+
+            //입력한 수료일 날짜 구하기
+            let date = document.getElementById("d_day").value;
+            const afterDate = new Date(date);//종료날짜 객체 생성
+
+            // 오늘날짜 객체 , 수료날짜 객체
+            // 시간을 가지고 계산해야 함
+            // getTime() : 단위가 ms
+            // 1970년 -----> 현재날짜 시간
+            // 1970년 --------->수료날짜 시간
+            // console.log(nowDate.getTime());
+            let period =
+                Math.ceil((afterDate.getTime() - nowDate.getTime())
+                    / (1000 * 1 * 60 * 60 * 24))
+
+            document.getElementById("period").value = period;
+        }
     </script>
 </head>
 
