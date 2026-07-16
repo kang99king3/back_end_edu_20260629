@@ -39,6 +39,23 @@
                 console.log(divEle.length);
                 divEle[1].style.backgroundColor = "blue";
             }
+
+            //firstChild, lastChild
+            btnEle[2].onclick = () => {
+                const div = document.querySelectorAll("div")[0];
+                // const fci = div.firstChild;//node반환
+                // const lci = div.lastChild;//node반환
+                const fci = div.firstElementChild;//element반환
+                const lci = div.lastElementChild;//element반환
+                console.log(fci.nodeName, lci.nodeName);
+            }
+
+            btnEle[3].onclick = () => {
+                const child02 = document.querySelectorAll("div > p")[1];
+                const preP = child02.previousElementSibling;
+                const nextP = child02.nextElementSibling;
+                console.log(preP.textContent, nextP.textContent);
+            }
         }
     </script>
 </head>

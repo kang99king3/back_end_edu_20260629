@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        function eleCreate() {
+            //div태그생성
+            const div = document.createElement("div");//<div></div>
+            //style속성생성
+            const styleAttr = document.createAttribute("style");// style=""
+            //text 생성
+            const txt = document.createTextNode("엘리먼트");//"엘리먼트"
+
+            //속성 정의
+            styleAttr.nodeValue = "color:red;"// style="color:red;"
+
+            div.setAttributeNode(styleAttr);//<div style="color:red"></div>
+            div.appendChild(txt);//<div style="color:red">엘리먼트</div>
+            //완성된 div객체를 main요소에 추가
+            document.querySelectorAll("#main")[0].appendChild(div);
+
+            // document.querySelectorAll("#main").innerHTML="<div>"
+            //                                         +"<p>"+val+"</p>"
+            //                                         +"</div>";
+            // document.querySelectorAll("#main").innerHTML =
+            //                                         `<div><p>${val}</p>
+            //                                             <p>${val}</p>
+            //                                             <p>${val}</p>
+            //                                             <p>${val}</p>
+            //                                         </div>`
+        }
+    </script>
+</head>
+
+<body>
+    <h1>요소 생성하기</h1>
+    <button onclick="eleCreate()">엘리먼트 생성하기</button>
+    <div id="main"></div>
+</body>
+
+</html>
