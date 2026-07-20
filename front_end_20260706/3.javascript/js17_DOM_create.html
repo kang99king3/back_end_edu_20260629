@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>js17_DOM_create_table.html</title>
+    <script type="text/javascript">
+        function tableVal() {
+            // 폼에서 입력한 값을 가져오자
+            // - 기능 추가
+            //    1. 입력된 정보를 목록에 추가할때 10개로 제한하자
+            //       -> 10개가 넘어가면 alert("10개까지만 추가가능합니다.")보여주기
+            //    2. 입력이 안된 항목을 알려주기 (유효값 처리 개념)
+            //       -> 경고창으로 경고하기(내용이 입력안된 항목 알려주기 : 아이디 비밀번호 전화번호)
+            const inputs = document
+                .querySelectorAll("form[name=formTest] input[name]");
+
+            console.log(inputs[0].value);
+
+
+            // input.value==null, input.value=="", input.value==undefined
+            let count = 0;//입력안된 목록 개수
+            let msg = "";//입력 안된 목록을 문자열로 저장할 변수
+            inputs.forEach((input) => {
+                if (input.value == null || input.value == "" || input.value == undefined) {
+                    count++;
+                    //   input.   td     .    th     .  "아이디"
+                    msg += input.parentNode.previousElementSibling.textContent + " ";
+                }
+            });
+            console.log(msg);
+            //tbody의 자식요소의 개수를 구한다.
+            // 		const tbodyTrCount=document.querySelector("#addtr").children.length;
+            // childElementCount 속성
+            const tbodyTrCount = document.querySelector("#addtr").childElementCount;
+
+            if (count > 0) {
+                alert(`모두 입력하세요!!(${msg})`);
+            } else {
+                if (tbodyTrCount < 10) {
+                    // <tr><td>value</td><td>value</td><td>value</td><td>value</td></tr>
+                    const tr = document.createElement("tr");//<tr></tr>
+                    for (let i = 0; i < inputs.length; i++) {
+                        const td = document.createElement("td");//<td></td>
+                        td.textContent = inputs[i].value;//<td>value</td>
+                        tr.appendChild(td);//<tr><td>value</td><td>value</td><td>value</td><td>value</td></tr>
+                    }
+
+                    //완성된 tr요소를 tbody에 추가하자
+                    document.querySelector("#addtr").appendChild(tr);
+                } else {
+                    alert("10개까지만 입력 가능합니다.");
+                }
+            }
+
+            //기존 요소를 탐색해서 원하는 요소 내부로 append하면 위치 이동이 된다.
+            // 		const caption= 
+            // 		document.querySelectorAll("form[name=formTest] caption")[0];
+            // 		document.body.appendChild(caption);
+        }
+    </script>
+</head>
+
+<body>
+    <form name="formTest">
+        <table border="1">
+            <caption>회원정보입력</caption>
+            <col width="100px">
+            <col width="300px">
+            <tr>
+                <th>아이디</th>
+                <td><input type="text" name="id" /></td>
+            </tr>
+            <tr>
+                <th>비밀번호</th>
+                <td><input type="password" name="pw" /></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td><input type="text" name="addr" /></td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td><input type="tel" name="phone" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" value="추가" onclick="tableVal()" /></td>
+            </tr>
+        </table>
+    </form>
+    <hr />
+    <div id="addTable">
+        <table border="1" id="ctb">
+            <caption>회원정보목록</caption>
+            <col width="100px">
+            <col width="100px">
+            <col width="300px">
+            <col width="200px">
+            <thead>
+                <tr>
+                    <th>아이디</th>
+                    <th>비밀번호</th>
+                    <th>주소</th>
+                    <th>전화번호</th>
+                </tr>
+            </thead>
+            <tbody id="addtr"></tbody>
+        </table>
+    </div>
+</body>
+
+</html>
