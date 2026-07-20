@@ -73,7 +73,7 @@
             </tr>
             <tr>
                 <th>비밀번호</th>
-                <td><input type="password" name="pw" /></td>
+                <td><input type="password" name="pw" required="required" /></td>
             </tr>
             <tr>
                 <th>주소</th>
@@ -84,7 +84,8 @@
                 <td><input type="tel" name="phone" /></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="button" value="추가" onclick="tableVal()" /></td>
+                <td colspan="2"><input type="button" value="추가" onclick="tableVal()" />
+                </td>
             </tr>
         </table>
     </form>
@@ -104,7 +105,9 @@
                     <th>전화번호</th>
                 </tr>
             </thead>
-            <tbody id="addtr"></tbody>
+            <tbody id="addtr">
+
+            </tbody>
         </table>
     </div>
 </body>

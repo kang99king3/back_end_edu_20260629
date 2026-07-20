@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        function setCookieTest() {
+            //cookie에 값을 저장: key-"user1", value-"hk1"
+
+        }
+
+        function removeCookieTest() {
+
+        }
+
+        function getCookieTest() {
+
+        }
+
+        //setCookie()함수 구현:  "key=value;key=value;key=value;..."
+        function setCookie(name, value, expires, domain, path, secure) {
+            let cookies = "";
+
+            //인코딩 처리3가지 방식
+            // - escape() : ASCII코드로 변환, 나머지 유니코드 변환 -> 이제 안씀
+            //  'A' -> 65    --> 유니코드: 한글등 다른언어
+            // - encodeURI() : 주소 전체를 인코딩할때 사용
+            //                 일반 문자는 인코딩처리, 주소와 관련된 특수문자는 제외
+            //                https://www.hankyung.com/user?id=hk&name=han
+            // - encodeURIComponent() : 모든 문자/특수문자 등등을 인코딩 처리함
+            //                          파라미터에 대한 내용도 모두 처리 가능
+
+            cookies += name + "=" + encodeURIComponent(value);//인코딩처리해서 저장
+
+            const date = new Date();
+            date.setDate(date.getDate() + expires);// 현재일수 + 유효기간 일수
+            // cookies += ";expires=" + date.toUTCString();// 유효기간 설정(세계표준시)
+            cookies += ";max_age=" + (1000 * 1 * 60 * 60 * 24 * expires); //ms단위로 설정
+
+            if (domain) cookies += ";domain=" + domain;
+            if (path) cookies += ";path=" + path;
+            if (secure) cookies += ";secure=" + secure;
+            // 서비스 배포 -> 192.168.1.22 -> http://hankyung.com -> ssl인증서 -> 
+            //                            -> https://hakyung.com
+
+            document.cookie = cookies;//쿠키에 값을 저장하기
+        }
+    </script>
+</head>
+
+<body>
+    <h1>쿠키사용하기</h1>
+    <button onclick="setCookieTest()">쿠키추가</button>
+    <button onclick="removeCookieTest()">쿠키삭제</button>
+    <button onclick="getCookieTest()">쿠키값 가져오기</button>
+</body>
+
+</html>
