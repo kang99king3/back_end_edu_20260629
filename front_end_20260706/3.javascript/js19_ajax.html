@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        function ajaxGet() {
+            const xhr = new XMLHttpRequest();
+            //https://hankyung.com?/content/data.json
+            let params = "num=1&id=hk";
+            //  (요청방식,  요청주소,  비동기처리여부)
+            xhr.open("GET", `data.json?${params}`, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status == 200) {
+                    let data = JSON.parse(xhr.responseText);//JS객체로 변환
+                    console.log(data.id, data.name);
+                    document.querySelector("#result").innerHTML =
+                        `<p>${data.id}</p>
+                        <p>${data.name}</p>
+                        <p>${data.addr}</p>`
+
+                }
+            }
+
+            //요청을 서버로 전송
+            xhr.send();
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="ajaxGet()">Get방식</button>
+    <div id="result"></div>
+</body>
+
+</html>
