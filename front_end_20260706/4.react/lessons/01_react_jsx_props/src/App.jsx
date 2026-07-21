@@ -13,6 +13,11 @@ const team = [
 ]
 
 function App() {
+  // return 문에 렌더링할 요소를 작성
+  //  주의사항: 하나의 요소로 감싸서 그룹화 시켜야 함
+  //  return (<div></div><div></div>)   (X)
+  //          <div></div>, <></>빈요소   (O)
+
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
       <h1>우리 팀 소개 ({team.length}명)</h1>
@@ -21,9 +26,22 @@ function App() {
         {/* TODO: STEP 3 — team 배열을 .map으로 순회하며 ProfileCard를 렌더링하세요.
             - 각 항목에 고유한 key를 주고
             - name, job, emoji, bgColor, isOnline, isLead 를 props로 전달 */}
+        {team.map((member) => (
+          <ProfileCard
+            key={member.id}
+            name={member.name}
+            job={member.job}
+            emoji={member.emoji}
+            bgColor={member.bgColor}
+            isOnline={member.isOnline}
+            isLead={member.isLead}
+          />
+        ))
+
+        }
       </div>
     </div>
   )
 }
 
-export default App
+export default App 
