@@ -29,6 +29,74 @@
             //요청을 서버로 전송
             xhr.send();
         }
+
+        /*  콜백 지옥 발생 상황
+            글목록을 조회 -> 글상세내용을 조회 -> 글 수정  연속적인 요청 처리
+            getBoardList(,function(){
+                            getBoard(,function(){
+                                updateBoard(,function(){
+                                    deleteBoard()
+                                })
+                            })
+                        })
+        */
+        //Promise 객체가 해결~
+        //비동기 작업의 성공/실패에 대한 객체를 반환해서 then()으로 받아서 처리
+        //   콜백지옥의 들여쓰기를 제거할 수 있게 된다.
+        // getBoardList().then(
+        // (res) => {res return re; }
+        //                 ).then()
+        //                  .then()
+        function promiseTest(method, url, data = null) {//파라미터 초기값 설정 가능
+            return new promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                // const params = "num=1&id=hk";
+                xhr.open(method, url, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status == 200) {
+                        resolve(xhr.responseText);
+                    } else {
+                        reject(new Error("요청실패:" + xhr.status));
+                    }
+                }
+
+                //요청을 서버로 전송
+                xhr.send();
+            });//promise 종료
+        }
+
+        function ajaxPromise() {
+            promiseTest("GET", "data.json")
+                .then((response) => {
+                    const data = JSON.parse(response);//JS객체로 변환
+                    document.querySelector("#result").innerHTML =
+                        `<p>${data.id}</p>
+                    <p>${data.name}</p>
+                    <p>${data.addr}</p>`
+                    return data;
+                }).then(
+                    (res) => {
+
+                    }
+                ).catch(error => { console.error("실패") });
+        }
+
+        //promise 기반의 ajax처리하는 API -> fetch() 등장
+        function ajaxFetch() {
+            fetch("data.json").then((response) => {
+                // JSON.parse(response);
+                return response.json();// js객체
+            })
+                .then(data => {
+                    document.querySelector("#result").innerHTML =
+                        `<p>${data.id}</p>
+                        <p>${data.name}</p>
+                        <p>${data.addr}</p>`
+                }).catch(error => {
+                    console.log("실패");
+                })
+        }
     </script>
 </head>
 
