@@ -5,7 +5,10 @@ import { memo } from 'react'
 
 // TODO: STEP 3 — 아래 함수 컴포넌트를 React.memo로 감싸서 export 하세요.
 //   (지금은 memo가 없어 부모가 렌더될 때마다 모든 행이 다시 렌더됩니다)
-function StockRow({ stock, isFavorite, onToggleFavorite }) {
+// function StockRow(props)  --> props.stock, props.isFavorite ...
+//  --> 구조를 분해해서 할당하는 문법 props --> {stock,isFavorite..}
+// function StockRow({ stock, isFavorite, onToggleFavorite }) {
+const StockRow = memo(function ({ stock, isFavorite, onToggleFavorite }) {
     console.log(`${stock.symbol} 렌더링`) // 관전 포인트: 별 클릭 시 그 종목만 찍혀야 정상
 
     const isUp = stock.change >= 0
@@ -23,6 +26,6 @@ function StockRow({ stock, isFavorite, onToggleFavorite }) {
             </span>
         </li>
     )
-}
+})
 
 export default StockRow

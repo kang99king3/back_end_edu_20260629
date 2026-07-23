@@ -20,7 +20,8 @@ export default function StockSearch() {
     renderCount.current += 1 // 1씩 증가시키자
 
     const handleSearch = (e) => {
-        const q = e.target.value
+        // onchange가 발생된 요소의 value속성에 저장된 값
+        const q = e.target.value //입력값 받아오기
         setQuery(q)
         setResults(
             q.trim()
