@@ -5,12 +5,19 @@ import { useState, useRef } from 'react'
 import { STOCKS } from '../data/stocks'
 
 export default function StockSearch() {
-    const [query, setQuery] = useState('')
-    const [results, setResults] = useState([])
+    const [query, setQuery] = useState('') //검색어
+    const [results, setResults] = useState([]) //검색 결과
 
     // TODO: STEP 2 — input DOM에 접근할 ref(inputRef)를 useRef로 만드세요.
+    const inputRef = useRef(null)
+    // document.querySelector("input").focus(); (X)
+    // inputRef.current.focus() (O)
+
     // TODO: STEP 2 — 렌더 횟수를 셀 ref(renderCount)를 useRef로 만들고, 렌더마다 1 증가시키세요.
     //   (state로 세면 무한 리렌더가 나므로 ref로 셉니다)
+    // const renderCount = useState(0) -> 무한 렌더링 발생
+    const renderCount = useRef(0)
+    renderCount.current += 1 // 1씩 증가시키자
 
     const handleSearch = (e) => {
         const q = e.target.value
@@ -26,20 +33,23 @@ export default function StockSearch() {
         )
     }
 
+    //초기화 기능
     const handleClear = () => {
         setQuery('')
         setResults([])
         // TODO: STEP 2 — ref로 실제 input에 포커스를 주세요.
+        inputRef.current.focus()
     }
 
     return (
         <div style={{ padding: '1rem', maxWidth: '500px' }}>
             {/* TODO: STEP 2 — 렌더 횟수(renderCount의 현재값)를 화면에 표시하세요. */}
-            <p style={{ fontSize: '12px', color: '#888' }}>렌더링 횟수: (여기 표시)</p>
+            <p style={{ fontSize: '12px', color: '#888' }}>렌더링 횟수: ({renderCount.current})</p>
 
             <div style={{ display: 'flex', gap: '8px' }}>
                 {/* TODO: STEP 2 — 아래 input에 위에서 만든 ref를 연결하세요. */}
                 <input
+                    ref={inputRef}  // ref를 DOM요소와 연결
                     value={query}
                     onChange={handleSearch}
                     placeholder="종목 검색..."
