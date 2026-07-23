@@ -26,6 +26,8 @@ function TodoApp() {
     // }, [])
 
     // TODO: STEP 3-2 — todos가 바뀔 때마다 localStorage에 저장하세요. (useEffect, 의존성 [todos])
+    // 최초 마운트 시 실행한번하고, 그 다음부터는 todos에 변경이 발생하면 실행
+    // 렌더링이 다 끝난 뒤에 실행
     useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos)) //배열객체 -> 문자열로 직렬화
     }, [todos])
