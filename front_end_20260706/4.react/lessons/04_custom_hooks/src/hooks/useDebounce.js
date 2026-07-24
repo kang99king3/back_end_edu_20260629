@@ -8,6 +8,11 @@ export function useDebounce(value, delay = 300) {
 
     // TODO: STEP 2 — value/delay가 바뀔 때, delay 후에 debouncedValue를 갱신하는 useEffect를 작성하세요.
     //   반드시 cleanup(return () => ...)으로 이전 타이머를 취소해야 '마지막 값'만 반영됩니다.
-
+    useEffect(() => {
+        const timer = setTimeout(() => setDebouncedValue(value), delay)
+        //return 코드-> 다음번에 effect가 실행할때 동작함
+        // effect실행->return 기능 준비만하고 -> effect실행할때 return기능 먼저 실행
+        return () => clearTimeout(timer)
+    }, [value, delay])
     return debouncedValue
 }

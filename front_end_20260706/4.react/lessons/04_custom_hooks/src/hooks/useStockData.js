@@ -42,7 +42,14 @@ export function useStockData(symbol) {
     }
 
     // TODO: STEP 1 — symbol이 바뀔 때마다 load()를 호출하는 useEffect를 작성하세요. (의존성 [symbol])
-
+    useEffect(() => {
+        if (!symbol) {
+            setState({ data: null, loading: false, error: null })
+            return
+        }
+        load()
+    }, [symbol])
     // 상태 + 수동 새로고침 함수 반환
+    // {data: null, loading: false, error: null,refetch:load}
     return { ...state, refetch: load }
 }
