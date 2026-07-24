@@ -17,7 +17,8 @@ function RowWithoutMemo({ symbol, price, change, onToggle }) {
 }
 
 // TODO: STEP 1 — 아래 컴포넌트를 React.memo로 감싸세요.
-function RowWithMemo({ symbol, price, change, onToggle }) {
+//  -> 부모가 렌더링되거나, props의 값이 변경되지 않는다면 리렌더링을 막아준다.
+const RowWithMemo = memo(function RowWithMemo({ symbol, price, change, onToggle }) {
     console.log(`[memo있음] ${symbol} 렌더링`)
     const isUp = change >= 0
     return (
@@ -27,7 +28,7 @@ function RowWithMemo({ symbol, price, change, onToggle }) {
             <button onClick={() => onToggle(symbol)} style={{ marginLeft: '8px' }}>★</button>
         </div>
     )
-}
+})
 
 const stocks = [
     { symbol: 'AAPL', price: 182.52, change: 1.24 },
@@ -40,9 +41,9 @@ export default function MemoComparison() {
 
     // TODO: STEP 1 — onToggle을 useCallback으로 감싸 참조를 고정하세요. (의존성 [])
     //   (고정하지 않으면 RowWithMemo를 memo로 감싸도 무력화됩니다)
-    const onToggle = (symbol) => {
+    const onToggle = useCallback((symbol) => {
         console.log('토글:', symbol)
-    }
+    }, [])
 
     return (
         <div style={{ padding: '1.5rem', maxWidth: '500px' }}>

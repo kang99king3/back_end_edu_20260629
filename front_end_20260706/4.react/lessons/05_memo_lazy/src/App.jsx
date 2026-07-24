@@ -10,8 +10,9 @@ const lazyWithDelay = (factory) =>
 
 // TODO: STEP 3 — HeavyChart / HeavyReport를 lazyWithDelay(또는 lazy)로 불러오세요.
 //   (경로: './components/HeavyChart', './components/HeavyReport')
-const HeavyChart = () => <p>TODO: lazy로 불러오세요</p>
-const HeavyReport = () => <p>TODO: lazy로 불러오세요</p>
+// const HeavyChart = lazy(() => import('./components/HeavyChart'))
+const HeavyChart = lazyWithDelay(() => import('./components/HeavyChart'))
+const HeavyReport = lazyWithDelay(() => import('./components/HeavyReport'))
 
 function LoadingSpinner({ label }) {
   return <div style={{ padding: '3rem', textAlign: 'center', border: '1px dashed #ddd', borderRadius: '8px', color: '#888' }}>⏳ {label || '로딩 중'}...</div>
@@ -39,11 +40,11 @@ export default function App() {
 
       {/* TODO: STEP 3 — 아래 영역을 <Suspense fallback={<LoadingSpinner .../>}>로 감싸세요.
           (lazy 컴포넌트가 로드되는 동안 fallback이 보입니다) */}
-      <div>
+      <Suspense fallback={<LoadingSpinner label={"컴포넌트 로딩"} />}>
         {tab === 'memo' && <MemoComparison />}
         {tab === 'chart' && <HeavyChart />}
         {tab === 'report' && <HeavyReport />}
-      </div>
+      </Suspense>
     </div>
   )
 }
