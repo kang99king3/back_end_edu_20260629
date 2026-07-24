@@ -6,9 +6,24 @@ import { useState, useEffect } from 'react'
 export function useLocalStorage(key, initialValue) {
     // TODO: STEP 4 — 함수형 초기화(useState(() => ...))로 localStorage에서 복원하세요.
     //   저장된 값이 있으면 JSON.parse해서 쓰고, 없거나 에러면 initialValue 사용.
-    const [value, setValue] = useState(initialValue) // ← 함수형 초기화로 교체하세요
+    const [value, setValue] = useState(() => {
+        try {
+            const item = localStorage.getItem(key)
+            return item ? JSON.parse(item) : initialValue
+        } catch (err) { // log 레벨 : warn , info , error .. 
+            console.warn('localStorage 읽기 실패:', err)
+            return initialValue
+        }
+    }) // ← 함수형 초기화로 교체하세요
 
     // TODO: STEP 4 — value/key가 바뀔 때 localStorage에 저장(JSON.stringify)하는 useEffect를 작성하세요.
+    useEffect(() => {
+        try {
+            localStorage.setItem(key, JSON.stringify(value))
+        } catch (err) {
+            console.warn('localStorage 저장 실패 : ', err)
+        }
+    }, [key, value])
 
-    return [value, setValue]
+    return [value, setValue] // useState와 동일한 구조 만들어서 리턴
 }

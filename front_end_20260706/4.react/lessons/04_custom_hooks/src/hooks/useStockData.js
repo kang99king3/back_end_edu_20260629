@@ -35,7 +35,7 @@ export function useStockData(symbol) {
     //   로딩 시작 표시 → fakeFetch(symbol) → 성공 시 data 세팅 / 실패 시 error 세팅.
     const load = () => {
         // 새로고침 될때 loading화면을 보여주기 위해 loading:ture 설정
-        setState((prev) => ({ ...prev, loading: ture, error: null }))
+        setState((prev) => ({ ...prev, loading: true, error: null }))
         // 로딩중... --> 0.8~1.2초 후에 조회된 데이터가 보여진다.
         fakeFetch(symbol).then((data) => setState({ data, loading: false, error: null }))
             .catch((err) => setState({ data: null, loading: false, error: err.message }))

@@ -3,11 +3,23 @@
 // 막히면 정답 참고: lessons_edu/04_custom_hooks/src/hooks/useInterval.js
 import { useEffect, useRef } from 'react'
 
+//                    callback파라미터<- refetch()<- load()
 export function useInterval(callback, delay) {
+    //초기화 선언        useState(5), useRef(10)
+    //  다음 렌더링부터   setState(10), useRef.current=9  변경해야 한다.
+    // useRef는 저장공간이 딱 한 생성된다 
     const savedCallback = useRef(callback)
 
     // TODO: STEP 3 — 최신 callback을 savedCallback.current에 보관하는 useEffect를 작성하세요. (의존성 [callback])
-
+    useEffect(() => {
+        savedCallback.current = callback
+    }, [callback])
     // TODO: STEP 3 — delay마다 savedCallback.current()를 실행하는 useEffect를 작성하세요.
     //   delay가 null이면 실행하지 말고(정지), cleanup으로 타이머를 정리하세요. (의존성 [delay])
+    useEffect(() => {
+        if (delay === null) return
+        const id = setInterval(() => savedCallback.current(), delay)
+        return () => clearInterval(id)
+    }, [delay])
+
 }

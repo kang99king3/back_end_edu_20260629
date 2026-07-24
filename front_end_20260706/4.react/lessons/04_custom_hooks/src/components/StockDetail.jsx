@@ -7,20 +7,27 @@ import { useDebounce } from '../hooks/useDebounce'
 import { useInterval } from '../hooks/useInterval'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
+// -useLocalStorage : 마지막에 조회한 종목을 저장하고 가져오는 기능
+// -useDebounce : 타이핑이 멎은 뒤에만 API를 호출하는 기능
+// -useStockData : 데이터, 로딩/에러/refetch(load())관리하는 기능
+// -useInterval : 5초마다 자동 갱신하는 기능 
 export default function StockDetail() {
     // TODO: STEP 5 — inputSymbol을 useLocalStorage로 관리하세요. (키 'lastSymbol', 기본 'AAPL')
-    const [inputSymbol, setInputSymbol] = useState('AAPL') // ← useLocalStorage로 교체
-
+    // const [inputSymbol, setInputSymbol] = useState('AAPL') // ← useLocalStorage로 교체
+    const [inputSymbol, setInputSymbol] = useLocalStorage('lastSymbol', 'AAPL')
     const [autoRefresh, setAutoRefresh] = useState(false)
 
     // TODO: STEP 5 — 입력(inputSymbol)을 300ms 디바운스한 값을 만드세요. (useDebounce)
-    const debouncedSymbol = inputSymbol // ← useDebounce로 교체
+    // const debouncedSymbol = inputSymbol // ← useDebounce로 교체
+    const debouncedSymbol = useDebounce(inputSymbol, 300)
 
     // TODO: STEP 5 — 디바운스된 종목으로 데이터를 조회하세요. (useStockData → data/loading/error/refetch)
-    const data = null, loading = false, error = null, refetch = () => { } // ← useStockData로 교체
+    // const data = null, loading = false, error = null, refetch = () => { } // ← useStockData로 교체
+    const { data, loading, error, refetch } = useStockData(debouncedSymbol)
 
     // TODO: STEP 5 — autoRefresh가 켜지면 5초마다 refetch, 꺼지면 정지(null)로 useInterval을 호출하세요.
-
+    // useInterver(callback, delay)
+    useInterval(refetch, autoRefresh ? 5000 : null)
     return (
         <div style={{ padding: '1.5rem', maxWidth: '480px' }}>
             <h2>종목 상세 조회</h2>
