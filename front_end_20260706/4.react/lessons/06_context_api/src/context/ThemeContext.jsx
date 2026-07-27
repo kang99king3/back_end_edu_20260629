@@ -4,14 +4,16 @@
 import { createContext, useState, useContext } from 'react'
 
 // 1) 빈 Context 상자 생성 (제공됨)
+//  - createContext()로 상자를 만들고, 기본값은 null로 설정
+//    -> 기본값을 초기 기본 데이터로 설정하면 오류시 위치 찾기 힘들어짐
 const ThemeContext = createContext(null)
 
 export function ThemeProvider({ children }) {
     const [isDark, setIsDark] = useState(false)
 
     const theme = {
-        isDark,
-        toggle: () => setIsDark((d) => !d),
+        isDark,  // key 이름하고 값으로 사용할 변수명하고 동일하면 한번만 정의
+        toggle: () => setIsDark((d) => !d), // setIsDark(true)
         bg: isDark ? '#1a1a2e' : '#ffffff',
         cardBg: isDark ? '#0d2137' : '#f8f9fa',
         text: isDark ? '#ccd6f6' : '#1a1a18',
@@ -23,16 +25,18 @@ export function ThemeProvider({ children }) {
     // TODO: STEP 1 — theme 값을 하위 트리에 공급하도록 ThemeContext.Provider로 감싸세요.
     //   (아래 <div>를 <ThemeContext.Provider value={theme}>로 감싸면 됩니다)
     return (
-        <div style={{ background: theme.bg, color: theme.text, minHeight: '100vh' }}>
-            {children}
-        </div>
+        <ThemeContext.Provider value={theme}>
+            <div style={{ background: theme.bg, color: theme.text, minHeight: '100vh' }}>
+                {children}
+            </div>
+        </ThemeContext.Provider>
     )
 }
 
 // 3) 커스텀 훅
 export function useTheme() {
     // TODO: STEP 1 — useContext로 ThemeContext 값을 꺼내 ctx에 담으세요.
-    const ctx = null // ← useContext(ThemeContext)로 교체
+    const ctx = useContext(ThemeContext) // ← useContext(ThemeContext)로 교체
     if (!ctx) throw new Error('useTheme은 ThemeProvider 안에서 사용하세요')
     return ctx
 }
