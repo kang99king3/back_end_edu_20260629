@@ -34,6 +34,8 @@ export function ThemeProvider({ children }) {
 }
 
 // 3) 커스텀 훅
+//     useContext 구현하고, 에러발생을 알려줌
+//     임포트 간소화: ThemeContext와 useContext 임포트 작업을 간소화
 export function useTheme() {
     // TODO: STEP 1 — useContext로 ThemeContext 값을 꺼내 ctx에 담으세요.
     const ctx = useContext(ThemeContext) // ← useContext(ThemeContext)로 교체
