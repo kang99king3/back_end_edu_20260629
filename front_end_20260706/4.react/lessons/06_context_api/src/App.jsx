@@ -6,18 +6,25 @@ import { WatchlistProvider } from './context/WatchlistContext'
 import Header from './components/Header'
 import StockGrid from './components/StockGrid'
 import SortProvider from './context/sortContext'
+import AppProviders from './context/AppProviders'
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <WatchlistProvider>
-        <SortProvider>
-          <Header />
-          <main style={{ padding: '1rem', maxWidth: '900px', margin: '0 auto' }}>
-            <StockGrid />
-          </main>
-        </SortProvider>
-      </WatchlistProvider>
-    </ThemeProvider>
+    // <ThemeProvider>
+    //   <WatchlistProvider>
+    //     <SortProvider>
+    //       <Header />
+    //       <main style={{ padding: '1rem', maxWidth: '900px', margin: '0 auto' }}>
+    //         <StockGrid />
+    //       </main>
+    //     </SortProvider>
+    //   </WatchlistProvider>
+    // </ThemeProvider>
+    <AppProviders>
+      <Header />
+      <main style={{ padding: '1rem', maxWidth: '900px', margin: '0 auto' }}>
+        <StockGrid />
+      </main>
+    </AppProviders>
   )
 }
