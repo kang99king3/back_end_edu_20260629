@@ -8,6 +8,8 @@ import { posts, tagStyle } from '../posts'
 export default async function BlogPost({ params }) {
     // TODO: STEP 5 — params를 await로 풀어 id를 꺼내세요.
     console.log(params)
+    //params={id:"1"} 객체형태로 저장하고 있어서 
+    // --> params.id 또는 구조분해할당 {id}로 꺼내서 받아야 함
     const { id } = await params // ← await params에서 꺼내도록 교체
 
     // TODO: STEP 5 — id로 해당 글을 찾으세요. (URL의 id는 문자열이므로 숫자로 변환해 비교)
