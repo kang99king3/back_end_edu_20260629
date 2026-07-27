@@ -13,7 +13,21 @@ export default function BlogList() {
             - 각 항목에 고유 key
             - 제목을 <Link href={`/blog/${post.id}`}>로 감싸 동적 경로로 이동
             - 태그는 <span style={tagStyle(post.tag)}>로 표시 */}
+                {posts.map((post) => (
+                    <li key={post.id} style={{ borderBottom: '1px solid #eee', padding: '1.25rem 0' }}>
+                        <span style={tagStyle(post.tag)}>
+                            {post.tag}
+                        </span>
+                        <h2 style={{ margin: '6px 0 4px', fontSize: '1.1rem' }}>
+                            {/* 동적시그먼트 : /blog/1 , /blog/2 , /blog/3 */}
+                            <Link href={`/blog/${post.id}`}
+                                style={{ textDecoration: 'none', color: '#1a1a18' }}>
+                                {post.title}
+                            </Link>
+                        </h2>
+                        <p sytle={{ color: '#aaa', fontSize: '13px', margin: 0 }}>{post.date}</p>
+                    </li>))}
             </ul>
-        </div>
+        </div >
     )
 }

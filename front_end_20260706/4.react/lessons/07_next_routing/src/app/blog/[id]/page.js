@@ -5,12 +5,13 @@ import Link from 'next/link'
 import { posts, tagStyle } from '../posts'
 
 // TODO: STEP 5 — 이 컴포넌트를 async 함수로 만드세요. (params는 Promise라 await가 필요)
-export default function BlogPost({ params }) {
+export default async function BlogPost({ params }) {
     // TODO: STEP 5 — params를 await로 풀어 id를 꺼내세요.
-    const id = null // ← await params에서 꺼내도록 교체
+    console.log(params)
+    const { id } = await params // ← await params에서 꺼내도록 교체
 
     // TODO: STEP 5 — id로 해당 글을 찾으세요. (URL의 id는 문자열이므로 숫자로 변환해 비교)
-    const post = null
+    const post = posts.find((p) => p.id === Number(id))
 
     if (!post) {
         return (
