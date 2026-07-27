@@ -1,6 +1,7 @@
 // ── STEP 3: 두 Context를 '소비'하는 헤더 ──
 // props를 하나도 받지 않는데도, useTheme/useWatchlist로 전역 값에 바로 접근한다.
 // (이것이 Context의 핵심 — prop drilling 없이 원하는 곳에서 바로 꺼내 쓰기)
+import { useSort } from '../context/sortContext'
 import { useTheme } from '../context/ThemeContext'
 import { useWatchlist } from '../context/WatchlistContext'
 
@@ -8,6 +9,7 @@ export default function Header() {
     //useTheme() -> ThemeContext반환 -> value={isDark,toggel...}
     const { isDark, toggle, text, border } = useTheme()
     const { watchlist } = useWatchlist()
+    const [sortBy, setSortBy] = useSort()
 
     return (
         <header
@@ -38,6 +40,18 @@ export default function Header() {
             >
                 {isDark ? '☀️ 라이트' : '🌙 다크'}
             </button>
+            <div>
+                <button style={{
+                    padding: '6px 14px', borderRadius: '20px', border: `1px solid ${border}`,
+                    background: 'none', color: text, cursor: 'pointer', fontSize: '14px',
+                }}
+                    onClick={() => setSortBy('symbol')}>종목코드</button>
+                <button style={{
+                    padding: '6px 14px', borderRadius: '20px', border: `1px solid ${border}`,
+                    background: 'none', color: text, cursor: 'pointer', fontSize: '14px',
+                }}
+                    onClick={() => setSortBy('price')}>가격</button>
+            </div>
         </header>
     )
 }

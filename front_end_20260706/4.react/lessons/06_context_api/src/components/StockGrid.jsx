@@ -1,6 +1,8 @@
 // ── STEP 4: 두 Context를 소비하는 종목 그리드 ──
 // 테마 색상(useTheme)과 관심목록 조작(useWatchlist)을 함께 사용한다.
 // Header와 StockGrid가 '같은' watchlist를 공유하므로, 여기서 별을 누르면 Header의 개수도 즉시 바뀐다.
+import { useMemo } from 'react'
+import { useSort } from '../context/sortContext'
 import { useTheme } from '../context/ThemeContext'
 import { useWatchlist } from '../context/WatchlistContext'
 import { STOCKS } from '../data/stocks'
@@ -8,12 +10,32 @@ import { STOCKS } from '../data/stocks'
 export default function StockGrid() {
     const { cardBg, text, muted, border, primary } = useTheme()
     const { isWatching, addSymbol, removeSymbol } = useWatchlist()
+    const [sortBy, setSortBy] = useSort()
+
+    //앞에서 배웠던 useMemo 정렬하기 코드 참고
+    const sortByList = useMemo(() => {
+        const sortedStock = [...STOCKS]
+        sortedStock.sort((a, b) => {
+            if (sortBy === 'price') {
+                return b.price - a.price
+            }
+            return a.symbol.localeCompare(b.symbol)
+        })
+        return sortedStock
+    }, [sortBy])
 
     return (
         <div>
             <h2 style={{ margin: '1rem 0 0.75rem' }}>전체 종목</h2>
+            {/* <div>
+                <button style={{ margin: '5px' }}
+                    onClick={() => setSortBy('symbol')}>종목코드</button>
+                <button style={{ margin: '5px' }}
+                    onClick={() => setSortBy('price')}>가격</button>
+            </div> */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '12px' }}>
-                {STOCKS.map((stock) => {
+                {/* {STOCKS.map((stock) => { */}
+                {sortByList.map((stock) => {
                     const watching = isWatching(stock.symbol)
                     const isUp = stock.change >= 0
                     return (

@@ -5,15 +5,18 @@ import { ThemeProvider } from './context/ThemeContext'
 import { WatchlistProvider } from './context/WatchlistContext'
 import Header from './components/Header'
 import StockGrid from './components/StockGrid'
+import SortProvider from './context/sortContext'
 
 export default function App() {
   return (
     <ThemeProvider>
       <WatchlistProvider>
-        <Header />
-        <main style={{ padding: '1rem', maxWidth: '900px', margin: '0 auto' }}>
-          <StockGrid />
-        </main>
+        <SortProvider>
+          <Header />
+          <main style={{ padding: '1rem', maxWidth: '900px', margin: '0 auto' }}>
+            <StockGrid />
+          </main>
+        </SortProvider>
       </WatchlistProvider>
     </ThemeProvider>
   )
