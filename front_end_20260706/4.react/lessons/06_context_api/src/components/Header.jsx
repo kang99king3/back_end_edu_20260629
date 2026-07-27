@@ -5,6 +5,7 @@ import { useTheme } from '../context/ThemeContext'
 import { useWatchlist } from '../context/WatchlistContext'
 
 export default function Header() {
+    //useTheme() -> ThemeContext반환 -> value={isDark,toggel...}
     const { isDark, toggle, text, border } = useTheme()
     const { watchlist } = useWatchlist()
 
