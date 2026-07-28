@@ -1,26 +1,37 @@
 // ── STEP 1: Zustand 스토어 (전역 상태) ── (빈칸 채우기)
 // 개념: create((set, get) => ({ 상태와 액션 })). set=변경, get=읽기.
 // 막히면 정답 참고: lessons_edu/08_zustand_store/app/store/useStockStore.js
-import { create } from 'zustand'
 
+import { create } from 'zustand'
+// create((set,get)=>({상태와 액션}))
+//  set(), get()
 const useStockStore = create((set, get) => ({
     // ── 상태 (제공됨)
-    watchlist: ['AAPL', 'TSLA', 'MSFT'],
-    selectedSymbol: 'AAPL',
+    watchlist: ['AAPL', 'TSLA', 'MSFT'], // 관심종목 코드 - 배열형태
+    selectedSymbol: 'AAPL', // 현재 선택된 종목
+    // 임시적으로 종목코드와 가격정보를 저장해둠
     prices: { AAPL: 182.52, TSLA: 248.5, MSFT: 378.85 },
 
     // ── 액션 (빈칸 — 아래 로직을 채우세요)
     // TODO: STEP 1 — 관심종목 추가 (get()으로 현재 목록 확인, 중복이면 무시, set으로 추가)
-    addToWatchlist: (symbol) => { },
+    addToWatchlist: (symbol) => {
+        const { watchlist } = get() // get()은 현재 {watchlist:[],prices:{}...}
+        if (watchlist.includes(symbol)) return
+        // ['AAPL', 'TSLA', 'MSFT','akdi']
+        set({ watchlist: [...watchlist, symbol] })
+    },
 
     // TODO: STEP 1 — 관심종목 제거 (filter로 해당 종목 제외)
-    removeFromWatchlist: (symbol) => { },
+    removeFromWatchlist: (symbol) => {
+        set((state) => ({ watchlist: state.watchlist.filter((s) => s !== symbol) }))
+    },
 
     // TODO: STEP 1 — 선택 종목 변경 (set)
-    selectSymbol: (symbol) => { },
+    selectSymbol: (symbol) => set({ selectedSymbol: symbol }),
 
     // TODO: STEP 1 — 특정 종목 가격 설정 (기존 prices를 복사 후 해당 종목만 갱신)
-    setPrice: (symbol, price) => { },
+    setPrice: (symbol, price) =>
+        set((state) => ({ prices: { ...state.prices, [symbol]: price } })),
 }))
 
 export default useStockStore
