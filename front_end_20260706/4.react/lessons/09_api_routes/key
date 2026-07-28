@@ -1,0 +1,3 @@
+FINNHUB_API_KEY=d8v1ucpr01qrt65uste0d8v1ucpr01qrt65usteg
+
+NEXT_PUBLIC_APP_NAME=StockDash
