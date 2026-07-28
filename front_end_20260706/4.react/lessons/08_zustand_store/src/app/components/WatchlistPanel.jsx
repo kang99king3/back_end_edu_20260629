@@ -7,11 +7,11 @@ import useStockStore from '@/app/store/useStockStore'
 export default function WatchlistPanel() {
     // TODO: STEP 3 — 필요한 상태/액션을 '조각별로' 구독하세요.
     //   필요한 것: watchlist, selectedSymbol, prices, selectSymbol, removeFromWatchlist
-    const watchlist = []
-    const selectedSymbol = null
-    const prices = {}
-    const selectSymbol = () => { }
-    const removeFromWatchlist = () => { }
+    const watchlist = useStockStore((s) => s.watchlist)
+    const selectedSymbol = useStockStore((s) => s.selectedSymbol)
+    const prices = useStockStore((s) => s.prices)
+    const selectSymbol = useStockStore((s) => s.selectSymbol)
+    const removeFromWatchlist = useStockStore((s) => s.removeFromWatchlist)
 
     return (
         <div style={{ padding: '1rem' }}>

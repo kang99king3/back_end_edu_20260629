@@ -9,10 +9,14 @@ export default function AddStockForm() {
     const [input, setInput] = useState('')
 
     // TODO: STEP 2 — 스토어에서 addToWatchlist 액션을 구독하세요. (셀렉터 사용)
+    // store로부터 원하는 상태만 가져온다면 업데이트 함수로 얻어온다.
+    const addToWatchlist = useStockStore((s) => s.addToWatchlist)
 
     const handleAdd = () => {
         if (!input.trim()) return
         // TODO: STEP 2 — 대문자로 변환해 관심종목에 추가하고 입력을 비우세요.
+        addToWatchlist(input.toUpperCase()) // 종목코드 대문자 통일
+        setInput('')
     }
 
     return (
