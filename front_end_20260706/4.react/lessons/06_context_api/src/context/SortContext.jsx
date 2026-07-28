@@ -4,7 +4,7 @@ const SortContext = createContext(null)
 
 export default function SortProvider({ children }) {
 
-    const [sortBy, setSortBy] = useState("symbol")
+    const [sortBy, setSortBy] = useState("symbol") //symbol, price
 
     return (
         <SortContext.Provider value={[sortBy, setSortBy]}>
