@@ -19,10 +19,19 @@ export default function StockSearch() {
       return
     }
     // TODO: STEP 3 — /api/search?q=... 를 fetch해서 받은 results를 setResults 하세요.
+    const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`)
+    const data = await res.json() //js객체로 변환
+    // fetch('url').then((res)=>res.json()).then()
+
+    setResults(data.results || [])
   }
 
   const handleSelect = (symbol) => {
     // TODO: STEP 3 — 관심종목에 추가하고, 입력/결과를 초기화한 뒤 입력창에 포커스를 복원하세요.
+    addToWatchlist(symbol)
+    setQuery('')
+    setResults([])
+    inputRef.current?.focus()
   }
 
   return (

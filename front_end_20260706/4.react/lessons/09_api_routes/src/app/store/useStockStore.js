@@ -13,7 +13,9 @@ const useStockStore = create((set, get) => ({
   },
   removeFromWatchlist: (symbol) =>
     set((state) => ({ watchlist: state.watchlist.filter((s) => s !== symbol) })),
+
   selectSymbol: (symbol) => set({ selectedSymbol: symbol }),
+
   setPrice: (symbol, price) =>
     set((state) => ({ prices: { ...state.prices, [symbol]: price } })),
 }))
