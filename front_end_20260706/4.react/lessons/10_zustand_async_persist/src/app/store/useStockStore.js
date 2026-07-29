@@ -52,10 +52,39 @@ const useStockStore = create(
       },
 
       // TODO: STEP 1 — 매수: 이미 보유 중이면 평단가 재계산(총비용/총수량), 없으면 신규 등록.
-      buyStock: (symbol, qty, price) => { },
+      buyStock: (symbol, qty, price) => {
+        const { portfolio } = get()
+        const existing = portfolio[symbol]
+        if (existing) {
+          //총 수량 = 기존 수량 + 매수 수량
+          const totalQty = existing.qty + qty
+          //총 매입원가 = 기존 매입원가 + 신규 매입원가
+          const totalCost = existing.qty * existing.avgPrice + qty * price
+          set((state) => ({
+            portfolio: { ...state.portfolio, [symbol]: { qty: totalQty, avgPrice: totalCost / totalQty } },
+          }))
+        } else {
+          set((state) => ({ portfolio: { ...state.portfolio, [symbol]: { qty, avgPrice: price } } }))
+        }
+      },//buystock종료
 
       // TODO: STEP 1 — 매도: 남은 수량이 0 이하면 종목 제거, 아니면 수량만 차감.
-      sellStock: (symbol, qty) => { },
+      sellStock: (symbol, qty) => {
+        const { portfolio } = get()
+        const existing = portfolio[symbol] //매도 종목의 가격정보 가져오기
+        if (!existing) return //없으면 종료
+        const remain = existing.qty - qty //보유수량 - 매도수량
+        if (remain <= 0) {//0이하라면 모두 매도했다는 의미
+          set((state) => {
+            const next = { ...state.portfolio } //기존 포트폴리오 복사
+            delete next[symbol] //모두 매도했다면 포트폴리오에서 종목 제거
+            return { portfolio: next } //제거한 객체로 업데이트
+          })
+        } else {
+          //매수량이 남아있으면, 보유수량에서 매도수량의 차를 구해 다시 업데이트
+          set((state) => ({ portfolio: { ...state.portfolio, [symbol]: { ...existing, qty: remain } } }))
+        }
+      },//sellstock종료
     }),
     // TODO: STEP 1 — persist 두 번째 인자(설정)를 추가하세요.
     //   name(localStorage 키)과 partialize(watchlist/selectedSymbol/portfolio만 저장)를 지정.

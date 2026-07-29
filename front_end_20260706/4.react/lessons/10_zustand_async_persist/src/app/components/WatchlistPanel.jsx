@@ -15,6 +15,10 @@ export default function WatchlistPanel() {
   const buyStock = useStockStore((s) => s.buyStock)
 
   // TODO: STEP 2 — 최초 마운트 시 관심종목 전체 시세를 조회하세요. (useEffect + fetchAllPrices)
+  //  -> 가격정보는 localStorage에 저장하지 않기때문에 일괄적으로 가격을 구한다.
+  useEffect(() => {
+    fetchAllPrices()
+  }, [fetchAllPrices])
 
   return (
     <div style={{ padding: '1rem' }}>
