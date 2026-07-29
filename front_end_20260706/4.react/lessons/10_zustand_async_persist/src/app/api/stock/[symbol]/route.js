@@ -17,8 +17,9 @@ export async function GET(request, { params }) {
   try {
     const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`, { cache: 'no-store' })
     if (!res.ok) throw new Error(`API 호출 실패 (status ${res.status})`)
-    const data = await res.json()
-    return Response.json({
+    console.log("finnhub데이터:", res)
+    const data = await res.json() // json()은 js객체로 변환
+    return Response.json({  // json()은 js객체를 json문자열로 변환
       symbol, price: data.c, change: data.d, changePercent: data.dp, timestamp: Date.now(), source: 'finnhub',
     })
   } catch (err) {

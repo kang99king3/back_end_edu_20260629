@@ -36,7 +36,7 @@ const useStockStore = create(
         try {
           const res = await fetch(`/api/stock/${symbol}`)
           if (!res.ok) throw new Error(`${symbol} 시세 조회 실패`)
-          const data = await res.json()
+          const data = await res.json() // js객체로 변환
           set((state) => ({ prices: { ...state.prices, [symbol]: data.price }, loading: false }))
         } catch (err) {
           set({ error: err.message, loading: false })
@@ -44,7 +44,12 @@ const useStockStore = create(
       },
 
       // TODO: STEP 1 — 관심종목 전체 병렬 조회: watchlist를 돌며 fetchPrice를 Promise.all로.
-      fetchAllPrices: async () => { },
+      fetchAllPrices: async () => {
+        const { watchlist, fetchPrice } = get()
+        //관심종목 여러개를 가져와 각각 가격정보를 업데이트하는 fetchPrice를 병렬로 호출
+        //직렬로 실행할 경우 fetchPrice(s) 하나하나 끝날때까지 기다려야 하므로 비효율적(f->f->f)
+        await Promise.all(watchlist.map((s) => fetchPrice(s)))
+      },
 
       // TODO: STEP 1 — 매수: 이미 보유 중이면 평단가 재계산(총비용/총수량), 없으면 신규 등록.
       buyStock: (symbol, qty, price) => { },
