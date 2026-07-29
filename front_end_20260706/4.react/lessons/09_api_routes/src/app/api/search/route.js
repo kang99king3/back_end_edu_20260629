@@ -26,6 +26,7 @@ export async function GET(request) {
     // TODO: STEP 1 — 쿼리스트링 q를 읽으세요. (new URL(request.url).searchParams 사용, 소문자 변환)
     // fetch('/api/search?q=app') 요청
     // URL객체에는 url 정보가 있고 내용은 {pathname, hostname, searchParams}
+    // searchParams={q:v}
     const { searchParams } = new URL(request.url)
     const q = searchParams.get('q')?.toLowerCase() || ''
 
