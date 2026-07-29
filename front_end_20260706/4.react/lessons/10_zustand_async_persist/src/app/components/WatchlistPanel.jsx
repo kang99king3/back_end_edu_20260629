@@ -52,6 +52,7 @@ export default function WatchlistPanel() {
                 onClick={(e) => {
                   e.stopPropagation()
                   // TODO: STEP 2 — 현재가(price)가 있으면 1주 매수하세요. (buyStock)
+                  if (price) buyStock(symbol, 1, price)
                 }}
                 disabled={!price}
                 style={{ marginTop: '8px', width: '100%', padding: '5px', fontSize: '12px', borderRadius: '6px', background: '#61dafb22', color: '#61dafb', border: '1px solid #61dafb55', cursor: price ? 'pointer' : 'not-allowed' }}

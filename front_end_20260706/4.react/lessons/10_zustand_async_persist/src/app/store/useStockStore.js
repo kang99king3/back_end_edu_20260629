@@ -52,6 +52,7 @@ const useStockStore = create(
       },
 
       // TODO: STEP 1 — 매수: 이미 보유 중이면 평단가 재계산(총비용/총수량), 없으면 신규 등록.
+      //        종목코드, 수량, 가격
       buyStock: (symbol, qty, price) => {
         const { portfolio } = get()
         const existing = portfolio[symbol]
