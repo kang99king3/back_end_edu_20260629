@@ -10,6 +10,10 @@ export default function ThemeWrapper({ children }) {
 
   // TODO: STEP 2 — theme가 바뀔 때 <html>(document.documentElement)에 'dark' 클래스를 add/remove 하세요.
   //   (theme === 'dark'이면 add, 아니면 remove — useEffect 의존성 [theme])
-
+  useEffect(() => {
+    const root = document.documentElement // <html>요소
+    if (theme === 'dark') root.classList.add('dark') // class='dark' 추가
+    else root.classList.remove('dark')
+  }, [theme])
   return children
 }

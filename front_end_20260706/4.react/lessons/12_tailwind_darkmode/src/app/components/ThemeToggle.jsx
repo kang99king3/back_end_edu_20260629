@@ -7,7 +7,7 @@ import useStockStore from '@/app/store/useStockStore'
 export default function ThemeToggle() {
   // TODO: STEP 2 — 스토어에서 theme와 toggleTheme을 구독하세요.
   const theme = 'dark'
-  const toggleTheme = () => {}
+  const toggleTheme = () => { }
 
   return (
     <button

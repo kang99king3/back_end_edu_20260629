@@ -1,9 +1,10 @@
 /* ── STEP 1: Tailwind v4 설정 ── (빈칸 채우기) */
-/* 막히면 정답 참고: lessons_edu/12_tailwind_darkmode/app/globals.css */
+/* 이전 버전까지는 tailwind.config.js, postcss.config.mjs */
 @import "tailwindcss";
 
 /* TODO: STEP 1 — 클래스 기반 다크모드를 켜세요.
    (이 설정이 있어야 <html>.dark 일 때 dark: 유틸리티가 동작합니다 → @variant 사용) */
+@variant dark (&:where(.dark, .dark *));
 
 /* 커스텀 색 (제공됨) — bg-stock-card, text-stock-cyan 등 생성 */
 @theme {
