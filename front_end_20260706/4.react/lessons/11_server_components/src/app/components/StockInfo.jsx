@@ -7,19 +7,24 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 async function getStockProfile(symbol) {
   await delay(2000)
-  const names = { AAPL: 'Apple Inc.', TSLA: 'Tesla Inc.', MSFT: 'Microsoft Corp.' }
-  return {
-    name: names[symbol] || symbol,
-    exchange: 'NASDAQ',
-    industry: '기술',
-    marketCap: '2.8T',
-    description: `${symbol}은 글로벌 기업으로 혁신적인 제품과 서비스를 제공합니다.`,
-  }
+  // const names = { AAPL: 'Apple Inc.', TSLA: 'Tesla Inc.', MSFT: 'Microsoft Corp.' }
+  // return {
+  //   name: names[symbol] || symbol,
+  //   exchange: 'NASDAQ',
+  //   industry: '기술',
+  //   marketCap: '2.8T',
+  //   description: `${symbol}은 글로벌 기업으로 혁신적인 제품과 서비스를 제공합니다.`,
+  // }
+  const res = await fetch(`http://localhost:3002/api/stock/${symbol}/profile`)
+  const data = await res.json()
+  return data
 }
 
 // TODO: STEP 1 — 이 컴포넌트를 async로 만들고, 안에서 getStockProfile을 await로 가져와 profile에 담으세요.
-export default function StockInfo({ symbol }) {
-  const profile = { name: symbol, exchange: '-', industry: '-', marketCap: '-', description: '' } // ← await getStockProfile(symbol)로 교체
+export default async function StockInfo({ symbol }) {
+  // const profile = { name: symbol, exchange: '-',
+  //    industry: '-', marketCap: '-', description: '' } // ← await getStockProfile(symbol)로 교체
+  const profile = await getStockProfile(symbol)
 
   return (
     <div style={{ padding: '1.25rem', borderRadius: '12px', border: '1px solid #0f3460', background: '#0d2137' }}>

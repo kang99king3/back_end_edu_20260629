@@ -13,7 +13,10 @@ function CardSkeleton({ height = '180px' }) {
   )
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage({ searchParams }) {
+  const { symbol } = await searchParams
+  const symbolVal = symbol || 'AAPL'
+
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '1rem', minHeight: '100vh', padding: '1rem' }}>
       <aside style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -25,7 +28,14 @@ export default function DashboardPage() {
       <main style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {/* TODO: STEP 2 — 아래 StockInfo를 <Suspense fallback={<CardSkeleton />}>로 감싸세요.
             (로딩 동안 스켈레톤이 보이고, 준비되면 실제 정보로 교체됩니다) */}
-        <StockInfo symbol="AAPL" />
+        <Suspense fallback={<CardSkeleton height='180px' />}>
+          {/* zustand 설정된 useStockStore에서 selectedsymbol을 가져오면 되지만 
+          현재 컴포넌트는 서버컴포넌트임
+           - 연결해볼 기능: 관심종목 목록을 클릭했을때 그종목의 symbol을 받아 처리하도록 보완하자
+          */}
+          {/* <StockInfo symbol="AAPL" /> */}
+          <StockInfo symbol={symbolVal} />
+        </Suspense>
 
         <div style={{ padding: '1.25rem', borderRadius: '12px', border: '1px solid #0f3460', background: '#0d2137' }}>
           <p style={{ color: '#8892b0' }}>차트 영역 (13강에서 구현)</p>

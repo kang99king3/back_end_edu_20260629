@@ -4,6 +4,7 @@
 'use client'
 import { useEffect } from 'react'
 import useStockStore from '@/app/store/useStockStore'
+import { useRouter } from 'next/navigation'
 
 export default function WatchlistPanel() {
   const watchlist = useStockStore((s) => s.watchlist)
@@ -13,6 +14,8 @@ export default function WatchlistPanel() {
   const removeFromWatchlist = useStockStore((s) => s.removeFromWatchlist)
   const fetchAllPrices = useStockStore((s) => s.fetchAllPrices)
   const buyStock = useStockStore((s) => s.buyStock)
+
+  const router = useRouter() //라우터 가져옴
 
   // TODO: STEP 2 — 최초 마운트 시 관심종목 전체 시세를 조회하세요. (useEffect + fetchAllPrices)
   //  -> 가격정보는 localStorage에 저장하지 않기때문에 일괄적으로 가격을 구한다.
@@ -29,7 +32,11 @@ export default function WatchlistPanel() {
           return (
             <li
               key={symbol}
-              onClick={() => selectSymbol(symbol)}
+              onClick={() => {
+                selectSymbol(symbol)
+                // 주소창에 값을 변경한다.( /로 시작하면 절대경로임 root다음에 붙는다)
+                router.push(`/?symbol=${symbol}`)
+              }}
               style={{
                 padding: '12px', marginBottom: '8px', borderRadius: '8px',
                 border: `1px solid ${selectedSymbol === symbol ? '#61dafb' : '#0f3460'}`,
