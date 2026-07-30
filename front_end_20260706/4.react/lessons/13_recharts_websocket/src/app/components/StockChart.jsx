@@ -23,6 +23,9 @@ export default function StockChart() {
   // 직전 가격 (렌더와 무관하게 관리)
   const lastPriceRef = useRef(0)
 
+  //마지막 업데이트 시간 저장:차트 점과 점의 간격 시간
+  const lastUpdateTimeRef = useRef(0)
+
   // TODO: STEP 3 — 종목(selectedSymbol)이 바뀔 때마다 /api/stock/[symbol]/chart 로 초기 데이터를 로드하세요.
   //   받은 data로 setChartData, 마지막 가격을 lastPriceRef에 저장, setIsLoading(false).
   //   (언마운트 시 stale 응답을 무시하도록 정리하면 더 좋습니다)
@@ -66,17 +69,29 @@ export default function StockChart() {
     // 1번 방식:WebSocket 방식 구현 (실제로 실시간 처리, 키 필요)
     if (token) {
       const ws = new WebSocket(`wss://ws.finnhub.io?token=${token}`)
-      ws.onopen = () => ws.send(JSON.stringify({ type: 'subscribe', symbol: selectedSymbol }))
+      ws.onopen = () => {
+        console.log("연결성공")
+        //symbol에 원래 selectedSymbol로 작성해야 함 테스트로 binance:btcusdt를 넣었음  
+        ws.send(JSON.stringify({ type: 'subscribe', symbol: 'BINANCE:BTCUSDT' }))
+      }
       ws.onmessage = (event) => {
         const msg = JSON.parse(event.data)
         console.log("data", msg.p)
         if (msg.type !== 'trade' || !msg.data?.length) return
-        pushPrice(msg.data[msg.data.length - 1].p)//마지막 체결가
+
+        const now = Date.now() // 현재시간 구하기
+        //시간 차가 2초보다 클경우 즉, 2초이상의 간격으로 실행
+        if (now - lastUpdateTimeRef.current >= 2000) {
+          pushPrice(msg.data[msg.data.length - 1].p)//마지막 체결가
+          lastUpdateTimeRef.current = now//업데이터 시간 갱신하기
+        }
       }
       ws.onerror = (err) => console.log('websocket 오류:', err)
       return () => {
+        console.log("닫기 실행")
         if (ws.readyState === WebSocket.OPEN) {
-          ws.send(JSON.stringify({ type: 'unsubscribe', symbol: selectedSymbol }))
+          //symbol에 원래 selectedSymbol로 작성해야 함 테스트로 binance:btcusdt를 넣었음                              
+          ws.send(JSON.stringify({ type: 'unsubscribe', symbol: 'BINANCE:BTCUSDT' }))
         }
         ws.close() // 이전 작업에서 연결된 socket 닫기
       }
