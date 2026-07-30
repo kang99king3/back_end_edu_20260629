@@ -8,7 +8,7 @@ export const metadata = { title: 'StockDash — 주식 대시보드' }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ko" class='dark'>
+    <html lang="ko">
       <body className="bg-white text-gray-900 dark:bg-stock-bg dark:text-stock-light min-h-screen">
         <ThemeWrapper>
           <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-3 border-b

@@ -9,7 +9,8 @@ const useStockStore = create(
     (set, get) => ({
       // ── 테마 상태 (빈칸)
       // TODO: STEP 2 — theme 초기값('dark')과, dark↔light를 뒤집는 toggleTheme 액션을 추가하세요.
-
+      theme: 'dark', // 'dark' || 'light'
+      toggleTheme: () => set((s) => ({ theme: s.theme === 'dark' ? 'light' : 'dark' })),
       // ── 앱 상태 (10강 완성본)
       watchlist: ['AAPL', 'TSLA', 'MSFT'],
       selectedSymbol: 'AAPL',
@@ -73,6 +74,7 @@ const useStockStore = create(
       name: 'stock-dashboard',
       partialize: (state) => ({
         // TODO: STEP 2 — 테마도 저장되도록 theme를 추가하세요.
+        theme: state.theme,
         watchlist: state.watchlist,
         selectedSymbol: state.selectedSymbol,
         portfolio: state.portfolio,
