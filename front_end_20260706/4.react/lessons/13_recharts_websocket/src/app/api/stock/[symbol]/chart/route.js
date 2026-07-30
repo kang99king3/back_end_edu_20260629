@@ -4,9 +4,13 @@
 import { isUSMarketOpen } from '@/app/lib/market'
 
 // (헬퍼는 제공됨) 더미 60개 생성
+// [{"time":"오전 09:01", "price":181.23},
+//  {"time":"오전 09:02", "price":181.23},
+//   ..... 
+//  ]
 function generateDummyData(symbol) {
   const now = Date.now()
-  const oneMin = 60 * 1000
+  const oneMin = 60 * 1000 // 1분을 ms로 환산
   const base = symbol === 'AAPL' ? 182 : symbol === 'TSLA' ? 250 : 150
   return Array.from({ length: 60 }, (_, i) => {
     const t = now - (59 - i) * oneMin
@@ -17,7 +21,7 @@ function generateDummyData(symbol) {
     }
   })
 }
-
+// /api/stock/[symbol]/chart
 export async function GET(request, { params }) {
   const { symbol } = await params
   const apiKey = process.env.FINNHUB_API_KEY
