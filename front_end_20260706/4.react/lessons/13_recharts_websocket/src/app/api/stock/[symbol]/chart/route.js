@@ -28,7 +28,9 @@ export async function GET(request, { params }) {
 
   // TODO: STEP 1 — 키가 없거나(!apiKey) 미국장이 닫혀 있으면(!isUSMarketOpen()) 더미 60개를 반환하세요.
   //   (generateDummyData(symbol)를 { symbol, data } 형태로 Response.json)
-
+  if (!apiKey || !isUSMarketOpen()) {
+    return Response.json({ symbol, data: generateDummyData(symbol) })
+  }
   // 키 있음 + 장 개장 → 실제 현재가 1점 (제공됨)
   try {
     const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`, { cache: 'no-store' })
