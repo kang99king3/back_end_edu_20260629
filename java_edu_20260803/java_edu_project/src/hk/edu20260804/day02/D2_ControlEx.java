@@ -1,6 +1,8 @@
 package hk.edu20260804.day02;
 
 import java.util.Random;
+import java.util.Scanner;
+import java.util.Base64.Encoder;
 
 public class D2_ControlEx {
     public static void main(String[] args) {
@@ -73,5 +75,57 @@ public class D2_ControlEx {
 
         // Random random = new Random();
         // System.out.println(random.nextInt(6));
+
+        // Scanner 클래스: 키보드로 입력받는 기능에 활용해 볼 수 있는 객체
+        // Scanner scan = new Scanner(System.in, "EUC-KR");
+        // System.out.println(scan.next());
+        // int num = 0;
+        // System.out.print("입력하세요:");
+        // num = Integer.parseInt(scan.nextLine());// 이 코드가 실행되면 콘솔에서 입력을 대기한다.
+        // System.out.println("입력결과값:" + num);
+        // System.out.println("또 입력받기:");
+        // int num2 = Integer.parseInt(scan.nextLine());
+        // hasNextInt()... 확인하는 기능
+
+        Scanner scan = new Scanner(System.in);
+        int balance = 0;// 금액 저장할 변수
+        while (true) {
+            System.out.println("-------------------------");
+            System.out.println("1.예금|2.출금|3.잔고|4.종료");
+            System.out.println("-------------------------");
+            System.out.print("선택>");
+
+            int num = 0;
+            if (scan.hasNextInt()) {// 줄바꿈을 읽지 않음 "문자입력\n"
+                num = Integer.parseInt(scan.nextLine());
+            } else {
+                System.out.println("숫자만 입력하세요");
+                scan.nextLine();// 남아 있는 한줄에 대해 읽고 제거
+                continue;
+            }
+
+            if (num == 1) {// 예금
+                System.out.print("예금액>");
+                int a = Integer.parseInt(scan.nextLine());// "10000"
+                balance += a;
+                System.out.println(a + "원 입금을 완료했습니다.");
+            } else if (num == 2) {// 출금
+                System.out.print("출금액>");
+                int a = Integer.parseInt(scan.nextLine());
+                if (balance > a) {// 잔액이 부족한지 충분한지 확인
+                    balance -= a;
+                } else {
+                    System.out.println("잔액이 부족합니다.");
+                    continue;
+                }
+            } else if (num == 3) { // 조회
+                System.out.printf("잔고:%d원입니다.\n", balance);
+            } else if (num == 4) {
+                System.out.println("프로그램 종료");
+                break;
+            } else {
+                System.out.println("1~4까지만 입력하세요");
+            }
+        }
     }
 }
