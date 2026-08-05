@@ -33,6 +33,39 @@ public class D1_StarView {
             }
             System.out.println();
         }
+        System.out.println("======================");
+        // i ☆☆☆☆★
+        // i ☆☆☆★★★
+        // i ☆☆★★★★★
+        // i ☆★★★★★★★
+        // i ★★★★★★★★★
+        // 별 출력: 1 3 5 7 9.. a0+n*d -> 1+i*2
+        for (int i = 0; i < num; i++) {
+            for (int j = 0; j < 4 - i; j++) {
+                System.out.print("  ");
+            }
+            for (int j = 0; j < 1 + i * 2; j++) {
+                System.out.print("★ ");
+            }
+            System.out.println();
+        }
+        System.out.println("==================");
 
+        // ★★★★★★★★★
+        // ☆★★★★★★★
+        // ☆☆★★★★★
+        // ☆☆☆★★★
+        // ☆☆☆☆★
+        // 9 7 5 3 1 -> 9+i*-2 -> 9-i*2
+        // 0 1 2 3 4 -> 0+i*1 -> i
+        for (int i = 0; i < num; i++) {
+            for (int j = 0; j < i; j++) {
+                System.out.print("  ");
+            }
+            for (int j = 0; j < (num * 2 - 1) - i * 2; j++) {
+                System.out.print("★ ");
+            }
+            System.out.println();
+        }
     }
 }
