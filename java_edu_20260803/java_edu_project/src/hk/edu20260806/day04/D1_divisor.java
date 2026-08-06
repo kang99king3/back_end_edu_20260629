@@ -2,6 +2,13 @@ package hk.edu20260806.day04;
 
 public class D1_divisor {
 
+    // Default 생성자: 생성자가 생략되어 있다
+    public D1_divisor() {
+        // 기본적으로 생성자 호출은 맨 윗줄에 작성
+        super();// 부모생성자를 호출 -> Object 클래스가 부모임
+        // this();// 같이 작성할 수 없다.
+    }
+
     public static void main(String[] args) {
         divisor(12);
         greateDivisor(10, 20);

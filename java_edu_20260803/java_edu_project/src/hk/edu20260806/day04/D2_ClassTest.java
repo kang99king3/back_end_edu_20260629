@@ -1,0 +1,33 @@
+package hk.edu20260806.day04;
+
+public class D2_ClassTest {
+
+    // 맴버필드: 클래스에서 데이터를 저장해서 사용하는 저장공간 개념
+    // -> 객체가 사라지지 않는 한 항상 유지 됨
+    public int number;// 인스턴스 맴버필드 (변수)
+
+    public static int staticNumber;// 클래스 변수
+
+    // 기본 생성자(default생성자): 파라미터 없음, 생략 가능,
+    // -------------------------맴버필드 초기화나 초기 실행할 작업
+    // 아래와 같이 파라미터가 있는 생성자를 추가하면 default생성자 생략못함
+    public D2_ClassTest() {
+
+    }
+
+    // 생성자 오버로딩: 파라미터의 개수와 타입을 다르게 해서 생성자나 메서드 이름을 같게 사용
+    public D2_ClassTest(int number) {
+        // supuer:부모, this:자기자신 클래스
+        this.number = number;
+    }
+
+    // 메서드: 인스턴스 메서드
+    public void methodTest() {
+        System.out.println("인스턴스에 관련된 기능을 정의한다.");
+    }
+
+    // 메서드: 클래스 메서드
+    public static void stMethodTest() {
+        System.out.println("메서드영역 메모리에 생성되어 공통기능을 정의한다.");
+    }
+}
