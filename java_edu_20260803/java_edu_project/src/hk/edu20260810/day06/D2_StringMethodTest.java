@@ -62,10 +62,28 @@ public class D2_StringMethodTest {
 
     // 파라미터 -> str="KB증권"
     public void search(String str) {
-        String s = "KB증권은 10일 삼성전자에 대해 \"연간 주주환원 규모가 KB증권최대 200조원에 달할 것\"이라며 \"확신의 매수 구간\"이라고 판단했다. 목표주가는 60만원을 유지했다.\r\n"
+        String s = "KB증권은 KB증권10일 삼성전자에 대해 \"연간 주주환원 규모가 KB증권최대 200조원에 달할 것\"이라며 \"확신의 매수 구간\"이라고 판단했다. 목표주가는 60만원을 유지했다.\r\n"
                 + //
                 "\r\n" + //
                 "김동원 KB증권 리서치본부장은 \"조만간 발표될 것으로 예상되는KB증권 연간 " +
                 "주주환원 규모는 최소 100조원에서 최대 200조원으로 추정된다\"며 \"기존(9조8000억원)보다 10배 이상 커질 KB증권 것으로 전망된다\"고 강조했다.";
+
+        if (s.indexOf(str) != -1) {
+            int idx = 0;
+            int count = 0;
+            while (s.indexOf(str, idx) != -1) {
+                int sidx = s.indexOf(str, idx);// 시작하는 인덱스
+                System.out.println(sidx);
+                idx = sidx + str.length();// 검색시작할 인덱스
+                String ss = s.substring(sidx, idx);
+                System.out.println(ss);
+                count++;
+            }
+            s = s.replace(str, "###");
+            System.out.println(s);
+            System.out.println("검색된 개수:" + count);
+        } else {
+            System.out.println("검색어가 존재하지 않습니다.");
+        }
     }
 }

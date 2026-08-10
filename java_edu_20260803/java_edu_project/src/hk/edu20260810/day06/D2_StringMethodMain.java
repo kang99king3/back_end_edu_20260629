@@ -6,5 +6,8 @@ public class D2_StringMethodMain {
         System.out.println(st.sTest01("ABCDE", 2));
         st.sTest2("ABCDEF");
         st.sTest04();
+
+        System.out.println("================");
+        st.search("KB증권");
     }
 }
