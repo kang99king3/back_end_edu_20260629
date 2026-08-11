@@ -15,8 +15,9 @@ public class D3_Calculator {
 
     public void paramInt(String s, String cal) {
         // s-> "5+10" -> "5"만 추출해서 정수형으로 변환하여 num1에 저장
-
+        this.num1 = Integer.parseInt(s.substring(0, s.indexOf(cal)));
         // s-> "5+10" -> "10"만 추출해서 정수형으로 변환하여 num2에 저장
+        this.num2 = Integer.parseInt(s.substring(s.indexOf(cal) + 1));// "5+10"
 
     }
 
@@ -46,14 +47,30 @@ public class D3_Calculator {
     // if 분기로 해당되는 사칙연산 메서드 실행하기: s값에서 "+"존재하면 +연산 메서드 실행, "-"가 존재하면...
     // paramInt()메서드 활용하여 맴버필드 초기화
     public void calcu(String s) { // s에 전달되는 아규먼트는 "5+10"과 같은 문자열
+
         if (s.indexOf("+") != -1) {// +연산을 요청한 경우
             // 맴버필드 num1,num2를 초기화해주는 코드(paramInt(s,cal)사용)
-
+            paramInt(s, "+");
             // 연산결과 출력 코드 작성
+            System.out.println(a(num1, num2));
+
         } else if (s.indexOf("-") != -1) {
             // 맴버필드 num1,num2를 초기화해주는 코드(paramInt(s,cal)사용)
-
+            paramInt(s, "-");
             // 연산결과 출력 코드 작성
+            System.out.println(b(num1, num2));
+        } else if (s.indexOf("/") != -1) {
+            // 맴버필드 num1,num2를 초기화해주는 코드(paramInt(s,cal)사용)
+            paramInt(s, "/");
+            // 연산결과 출력 코드 작성
+            System.out.println(d(num1, num2));
+        } else if (s.indexOf("*") != -1) {
+            // 맴버필드 num1,num2를 초기화해주는 코드(paramInt(s,cal)사용)
+            paramInt(s, "*");
+            // 연산결과 출력 코드 작성
+            System.out.println(c(num1, num2));
+        } else {
+            System.out.println("연산식을 확인하세요");
         }
     }
 }
