@@ -25,10 +25,10 @@ public class D1_LottoMain {
 
         // 추첨번호 67회 생성
         D1_Lotto lot = new D1_Lotto();
-        lot.getLots();// 번호6개짜리 배열
+        int[] lottoNum = lot.getLots();// 번호6개짜리 배열
 
         D1_LottoStore store = new D1_LottoStore();
-        store.getLottoStore();// 구매한 로또 5장
+        D1_Lotto[] lottoStoreNum = store.getLottoStore();// 구매한 로또 5장
 
         // 추첨번호와 구매번호를 비교해서 결과 출력 :
         // 각각 구매번호마다 당첨된 번호와 당첨번호 개수--> 1등,2등
