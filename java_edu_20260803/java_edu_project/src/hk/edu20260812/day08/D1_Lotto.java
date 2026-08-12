@@ -16,6 +16,7 @@ public class D1_Lotto {
     public D1_Lotto(int n) {
         // super();
         this.lots = new int[n];
+        makeLotto();// 객체생성하자마자 번호6개 추가하기
     }
 
     // 1~45까지 숫자를 랜덤하게 생성하는 메서드
