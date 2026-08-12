@@ -29,7 +29,7 @@ public class D1_Lotto {
         int count = 0;
         while (count < lots.length) {
             int b = makeBall();// 랜덤숫자 생성
-            if (!isSame(lots, b)) {
+            if (!D1_LottoUtil.isSame(lots, b)) {
                 lots[count++] = b;
             }
         }
@@ -37,16 +37,16 @@ public class D1_Lotto {
     }
 
     // 현재 생성된 숫자와 배열안에 같은 숫자가 있는지 판별
-    public boolean isSame(int[] a, int b) {
-        boolean isS = false;
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] == b) {
-                isS = true;
-                break;
-            }
-        }
-        return isS;
-    }
+    // public boolean isSame(int[] a, int b) {
+    // boolean isS = false;
+    // for (int i = 0; i < a.length; i++) {
+    // if (a[i] == b) {
+    // isS = true;
+    // break;
+    // }
+    // }
+    // return isS;
+    // }
 
     public int[] getLots() {
         return lots;
