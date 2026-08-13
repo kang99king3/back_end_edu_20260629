@@ -2,11 +2,14 @@ package hk.edu20260813.day09;
 
 public class D1_Customer {
 
-    private int customerID;// 고객ID
-    private String customerName;// 고객이름
-    private String customerGrade;// 고객등급
-    private int bonusPoint;// 보너스 포인트
-    private double bonusRatio;// 보너스 적립률
+    // public > protected > default > private
+    // private은 상속을 해줄 수 없어서 자식에서 사용하기 불편함
+    // -> protected로 선언하자
+    protected int customerID;// 고객ID
+    protected String customerName;// 고객이름
+    protected String customerGrade;// 고객등급
+    protected int bonusPoint;// 보너스 포인트
+    protected double bonusRatio;// 보너스 적립률
 
     // default생성을 하게 되면 나중에 ID, Name 값을 따로 추가해야 됨
     public D1_Customer() {
