@@ -3,6 +3,8 @@ package hk.edu20260812.day08;
 //문법: extends , 다중상속X
 public class D2_Child extends D2_Parent {
 
+    public String s = "나는 자식의 맴버필드 값이야";
+
     public D2_Child() {
         this(5);
         System.out.println("자식생성자(default)");
@@ -27,7 +29,8 @@ public class D2_Child extends D2_Parent {
     // Object클래스에 구현된 메서드
     @Override
     public String toString() {
-        return "나는 Child객체야~~";
+        // return "나는 Child객체야~~";
+        return s;
     }
 
 }

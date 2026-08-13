@@ -15,4 +15,10 @@ public class D2_Parent {
     public void parentMethod() {
         System.out.println("부모의 메서드:" + getClass());
     }
+
+    @Override
+    public String toString() {
+        return "D2_Parent [a=" + a + "]";
+    }
+
 }
