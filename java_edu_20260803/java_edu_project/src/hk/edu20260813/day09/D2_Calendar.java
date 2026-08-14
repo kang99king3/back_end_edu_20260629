@@ -136,4 +136,39 @@ public class D2_Calendar {
         System.out.println("\n");
     }
 
+    // JDK 8 부터 등장: LocalDate
+    public void localDateCalendarPrint(int year, int month) {
+        // 선언 방법
+        LocalDate today = LocalDate.now();// 현재날짜
+        LocalDate dateStr = LocalDate.parse("2026-08-03");// 특정날짜를 문자열로 정의하는 경우
+
+        // 1. 해당 연/월의 1일 날짜 객체 생성 (월에 -1 할 필요 없음!)
+        LocalDate firstDay = LocalDate.of(year, month, 1);
+
+        // 2. 그 달의 마지막 날짜 구하기 (윤년도 자동 계산됨)
+        int lastDay = firstDay.lengthOfMonth();
+
+        // 3. 1일의 요일 구하기
+        // LocalDate의 getValue()는 [월:1, 화:2, ..., 토:6, 일:7]을 반환합니다.
+        // % 7을 해주면 [일:0, 월:1, 화:2, ..., 토:6]으로 변환되어 바로 '공백수'가 됩니다!
+        int dayOfWeek = firstDay.getDayOfWeek().getValue() % 7;
+
+        // 출력부
+        System.out.println(year + "년\t" + month + "월");
+        System.out.println("일\t월\t화\t수\t목\t금\t토");
+
+        // 1일 앞의 공백 출력
+        for (int i = 0; i < dayOfWeek; i++) {
+            System.out.print("\t");
+        }
+
+        // 날짜 출력 및 토요일 줄바꿈
+        for (int i = 1; i <= lastDay; i++) {
+            System.out.print(i + "\t");
+            if ((i + dayOfWeek) % 7 == 0) {
+                System.out.println();
+            }
+        }
+        System.out.println("\n");
+    }
 }
