@@ -1,6 +1,7 @@
 package hk.edu20260813.day09;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 
 public class D2_Calendar {
 
@@ -80,13 +81,59 @@ public class D2_Calendar {
 
     public static void main(String[] args) {
         D2_Calendar cal = new D2_Calendar();
-        cal.calendarPrint(2026, 8);
+        // cal.calendarPrint(2026, 8);
 
         // 실습: 1. 2026년도 1월~12까지 출력하기
-
+        int year = 2026;
+        for (int i = 1; i <= 12; i++) {
+            cal.calendarPrint(year, i);
+            System.out.println("\n");
+        }
         // 실습: 2.나의 살아온 일수 구하기 --> 경과일 구하는 기능 구현
+        int a = cal.dates(2026, 8, 13);
+        int birth = cal.dates(1981, 5, 22);
+        System.out.println("나의 살아온 일수:" + (a - birth));
 
+        System.out.println("calendarAPI 사용한 경우");
         // 실습: 3. JAVA API를 활용해서 구현해보기
         // -- 관련 클래스: java.util.Calendar, java.time.LocalDate
+
+        for (int i = 1; i <= 12; i++) {
+            cal.calendarApiPrint(year, i);
+        }
+
     }
+
+    public void calendarApiPrint(int year, int month) {
+        // Calendar -> new 객체생성 X --> 추상클래스(미완성된 메서드를 포함)
+        // --> 사용하려면 반드시 하위에 자식클래스가 구현해야 된다.
+        // --> 완성된 메서드, 미완성된 메서드 -> 완성된 메서드는 공통으로 사용하고 싶음
+
+        // new X 못하고 getInstance() 메서드를 통해 객체를 얻어옴
+        Calendar cal = Calendar.getInstance();
+        // System.out.println(cal.get(Calendar.DATE));
+
+        // 0월~11월로 계산함
+        cal.set(year, month - 1, 1);// 특정날짜로 셋팅
+
+        // 해당 달의 마지막날 구하기
+        int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);// 요일: 1~7 관리
+        // 공백수 구한다면 dayOfWeek-1
+
+        System.out.println(year + "년\t" + month + "월");
+        System.out.println("일\t월\t화\t수\t목\t금\t토");
+        // 공백 출력
+        for (int i = 0; i < dayOfWeek - 1; i++) {
+            System.out.print("\t");
+        }
+        for (int i = 1; i <= lastDay; i++) {
+            System.out.print(i + "\t");
+            if ((i + dayOfWeek - 1) % 7 == 0) {// 현재날짜가 토요일인지 확인
+                System.out.println();
+            }
+        }
+        System.out.println("\n");
+    }
+
 }
