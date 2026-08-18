@@ -1,5 +1,6 @@
 package hk.edu20260818.day11;
 
+// 인터페이스+추상클래스+하위클래스
 public interface D2_Calc {
 
     double PI = 3.14;
