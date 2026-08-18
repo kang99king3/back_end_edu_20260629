@@ -3,7 +3,7 @@ package hk.edu20260814.day10;
 public class D3_MagicSquareMain {
 
     public static void main(String[] args) {
-        D3_OddMagicSquare odd = new D3_OddMagicSquare(3);
+        D3_OddMagicSquare odd = new D3_OddMagicSquare(11);
         odd.make();
 
         int[][] magic = odd.magic;
@@ -17,5 +17,9 @@ public class D3_MagicSquareMain {
         for (int i = 0; i < magic.length; i++) {
             System.out.print(odd.sumRow(i) + "\t");
         }
+        // 마방진 증명 확인하기
+        System.out.println();
+        System.out.println("마방진 증명여부:" + odd.isCheck());
+
     }
 }
