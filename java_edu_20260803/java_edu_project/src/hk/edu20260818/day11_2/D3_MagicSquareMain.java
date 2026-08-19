@@ -13,5 +13,9 @@ public class D3_MagicSquareMain {
         D3_IMagic odd = new D3_OddMagicSquare(9);
         odd.make();
         odd.magicPrint();
+
+        D3_IMagic even = new D2_EvenMagicSquare(8);
+        even.make();
+        even.magicPrint();
     }
 }
