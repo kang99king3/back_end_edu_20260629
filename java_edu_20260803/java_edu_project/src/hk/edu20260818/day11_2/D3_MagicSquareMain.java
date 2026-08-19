@@ -7,7 +7,10 @@ public class D3_MagicSquareMain {
     // OddMagicSquare : make() 구현
 
     public static void main(String[] args) {
-        D3_OddMagicSquare odd = new D3_OddMagicSquare(11);
+        // D3_OddMagicSquare odd = new D3_OddMagicSquare(11);
+        // odd.make();
+        // odd.magicPrint();
+        D3_IMagic odd = new D3_OddMagicSquare(9);
         odd.make();
         odd.magicPrint();
     }
