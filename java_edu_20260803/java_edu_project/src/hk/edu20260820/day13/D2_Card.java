@@ -32,4 +32,22 @@ public class D2_Card {
     public String toString() {
         return "[" + card + "]";
     }
+
+    // Card객체 내부에 멤버필드인 card끼리 비교하는 기능으로 재정의
+    // card1.equals(newcard)
+    @Override
+    public boolean equals(Object obj) { // card1.equals(card2)
+        boolean isS = false;
+        D2_Card ca = (D2_Card) obj;
+        if (this.card.equals(ca.getCard())) {// card 멤버필드끼리 비교
+            isS = true;
+        }
+        return isS;
+    }
+
+    // equals()를 오버라이딩하면 hashcode()도 오버라이딩해야 됨
+    @Override
+    public int hashCode() {
+        return card.hashCode() + 137;
+    }
 }
