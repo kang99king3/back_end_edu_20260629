@@ -1,7 +1,9 @@
 package hk.edu20260820.day13;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class D1_SetTest {
@@ -24,5 +26,9 @@ public class D1_SetTest {
             String str = iter.next();// 값을 꺼낸다
             System.out.println(str);
         }
+
+        // 꺼내는 다른 방법: List로 변환-> 원하는값만 지정해서 꺼낸다면..
+        List<String> list = new ArrayList<>(set);
+        System.out.println(list.get(2));
     }
 }
