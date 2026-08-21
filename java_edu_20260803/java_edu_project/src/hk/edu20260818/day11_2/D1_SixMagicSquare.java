@@ -1,19 +1,17 @@
-package hk.edu20260821.day14;
+package hk.edu20260818.day11_2;
 
-import hk.edu20260814.day10.D3_OddMagicSquare;
-
-public class D1_SixMagicSquare {
-
-    private int[][] magic;
+public class D1_SixMagicSquare extends D3_MagicSquare {
 
     public D1_SixMagicSquare() {
         this(6);
     }
 
     public D1_SixMagicSquare(int n) {
-        this.magic = new int[n][n];
+        // this.magic = new int[n][n];
+        super(n);
     }
 
+    @Override
     public void make() {
         makeA();
         makeB();
@@ -112,14 +110,4 @@ public class D1_SixMagicSquare {
         }
     }
 
-    public static void main(String[] args) {
-        D1_SixMagicSquare six = new D1_SixMagicSquare(10);
-        six.make();
-        for (int i = 0; i < six.magic.length; i++) {
-            for (int j = 0; j < six.magic.length; j++) {
-                System.out.print(six.magic[i][j] + "\t");
-            }
-            System.out.println();
-        }
-    }
 }
