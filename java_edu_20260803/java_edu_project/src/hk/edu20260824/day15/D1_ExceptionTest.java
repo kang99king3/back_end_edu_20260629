@@ -1,5 +1,7 @@
 package hk.edu20260824.day15;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -57,9 +59,19 @@ public class D1_ExceptionTest {
         }
         System.out.println("오류발생해도 프로그램은 종료되지 않는다.");
 
-        // try() {
-        // } catch (Exception e) {
-        // // TODO: handle exception
+        // 새로 추가된 기능: 리소스관련 객체 선언
+        try (InputStream in = new FileInputStream("url")) {
+            in.read();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 리소스 연결을 닫아주는 close()를 반드시 처리해줘야 하는데 생략이 가능함
+        // finally {
+        // try{
+        // in.close();
+        // }
         // }
     }
 
