@@ -26,6 +26,7 @@ public class D1_ExceptionTest {
 
         try {
             a = Integer.parseInt(s);// <----예외가 발생될 여지가 있는 코드
+            System.out.println();
         } catch (NumberFormatException e) {
             e.printStackTrace();
         } catch (Exception ee) {
@@ -67,6 +68,23 @@ public class D1_ExceptionTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // try(객체정의){} 문법을 사용하지 않으면 close()처리해야함--> 복잡함
+        InputStream in2 = null;
+        try {
+            in2 = new FileInputStream("url");
+            in2.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                in2.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
         // 리소스 연결을 닫아주는 close()를 반드시 처리해줘야 하는데 생략이 가능함
         // finally {
         // try{
