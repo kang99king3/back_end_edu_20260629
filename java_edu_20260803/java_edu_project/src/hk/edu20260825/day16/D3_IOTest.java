@@ -5,10 +5,13 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 
 public class D3_IOTest {
 
@@ -16,7 +19,9 @@ public class D3_IOTest {
         // test01();
         // test02();
         // test02_2();
-        test03();
+        // test03();
+        // test04();
+        test05();
     }
 
     // 파일을 읽고 출력하기
@@ -119,7 +124,7 @@ public class D3_IOTest {
                 // filter: 기본 데이터 타입을 이진데이터로 출력(자바프로그램끼리 주고받고 처리할때 사용)
                 DataOutputStream ds = new DataOutputStream(out);) {
             // ds.writeUTF(s);// UTF-8형식으로 인코딩된 문자열을 출력한다.
-            // ds.writeChars(s);
+            ds.writeChars(s);
             // out.write(s.getBytes());
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -145,6 +150,56 @@ public class D3_IOTest {
                 out.write(b, 0, i);// 읽은 개수만큼만 출력 -> 안정적(권장)
             }
         } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private static void test04() {
+        try (
+                InputStreamReader in = new InputStreamReader(System.in, "MS949");
+                OutputStreamWriter out = new OutputStreamWriter(System.out);) {
+            char[] ch = new char[512];// 2b*512 = 1024byte(1kb)
+            int i = 0;
+            while ((i = in.read(ch)) != -1) {
+                System.out.println("입력된 값:");
+                out.write(ch, 0, i);
+                out.flush();// 강제로 데이터를 밀어내서 출력하는 기능: System.out(콘솔출력)은 다 채워질때까지 출력X
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 과제: 다이어리 구현하기
+    // - 1.키보드로 입력받아서 메모장에 출력되도록 구현해보자
+    // - 2.한줄 입력하고 엔터 --> 메모장에 출력 : 다음에 입력한 내용이 이어서 출력되도록 하기
+    // - 3."exit"를 입력하면 종료되도록 하세요
+    private static void test05() {
+        String url = "D:\\back_end_edu_20260629\\back_end_edu_20260629\\java_edu_20260803\\java_edu_project\\src\\hk\\edu20260825\\temp\\test_diary.txt";
+        try (
+                InputStreamReader in = new InputStreamReader(System.in, "MS949");
+                OutputStreamWriter out = new FileWriter(url, true)) { // true 설정: 이어쓰기 모드
+            char[] ch = new char[512];
+            int i = 0;
+            System.out.println("입력하세요");
+            while ((i = in.read(ch)) != -1) {
+                String s = new String(ch, 0, i);// [e,x,i,t] -> "exit"
+                // eq~igno~case():대소문자 구분없이 비교
+                // 입력값에 엔터키(\r\n)까지 함께 읽혀오기때문에 trim()이용해서 제거
+                if (s.trim().equalsIgnoreCase("exit")) {
+                    System.out.println("다이어리를 종료합니다.");
+                    break;
+                }
+                out.write(ch, 0, i);
+                out.flush();
+            }
+        } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
