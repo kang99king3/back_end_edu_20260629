@@ -33,7 +33,7 @@ public class D2_StreamTest {
         // 람다식이 단순히 기존 메서드에 값을 전달하기만 한다면
         // --> "메서드 참조 문법"이라고 함
 
-        // 람다식을 사용하지 않고 구현한다면?
+        // Stream을 사용하지 않고 구현한다면?
         List<String> list2 = new ArrayList<>();
         for (String s : list) {
             if (s.contains("김")) {

@@ -15,15 +15,50 @@ public class D3_IOTest {
 
     // 파일을 읽고 출력하기
     private static void test01() {
-        InputStream in = null;// 입력 스트림
-        OutputStream out = null;// 출력 스트림
+        // InputStream in = null;// 입력 스트림
+        // OutputStream out = null;// 출력 스트림
 
-        try {
-            // FileInputStream("파일경로")
-            in = new FileInputStream(
-                    "D:\\back_end_edu_20260629\\back_end_edu_20260629\\java_edu_20260803\\java_edu_project\\src\\hk\\edu20260825\\temp\\test.txt");
-            out = new FileOutputStream(
-                    "D:\\back_end_edu_20260629\\back_end_edu_20260629\\java_edu_20260803\\java_edu_project\\src\\hk\\edu20260825\\temp\\test_copy.txt");
+        // try {
+        // // FileInputStream("파일경로")
+        // in = new FileInputStream(
+        // "D:\\back_end_edu_20260629\\back_end_edu_20260629\\java_edu_20260803\\java_edu_project\\src\\hk\\edu20260825\\temp\\test.txt");
+        // out = new FileOutputStream(
+        // "D:\\back_end_edu_20260629\\back_end_edu_20260629\\java_edu_20260803\\java_edu_project\\src\\hk\\edu20260825\\temp\\test_copy.txt");
+
+        // int i = 0;// byte단위로 읽어서 데이터(실데이터)를 저장하는 변수
+        // while ((i = in.read()) != -1) {// 읽어들일 데이터가 없으면 -1리턴
+        // System.out.println(i);
+        // out.write(i);// 파일 출력(byte단위로)
+        // }
+        // } catch (FileNotFoundException e) {
+        // e.printStackTrace();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // } finally {
+        // try {
+        // // 마지막에 실행됐던 스트림부터 닫는다
+        // if (out != null) {
+        // out.close();
+        // }
+        // if (in != null) {
+        // in.close();
+        // }
+        // } catch (IOException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
+        // }
+
+        // resource 관련 객체들을 편리하게 사용하기위해 추가된 try 문법
+        // -> 반드시 닫아줘야하는 작업( close()실행 )이 필요한 객체들에 대해 생략시켜줄 수 있다
+        try (
+                // FileInputStream("파일경로")
+                FileInputStream in = new FileInputStream(
+                        "D:\\back_end_edu_20260629\\back_end_edu_20260629\\java_edu_20260803\\java_edu_project\\src\\hk\\edu20260825\\temp\\test.txt");
+                FileOutputStream out = new FileOutputStream(
+                        "D:\\back_end_edu_20260629\\back_end_edu_20260629\\java_edu_20260803\\java_edu_project\\src\\hk\\edu20260825\\temp\\test_copy.txt");) {
 
             int i = 0;// byte단위로 읽어서 데이터(실데이터)를 저장하는 변수
             while ((i = in.read()) != -1) {// 읽어들일 데이터가 없으면 -1리턴
@@ -36,19 +71,6 @@ public class D3_IOTest {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                // 마지막에 실행됐던 스트림부터 닫는다
-                if (out != null) {
-                    out.close();
-                }
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
         }
     }
 }
