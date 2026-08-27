@@ -44,7 +44,7 @@ public class D4_ThreadTest {
         };
 
         // Thread의 run()을 실행시켜주는 메서드: start()
-        t1.start();
-        t2.start();
+        t1.start();// 실행단위 --> 독립적으로 실행
+        t2.start();// 실행단위 --> 독립적으로 실행
     }
 }
