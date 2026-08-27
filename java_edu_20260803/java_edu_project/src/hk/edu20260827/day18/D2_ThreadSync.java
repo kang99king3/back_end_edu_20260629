@@ -8,7 +8,7 @@ public class D2_ThreadSync {
 
     public void sbTest(String s) {
         for (int i = 0; i < 1000; i++) {
-            sb.append(s);// "AAAAAAAAAAAAAAAAAAAAAA.." 문자열길이: 1000
+            sf.append(s);// "AAAAAAAAAAAAAAAAAAAAAA.." 문자열길이: 1000
         }
         try {
             Thread.sleep(2000);
@@ -17,7 +17,7 @@ public class D2_ThreadSync {
             e.printStackTrace();
         }
         // 문자열의 길이 출력해서 1000인지 확인해보려고..
-        System.out.println(sb.length());
+        System.out.println(sf.length());
     }
 
     public static void main(String[] args) {
@@ -51,6 +51,23 @@ public class D2_ThreadSync {
         // ================================
         // 스레드 2개를 위에서 작성한것처럼 정의해서
         // sbTest() 실행해보기
+        D2_ThreadSync ts = new D2_ThreadSync();
+
+        Thread trC = new Thread() {
+            @Override
+            public void run() {
+                ts.sbTest("A");// 메서드 호출
+            }
+        };
+
+        Thread trD = new Thread() {
+            @Override
+            public void run() {
+                ts.sbTest("B");// 메서드 호출
+            }
+        };
+        trC.start();
+        trD.start();
 
     }// main 종료
 
