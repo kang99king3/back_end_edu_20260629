@@ -23,6 +23,10 @@ public class UserMain {
 			System.out.println(userDto.toString());
 		}
 	}
+	
+	public void test() {
+		
+	}
 }
 
 
