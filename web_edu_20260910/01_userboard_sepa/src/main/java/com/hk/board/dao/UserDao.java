@@ -32,7 +32,7 @@ public class UserDao {
 		List<UserDto> list = new ArrayList<>();
 		
 		//DB 연결을 위한 정보 정의
-		String url="jdbc:maridb://localhost:3306/hk";
+		String url="jdbc:mariadb://localhost:3306/hk";
 		String user = "root";
 		String password= "manager";
 		
@@ -97,6 +97,43 @@ public class UserDao {
 		
 		return list;
 	}
+	
+	//회원 등록 기능 : insert문(반환타입:boolean)
+	// 전달받는 파리미터 선언: id,name,addr,mobile.... 복잡함
+	//             --> UserDto로 받자
+	public boolean insertUser(UserDto dto) {
+		int count=0;
+		
+		//DB 연결을 위한 정보 정의
+		String url="jdbc:maridb://localhost:3306/hk";
+		String user = "root";
+		String password= "manager";
+		
+		//실행할 쿼리 정의
+		String sql =" INSERT INTO USERTBL "
+				  + " VALUES(?,?,?,?,?,?,?,SYSDATE()) ";
+		
+		// try() 문법을 사용하면 close()처리를 자동으로 해줌
+		try(Connection conn=DriverManager.getConnection(url, user, password);
+		    PreparedStatement psmt = conn.prepareStatement(sql);){
+			//쿼리에 ?를 채우는 작업
+			psmt.setString(1, dto.getUserId());
+			psmt.setString(2, dto.getName());
+			psmt.setInt(3, dto.getBirthYear());
+			psmt.setString(4, dto.getAddr());
+			psmt.setString(5, dto.getMobile1());
+			psmt.setString(6, dto.getMobile2());
+			psmt.setInt(7, dto.getHeight());
+			System.out.println("쿼리 준비 완료");
+			count=psmt.executeUpdate();//반환값은 수정된 행의 개수
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count>0?true:false;
+	}
+	
 	
 }
 
