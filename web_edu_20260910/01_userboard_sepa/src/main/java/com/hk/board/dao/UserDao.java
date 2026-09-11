@@ -183,9 +183,46 @@ public class UserDao {
 		return dto;
 	}
 	
-	// 회원정보 수정
-	
-	// 회원정보 삭제
+	// 회원정보 수정: update문(반환타입:boolean)
+	//     파라미터: userID, addr,mobile1, mobile2, height 
+	public boolean updateUser(UserDto dto) {
+		int count=0;
+		
+		//DB 연결을 위한 정보 정의
+		String url="jdbc:maridb://localhost:3306/hk";
+		String user = "root";
+		String password= "manager";
+		
+		String sql=" UPDATE usertbl "
+				 + " SET addr=? , "
+				 + "	     mobile1=?, "
+				 + "     mobile2=?, "
+				 + "     height=? "
+				 + " WHERE userid = ? ";
+		
+		try(Connection conn=DriverManager.getConnection(url, user, password);
+			PreparedStatement psmt=conn.prepareStatement(sql)	
+			)
+		{
+			//쿼리 ? 채우기
+			// setString,setInt <----대입할 값의 타입과 동일하게
+			psmt.setString(1, dto.getAddr());
+			psmt.setString(2, dto.getMobile1());
+			psmt.setString(3, dto.getMobile2());
+			psmt.setInt(4, dto.getHeight());
+			psmt.setString(5, dto.getUserId());
+			
+			count=psmt.executeUpdate();//실행후 수정된 행의 개수 반환
+		} catch (SQLException e) {
+				e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return count>0?true:false;
+	}
+	// 회원정보 삭제(파라미터: userid, 반환값: boolean)
+	// 메서드명: deleteUser
 }
 
 
