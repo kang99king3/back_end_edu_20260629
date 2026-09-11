@@ -17,7 +17,7 @@
 <h1>고객 조회 결과</h1>
 <table border="1">
 	<tr>
-		<th>아이디</th><th>이름</th><th>가입일</th><th>수정</th><th>삭제</th>
+		<th>아이디</th><th>이름</th><th>가입일</th><th>삭제</th>
 		<%
 			for(UserDto dto:list){
 				%>
