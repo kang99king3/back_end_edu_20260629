@@ -226,7 +226,7 @@ public class UserDao {
 	public boolean deleteUser(String userId) {
 		int count =0;
 		
-		return count>0?true;false;
+		return count>0?true:false;
 	}
 }
 
