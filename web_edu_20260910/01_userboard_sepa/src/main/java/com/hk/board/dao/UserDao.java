@@ -223,6 +223,11 @@ public class UserDao {
 	}
 	// 회원정보 삭제(파라미터: userid, 반환값: boolean)
 	// 메서드명: deleteUser
+	public boolean deleteUser(String userId) {
+		int count =0;
+		
+		return count>0?true;false;
+	}
 }
 
 
