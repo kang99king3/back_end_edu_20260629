@@ -105,7 +105,7 @@ public class UserDao {
 		int count=0;
 		
 		//DB 연결을 위한 정보 정의
-		String url="jdbc:maridb://localhost:3306/hk";
+		String url="jdbc:mariadb://localhost:3306/hk";
 		String user = "root";
 		String password= "manager";
 		
@@ -135,12 +135,12 @@ public class UserDao {
 	}
 	
 	//회원정보 상세 조회: select문 (파라미터: userId)
-	// 반환타입:한명이 정보 -> 하나의 행 정보 -> UserDto
+	// 반환타입:한명의 정보 -> 하나의 행 정보 -> UserDto
 	public UserDto getUser(String userId) {
 		UserDto dto=new UserDto();
 		
 		//DB 연결을 위한 정보 정의
-		String url="jdbc:maridb://localhost:3306/hk";
+		String url="jdbc:mariadb://localhost:3306/hk";
 		String user = "root";
 		String password= "manager";
 		
@@ -189,7 +189,7 @@ public class UserDao {
 		int count=0;
 		
 		//DB 연결을 위한 정보 정의
-		String url="jdbc:maridb://localhost:3306/hk";
+		String url="jdbc:mariadb://localhost:3306/hk";
 		String user = "root";
 		String password= "manager";
 		
@@ -227,7 +227,7 @@ public class UserDao {
 		int count=0;
 		
 		//DB 연결을 위한 정보 정의
-		String url="jdbc:maridb://localhost:3306/hk";
+		String url="jdbc:mariadb://localhost:3306/hk";
 		String user = "root";
 		String password= "manager";
 		

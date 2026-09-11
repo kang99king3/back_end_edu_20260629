@@ -25,8 +25,7 @@
 					<td><%=dto.getUserId()%></td>
 					<td><a href="userDetail.jsp?userid=<%=dto.getUserId()%>"><%=dto.getName()%></a></td>
 					<td><%=dto.getmDate()%></td>
-					<td></td>
-					<td></td>
+					<td><a href="#">삭제</a></td>
 				</tr>
 				<%
 			}

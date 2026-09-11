@@ -37,6 +37,15 @@ public class UserDto implements Serializable{
 		this.mDate = mDate;
 	}
 
+	public UserDto(String userId, String addr, String mobile1, String mobile2, int height) {
+		super();
+		this.userId = userId;
+		this.addr = addr;
+		this.mobile1 = mobile1;
+		this.mobile2 = mobile2;
+		this.height = height;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
