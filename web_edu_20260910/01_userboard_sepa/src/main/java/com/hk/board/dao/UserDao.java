@@ -224,8 +224,29 @@ public class UserDao {
 	// 회원정보 삭제(파라미터: userid, 반환값: boolean)
 	// 메서드명: deleteUser
 	public boolean deleteUser(String userId) {
-		int count =0;
+		int count=0;
 		
+		//DB 연결을 위한 정보 정의
+		String url="jdbc:maridb://localhost:3306/hk";
+		String user = "root";
+		String password= "manager";
+		
+		String sql=" delete from usertbl where userid=? ";
+		
+		try(Connection conn=DriverManager.getConnection(url, user, password);
+			PreparedStatement psmt=conn.prepareStatement(sql)	
+			)
+		{
+			//쿼리 ? 채우기
+			// setString,setInt <----대입할 값의 타입과 동일하게
+			psmt.setString(1, userId);
+			
+			count=psmt.executeUpdate();//실행후 수정된 행의 개수 반환
+		} catch (SQLException e) {
+				e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return count>0?true:false;
 	}
 }
