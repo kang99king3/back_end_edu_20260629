@@ -134,7 +134,58 @@ public class UserDao {
 		return count>0?true:false;
 	}
 	
+	//회원정보 상세 조회: select문 (파라미터: userId)
+	// 반환타입:한명이 정보 -> 하나의 행 정보 -> UserDto
+	public UserDto getUser(String userId) {
+		UserDto dto=new UserDto();
+		
+		//DB 연결을 위한 정보 정의
+		String url="jdbc:maridb://localhost:3306/hk";
+		String user = "root";
+		String password= "manager";
+		
+		//실행할 쿼리
+		String sql =" SELECT userid, NAME, birthyear, "
+			      + " addr, mobile1, mobile2, "
+				  + " 		height, mdate "
+				  + " FROM usertbl "
+				  + " WHERE userid = ? ";
+		
+		try(Connection conn=DriverManager.getConnection(url, user, password);
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			)
+		{
+			//쿼리 준비 완료
+			psmt.setString(1, userId);
+			
+			//ResultSet객체는 쿼리 준비가 끝나야 생성할 수 있어서 
+			// -> 따로 try처리
+			//쿼리 결과 받기
+			try(ResultSet rs= psmt.executeQuery()){
+				while(rs.next()) {
+					// dto맴버필드 <-----ResultSet[컬럼들]
+					dto.setUserId(rs.getString(1));
+					dto.setName(rs.getString(2));
+					dto.setBirthYear(rs.getInt(3));
+					dto.setAddr(rs.getString(4));
+					dto.setMobile1(rs.getString(5));
+					dto.setMobile2(rs.getString(6));
+					dto.setHeight(rs.getInt(7));
+					dto.setmDate(rs.getDate(8));					
+				}
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 	
+	// 회원정보 수정
+	
+	// 회원정보 삭제
 }
 
 
