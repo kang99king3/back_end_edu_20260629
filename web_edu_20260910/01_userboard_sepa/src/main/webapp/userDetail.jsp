@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>회원상세정보</title>
+<style type="text/css">
+	input[type=button]{
+		background-color: red;
+		color:white;
+		font-weight: bold;
+	}
+</style>
 </head>
 <%	//request(HttpServletRequest): 요청정보를 담고 있다.
 	//userList에서 이름을 클릭하면 해당 userid 값이 전송되고
@@ -51,10 +58,17 @@
 		<tr>
 			<td colspan="2">
 				<input type="submit" value="회원수정"/>
+				<input type="button" value="메인"
+									onclick="main()"/>
 			</td>
 		</tr>
 	</table>
 </form>
+<script type="text/javascript">
+	function main(){
+		location.href="index.jsp";
+	}
+</script>
 </body>
 </html>
 

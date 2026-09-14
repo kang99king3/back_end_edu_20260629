@@ -25,7 +25,7 @@
 					<td><%=dto.getUserId()%></td>
 					<td><a href="userDetail.jsp?userid=<%=dto.getUserId()%>"><%=dto.getName()%></a></td>
 					<td><%=dto.getmDate()%></td>
-					<td><a href="#">삭제</a></td>
+					<td><a href="#" onclick="delUser('<%=dto.getUserId()%>')">삭제</a></td>
 				</tr>
 				<%
 			}
@@ -37,6 +37,13 @@
 		</td>
 	</tr>
 </table>
+<script type="text/javascript">
+	function delUser(userId){
+		if(confirm("정말 삭제하겠습니까?")){
+			location.href="userDel.jsp?userid="+userId;
+		}
+	}
+</script>
 </body>
 </html>
 

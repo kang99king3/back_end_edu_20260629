@@ -19,10 +19,23 @@
 	int height = Integer.parseInt(pheight);//String -> int로 형변환
 	
 	UserDao dao = new UserDao();
+	//UserDto 생성자 이용해서 값을 초기화하면 매우 편하다
 	boolean isS=dao.updateUser(new UserDto(userId,addr,mobile1,mobile2,height));
 
 	if(isS){
-		response.sendRedirect("index.jsp");
+		//response객체(HttpServletResponse)
+        //response.sendRedirect("index.jsp");
+		//javascript 코드도 작성 가능함
+		//-> html과 java를 같이 사용할 수 있기 때문에
+		%>
+		<script type="text/javascript">
+			alert("회원정보를 수정했습니다.!!");
+// 			location.href="index.jsp";
+			location.href="userDetail.jsp?userid=<%=userId%>";
+		</script>
+		<%
+	}else{
+		response.sendRedirect("error.jsp");
 	}
 %>
 </body>
