@@ -9,6 +9,7 @@
 <body>
 <h1>고객관리시스템</h1>
 <p><a href="userList.jsp">(1)회원 조회(조회 후 수정/삭제 가능)</a> </p>
+<p><a href="userInsertForm.jsp">(2)신규회원등록</a></p>
 </body>
 </html>
 
