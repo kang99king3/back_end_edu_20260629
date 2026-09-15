@@ -1,3 +1,4 @@
+<%@page import="java.sql.Connection"%>
 <%@page import="com.hk.board.dto.UserDto"%>
 <%@page import="com.hk.board.dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,8 +10,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-	//파라미터 받기
+<%	
+	//파라미터 받기: 전송되는 값들이 모두 텍스트이다(문자열)
 	String userId=request.getParameter("userid");
 	String name=request.getParameter("name");
 	String addr=request.getParameter("addr");

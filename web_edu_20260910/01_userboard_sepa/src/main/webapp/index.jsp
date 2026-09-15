@@ -10,6 +10,13 @@
 <h1>고객관리시스템</h1>
 <p><a href="userList.jsp">(1)회원 조회(조회 후 수정/삭제 가능)</a> </p>
 <p><a href="userInsertForm.jsp">(2)신규회원등록</a></p>
+<h1>구매목록관리</h1>
+<p><a href="buyList.jsp">구매목록조회</a></p>
+<!-- 구매목록 내용: num, userId, prodName, groupName -->
+<!-- 목록 상세 조회: userId, prodName, groupName, price, amount -->
+<!-- 목록 내용 수정: price, amount -->
+<!-- 목록 삭제 -->
+<p><a href="buyInserForm.jsp">구매상품등록</a></p>
 </body>
 </html>
 

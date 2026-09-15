@@ -8,6 +8,7 @@
 </head>
 <body>
 <h1>신규회원입력</h1>
+<!-- 전송방식: get,post 방식의 차이점 -->
 <form action="userInsert.jsp" method="post">
 	<table border="1">
 		<tr>
