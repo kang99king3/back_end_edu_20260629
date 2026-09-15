@@ -42,7 +42,54 @@ public class HkDto {
 		this.title = title;
 		this.content = content;
 	}
-	
+
+	public int getSeq() {
+		return seq;
+	}
+
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
+	//부모 클래스(Object)의 메서드를 자식이 재정의함
+	// -> 다형성 개념: 부모의 메서드를 호출하면 자식이 불린다.
+	@Override
+	public String toString() {
+		return "HkDto [seq=" + seq + ", id=" + id + ", title=" + title + ", content=" + content + ", regDate=" + regDate
+				+ "]";
+	}
 	
 }
 
