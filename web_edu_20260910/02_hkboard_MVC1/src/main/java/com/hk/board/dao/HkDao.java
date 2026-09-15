@@ -34,7 +34,7 @@ public class HkDao extends DataBase{
 					dto.setContent(rs.getString(4));
 					dto.setRegDate(rs.getDate(5));
 					list.add(dto);
-					System.out.println(dto);
+//					System.out.println(dto);
 				}
 			}
 			
