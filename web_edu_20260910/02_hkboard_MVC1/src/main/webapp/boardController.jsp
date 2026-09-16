@@ -55,6 +55,33 @@
 		//dto객체를 저장하고 이동해야 전달됨
 		request.setAttribute("dto", dto);
 		pageContext.forward("boardDetail.jsp");
+	}else if(command.equalsIgnoreCase("boardUpdate")){
+		//파라미터 받기: seq, title, content
+		String pseq=request.getParameter("seq");
+		int seq=Integer.parseInt(pseq);// String -> int 형변환
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		boolean isS=dao.updateBoard(new HkDto(seq,title,content));
+		
+		if(isS){
+		%>		
+		<script type="text/javascript">
+ 			alert("수정성공");
+ 			location.href
+ 			="boardController.jsp?command=boardDetail&seq=<%=seq%>";
+ 		</script> 
+		<%
+// 		out.println(
+// 				"<script type='text/javascript'>"
+// 				+" alert('수정성공'); "
+// 				+" location.href "
+// 		+" ='boardController.jsp?command=boardDetail&seq="+seq+"';"
+// 				+" </script> "
+// 				);
+		}else{
+			response.sendRedirect("error.jsp");
+		}
 	}
 	
 	
