@@ -7,6 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#boardList{
+		width:800px;
+		border-collapse: collapse;
+	}
+</style>
+<script type="text/javascript">
+	// 글쓰기 폼 요청: controller를 통해 처리
+	function boardInsertForm(){
+		location.href="boardController.jsp?command=boardInsertForm";
+	}
+</script>
 </head>
 <%
 	//boardController.jsp에서 전달된 scope객체로부터 list객체를 가져온다.
@@ -15,7 +27,7 @@
 <body>
 <h1>게시판</h1>
 <h2>글목록</h2>
-<table border="1">
+<table border="1" id="boardList">
 	<tr>
 		<th><input type="checkbox" name="all" /></th>
 		<th>번호</th>
@@ -39,7 +51,7 @@
 	%>
 	<tr>
 		<td colspan="5">
-			<button type="button">글추가</button>
+			<button type="button" onclick="boardInsertForm()">글추가</button>
 			<button type="submit">글삭제</button>
 		</td>
 	</tr>

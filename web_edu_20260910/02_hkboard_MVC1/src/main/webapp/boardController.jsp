@@ -27,16 +27,35 @@
 // 		response.sendRedirect("boardlist.jsp");// 객체 전달 못함 (X)
 		//7단계: 페이지 이동
 		pageContext.forward("boardlist.jsp");
-	}else if(command.equalsIgnoreCase("boardinsertform")){
+	}else if(command.equalsIgnoreCase("boardInsertForm")){//글쓰기폼 이동
 		//글쓰기 폼으로 이동 요청
-	}else if(command.equalsIgnoreCase("boardinsert")){
+		response.sendRedirect("boardInsertForm.jsp");
+	}else if(command.equalsIgnoreCase("boardInsert")){
 		//글추가 요청
+		//파라미터 받기: id, title, content
+		String id = request.getParameter("id");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		boolean isS= dao.insertBoard(new HkDto(id, title, content));
+		if(isS){
+			//그냥 boardlist.jsp 페이지로 가면 안된고,
+			//반드시 컨트롤러를 거쳐서 가야 한다. --> list객체가 필요하기때문
+			response.sendRedirect("boardController.jsp?command=boardlist");
+		}else{
+			response.sendRedirect("error.jsp");
+		}
 	}
 	
 	
 %>
 </body>
 </html>
+
+
+
+
+
 
 
 
