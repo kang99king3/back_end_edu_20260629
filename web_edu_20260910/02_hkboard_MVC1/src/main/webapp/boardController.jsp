@@ -82,6 +82,19 @@
 		}else{
 			response.sendRedirect("error.jsp");
 		}
+	}else if(command.equalsIgnoreCase("boardDelete")){//글삭제하기
+		//파라미터 받기: seq
+		String pseq=request.getParameter("seq");
+		int seq=Integer.parseInt(pseq);// String -> int 형변환
+		
+		boolean isS=dao.deleteBoard(new HkDto(seq,null,null));
+		
+		if(isS){
+			response
+			.sendRedirect("boardController.jsp?command=boardlist");
+		}else{
+			response.sendRedirect("error.jsp");
+		}
 	}
 	
 	

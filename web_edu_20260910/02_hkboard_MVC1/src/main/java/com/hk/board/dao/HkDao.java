@@ -131,6 +131,28 @@ public class HkDao extends DataBase{
 		
 		return count>0?true:false;
 	}
+	
+	//글 삭제하기: 반환값(boolean) delete문
+	// -> 파라미터 받기: DTO로 받는다.
+	public boolean deleteBoard(HkDto dto) {
+		int count=0;
+		
+		String sql = "DELETE FROM HKBOARD WHERE SEQ = ?";
+		
+		try(Connection conn=getConnection();
+			PreparedStatement psmt = conn.prepareStatement(sql)
+			){
+			//쿼리에 파라미터 채우기: ?,?,? <--- HkDto(seq,title,content)
+			psmt.setInt(1, dto.getSeq());
+			
+			count = psmt.executeUpdate();//실행: 반환값은 수정된 행의 개수
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count>0?true:false;
+	}
 }
 
 

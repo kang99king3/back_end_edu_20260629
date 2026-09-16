@@ -32,12 +32,25 @@
 						required="required"><%=dto.getContent()%></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="글수정" /> <input
-					type="button" value="글목록"
+				<td colspan="2">
+				<input type="submit" value="글수정" />
+				
+				<input type="button" value="글삭제"
+				       onclick="boardDelete(<%=dto.getSeq()%>)"/>
+				        
+				<input type="button" value="글목록"
 					onclick="location.href='boardController.jsp?command=boardlist'" />
 				</td>
 			</tr>
 		</table>
 	</form>
+	<script type="text/javascript">
+		function boardDelete(seq){
+			if(confirm("정말 삭제하겠습니까?")){
+				location.href='boardController.jsp?'
+						     +'command=boardDelete&seq='+seq;
+			}
+		}
+	</script>
 </body>
 </html>
