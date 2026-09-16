@@ -18,6 +18,16 @@
 	function boardInsertForm(){
 		location.href="boardController.jsp?command=boardInsertForm";
 	}
+	
+	//전체 선택 체크박스 기능
+	function allSel(bool){
+		// 체크박스 요소들을 구한다(배열형태)
+		const chkObj=document.getElementsByName("seq");//[chk,chk...]
+		for(let i=0;i<chkObj.length;i++){
+			// 체크박스 요소에 속성 checked에 true/false 대입하면 체크설정 또는 해제
+			chkObj[i].checked=bool;
+		}
+	}
 </script>
 </head>
 <%
@@ -29,7 +39,7 @@
 <h2>글목록</h2>
 <table border="1" id="boardList">
 	<tr>
-		<th><input type="checkbox" name="all" /></th>
+		<th><input type="checkbox" name="all" onclick="allSel(this.checked)"/></th>
 		<th>번호</th>
 		<th>작성자</th>
 		<th>제목</th>
