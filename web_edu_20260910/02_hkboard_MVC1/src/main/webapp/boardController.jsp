@@ -30,7 +30,7 @@
 	}else if(command.equalsIgnoreCase("boardInsertForm")){//글쓰기폼 이동
 		//글쓰기 폼으로 이동 요청
 		response.sendRedirect("boardInsertForm.jsp");
-	}else if(command.equalsIgnoreCase("boardInsert")){
+	}else if(command.equalsIgnoreCase("boardInsert")){// 글추가하기
 		//글추가 요청
 		//파라미터 받기: id, title, content
 		String id = request.getParameter("id");
@@ -45,6 +45,16 @@
 		}else{
 			response.sendRedirect("error.jsp");
 		}
+	}else if(command.equalsIgnoreCase("boardDetail")){
+		//seq 파라미터 받기 
+		String pseq=request.getParameter("seq");
+		int seq=Integer.parseInt(pseq);// String -> int 형변환
+		
+		HkDto dto = dao.getBoard(seq);
+		
+		//dto객체를 저장하고 이동해야 전달됨
+		request.setAttribute("dto", dto);
+		pageContext.forward("boardDetail.jsp");
 	}
 	
 	

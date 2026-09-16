@@ -43,7 +43,11 @@
 				                          value="<%=dto.getSeq()%>" /></td>
 				<td><%=dto.getSeq()%></td>
 				<td><%=dto.getId()%></td>
-				<td><%=dto.getTitle()%></td>
+				<td>
+					<a href="boardController.jsp?command=boardDetail&seq=<%=dto.getSeq()%>">
+				    <%=dto.getTitle()%>
+				    </a>
+				</td>
 				<td><%=dto.getRegDate()%></td>
 			</tr>
 			<%

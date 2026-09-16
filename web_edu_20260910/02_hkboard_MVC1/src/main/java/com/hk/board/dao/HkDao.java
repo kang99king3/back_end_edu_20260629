@@ -70,6 +70,42 @@ public class HkDao extends DataBase{
 		
 		return count>0?true:false;
 	}
+	
+	//글 상세보기: 반환값 HkDto , 파라미터 SEQ
+	public HkDto getBoard(int seq){
+		HkDto dto = new HkDto();
+		
+		String sql= " SELECT SEQ, ID, TITLE, CONTENT, REGDATE "
+				  + " FROM HKBOARD "
+				  + " WHERE SEQ = ? ";
+		
+		try(Connection conn=getConnection();//2단계
+		    PreparedStatement psmt=conn.prepareStatement(sql);//3단계
+			){
+			
+			psmt.setInt(1, seq);// ? <---seq
+			
+			try(ResultSet rs=psmt.executeQuery()){//4단계: 쿼리 실행
+				//java <=== DB  : DB에 값들을 java에서 사용할 수 있게 처리
+				//JS <=== Server : [json text]를 JS객체로 변환 처리
+				//5단계:결과 받기
+				while(rs.next()) {
+					dto.setSeq(rs.getInt(1));
+					dto.setId(rs.getString(2));
+					dto.setTitle(rs.getString(3));
+					dto.setContent(rs.getString(4));
+					dto.setRegDate(rs.getDate(5));
+					System.out.println(dto);
+				}
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 }
 
 
