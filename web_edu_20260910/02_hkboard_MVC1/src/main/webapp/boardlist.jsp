@@ -37,39 +37,42 @@
 <body>
 <h1>게시판</h1>
 <h2>글목록</h2>
-<table border="1" id="boardList">
-	<tr>
-		<th><input type="checkbox" name="all" onclick="allSel(this.checked)"/></th>
-		<th>번호</th>
-		<th>작성자</th>
-		<th>제목</th>
-		<th>작성일</th>
-	</tr>
-	<%
-		for(HkDto dto:list){
-			%>
-			<tr>
-				<td><input type="checkbox" name="seq" 
-				                          value="<%=dto.getSeq()%>" /></td>
-				<td><%=dto.getSeq()%></td>
-				<td><%=dto.getId()%></td>
-				<td>
-					<a href="boardController.jsp?command=boardDetail&seq=<%=dto.getSeq()%>">
-				    <%=dto.getTitle()%>
-				    </a>
-				</td>
-				<td><%=dto.getRegDate()%></td>
-			</tr>
-			<%
-		}
-	%>
-	<tr>
-		<td colspan="5">
-			<button type="button" onclick="boardInsertForm()">글추가</button>
-			<button type="submit">글삭제</button>
-		</td>
-	</tr>
-</table>
+<form action="boardController.jsp" method="post">
+<input type="hidden" name="command" value="muldel"/>
+	<table border="1" id="boardList">
+		<tr>
+			<th><input type="checkbox" name="all" onclick="allSel(this.checked)"/></th>
+			<th>번호</th>
+			<th>작성자</th>
+			<th>제목</th>
+			<th>작성일</th>
+		</tr>
+		<%
+			for(HkDto dto:list){
+				%>
+				<tr>
+					<td><input type="checkbox" name="seq" 
+					                           value="<%=dto.getSeq()%>" /></td>
+					<td><%=dto.getSeq()%></td>
+					<td><%=dto.getId()%></td>
+					<td>
+						<a href="boardController.jsp?command=boardDetail&seq=<%=dto.getSeq()%>">
+					    <%=dto.getTitle()%>
+					    </a>
+					</td>
+					<td><%=dto.getRegDate()%></td>
+				</tr>
+				<%
+			}
+		%>
+		<tr>
+			<td colspan="5">
+				<button type="button" onclick="boardInsertForm()">글추가</button>
+				<button type="submit">글삭제</button>
+			</td>
+		</tr>
+	</table>
+</form>
 </body>
 </html>
 

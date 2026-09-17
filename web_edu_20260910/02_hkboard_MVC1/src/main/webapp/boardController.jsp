@@ -95,6 +95,12 @@
 		}else{
 			response.sendRedirect("error.jsp");
 		}
+	}else if(command.equalsIgnoreCase("muldel")){//여러글 삭제
+		//파라미터 받기:   대략 이런 형태라고 생각해보기 {seq: [1,32,4,5,6,7]}
+		// -> 파라미터가 같은 이름으로 여러개의 값을 전송할 경우 
+		String[] seqs = request.getParameterValues("seq");
+		
+		//dao.mulDel(seqs);
 	}
 	
 	
