@@ -203,8 +203,6 @@ public class HkDao extends DataBase{
 			e.printStackTrace();
 			isS=false;
 		}
-		
-		
 		return isS;
 	}
 }

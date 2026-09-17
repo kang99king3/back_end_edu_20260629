@@ -28,6 +28,23 @@
 			chkObj[i].checked=bool;
 		}
 	}
+	
+	//삭제 체크박스 유효값 처리
+	function isAllCheck(){
+		const chks=document.querySelectorAll("input[name=seq]:checked");
+		console.log(chks.length);
+		if(chks.length==0){//체크 개수가 0
+			document.querySelector("#msg").textContent="하나이상 체크하세요";
+			return false;// submit이벤트를 취소하기 위해 false 반환
+		}else{
+			if(confirm("정말 삭제하겠습니까?")){
+				return true;//submit O
+			}else{
+				document.querySelector("#msg").textContent="";
+				return false;//submit X
+			}
+		}
+	}
 </script>
 </head>
 <%
@@ -37,7 +54,7 @@
 <body>
 <h1>게시판</h1>
 <h2>글목록</h2>
-<form action="boardController.jsp" method="post">
+<form action="boardController.jsp" method="post" onsubmit="return isAllCheck()">
 <input type="hidden" name="command" value="muldel"/>
 	<table border="1" id="boardList">
 		<tr>
@@ -69,6 +86,7 @@
 			<td colspan="5">
 				<button type="button" onclick="boardInsertForm()">글추가</button>
 				<button type="submit">글삭제</button>
+				<span id="msg" style="color:red;"></span>
 			</td>
 		</tr>
 	</table>

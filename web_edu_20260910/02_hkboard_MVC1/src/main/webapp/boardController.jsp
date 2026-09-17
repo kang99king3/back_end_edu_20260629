@@ -100,7 +100,12 @@
 		// -> 파라미터가 같은 이름으로 여러개의 값을 전송할 경우 
 		String[] seqs = request.getParameterValues("seq");
 		
-		//dao.mulDel(seqs);
+		boolean isS=dao.mulDel(seqs);
+		if(isS){
+			response.sendRedirect("boardController.jsp?command=boardlist");
+		}else{
+			response.sendRedirect("error.jsp");
+		}
 	}
 	
 	
