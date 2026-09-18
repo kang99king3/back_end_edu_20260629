@@ -50,8 +50,8 @@ public class HelloServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
 		
 		//인코딩처리
-		request.setCharacterEncoding("utf-8");
-		respose.setContentType("text/html;charset=utf-8");
+//		request.setCharacterEncoding("utf-8");
+//		respose.setContentType("text/html;charset=utf-8");
 		
 		//request에서 제공하는 메서드 일부 살펴보면
 		System.out.println("요청주소:"+request.getRequestURL());
