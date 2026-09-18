@@ -3,6 +3,7 @@ package com.hk.hello;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,6 +20,14 @@ public class HelloServlet extends HttpServlet{
 		System.out.println("init():최초 한번 실행");
 	}
 	
+	//ServletConfig객체의 사용
+	//  ---> init()메서드에서 파라미터를 통해 얻을 수 있다.
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		String name=config.getInitParameter("name");
+		System.out.println("서블릿 초기값:"+name);
+	}
+	
 	//service(): 요청과 응답에 대한 처리 --> doGet(), doPost() 로 구현함
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse respose) throws ServletException, IOException {
@@ -26,6 +35,9 @@ public class HelloServlet extends HttpServlet{
 		//인코딩처리
 		request.setCharacterEncoding("utf-8");
 		respose.setContentType("text/html;charset=utf-8");
+		
+		//request에서 제공하는 메서드 일부 살펴보면
+		System.out.println("요청주소:"+request.getRequestURI());
 		
 		//파라미터 받기
 		String param = request.getParameter("param");
@@ -36,6 +48,9 @@ public class HelloServlet extends HttpServlet{
 		out.print("<h2>서블릿 기본 내용 알아보기</h2>");
 		out.print("<h2>서블릿에서 받은 파라미터:"+param+"</h2>");
 		out.print("<h3><a href='index.jsp'>메인으로 돌아가기</a></h3>");
+		
+		//페이지로 응답할 경우 
+//		respose.sendRedirect("index.jsp");
 	}
 	
 	@Override
