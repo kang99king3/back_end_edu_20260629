@@ -8,8 +8,8 @@
 </head>
 <body>
 <h1>글 추가하기</h1>
-<form action="boardController.jsp" method="post">
-	<input type="hidden" name="command" value="boardInsert"/>
+<form action="boardInsert.board" method="post">
+<!-- 	<input type="hidden" name="command" value="boardInsert"/> -->
 	<table border="1">
 		<tr>
 			<th>작성자(ID)</th>

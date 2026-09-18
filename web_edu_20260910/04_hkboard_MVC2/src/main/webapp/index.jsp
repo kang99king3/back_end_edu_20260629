@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>기본 게시판 만들기</h1>
-<a href="boardController.jsp?command=boardlist">게시판목록</a>
+<a href="boardlist.board">게시판목록</a>
 </body>
 </html>
 
