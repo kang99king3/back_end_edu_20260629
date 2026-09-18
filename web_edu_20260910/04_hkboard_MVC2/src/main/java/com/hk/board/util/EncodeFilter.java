@@ -1,4 +1,4 @@
-package com.hk.hello;
+package com.hk.board.util;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 //url Mapping 방법 2가지 (xml, 어노테이션)
 @WebFilter(
-			urlPatterns = {"/*","/a","/b","/c"},//여러 패턴 정의 가능
+			urlPatterns = {"/*"},//여러 패턴 정의 가능
 			initParams = {
 					@WebInitParam(name="encoding",value="utf-8")
 			}
@@ -28,17 +28,7 @@ public class EncodeFilter extends HttpFilter{
 	public void init(FilterConfig config) throws ServletException {
 		encode=config.getInitParameter("encoding");
 	}
-	
-	@Override
-	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		request.getRequestURI();
-		super.doFilter(request, response, chain);
-	}
-	// ServletRequest  : 상위  -> FTP,SMTP 다양한 프로토콜을 지원함
-	//       |
-	// HttpServletRequest : 하위 -> HTTP 전용
+
 	@Override
 	public void doFilter(ServletRequest request, 
 						 ServletResponse response, FilterChain chain)
