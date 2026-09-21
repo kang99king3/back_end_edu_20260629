@@ -67,6 +67,10 @@ public class BoardController extends HttpServlet {
 				//그냥 boardlist.jsp 페이지로 가면 안된고,
 				//반드시 컨트롤러를 거쳐서 가야 한다. --> list객체가 필요하기때문
 				response.sendRedirect("boardlist.board");
+				
+				//테이블 수정 요청에 대한 응답은 forward를 사용하면 안된다.
+				//--> 주소창에 url이 갱신되지 않아서 동일한 양식을 또 제출하게 된다.
+//				dispatch("boardlist.board", request, response);
 			}else{
 				response.sendRedirect("error.jsp");
 				
