@@ -12,6 +12,9 @@ import java.util.List;
 import com.hk.board.dao.HkDao;
 import com.hk.board.dto.HkDto;
 
+//서블릿이 뭐야?? --> java 파일--> 클라이언트로부터 요청과 응답을 처리하는 
+//                             라이프사이클이 있는 자바 객체
+//DAO클래스 --> JDBC6단계가 구현되어 있는 DB에 접근해서 처리하는 객체
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,6 +34,8 @@ public class BoardController extends HttpServlet {
 				          +pathInfo
 						  );
 		//command값 구하기 : "/boardlist.board" 추출
+		//uri        : 04_hkboard_MVC2/boardlist.board
+		//contextPath: 04_hkboard_MVC2
 		String command=requestURI.substring(contextPath.length());
 		
 		//2단계: DAO 객체 생성
@@ -67,7 +72,7 @@ public class BoardController extends HttpServlet {
 				
 			}//=================여기까지 요청URL 변경했음==================
 			
-		}else if(command.equalsIgnoreCase("boardDetail")){
+		}else if(command.equalsIgnoreCase("/boardDetail.board")){
 			//seq 파라미터 받기 
 			String pseq=request.getParameter("seq");
 			int seq=Integer.parseInt(pseq);// String -> int 형변환
@@ -78,7 +83,7 @@ public class BoardController extends HttpServlet {
 			request.setAttribute("dto", dto);
 //			pageContext.forward("boardDetail.jsp");
 			dispatch("boardDetail.jsp", request, response);
-		}else if(command.equalsIgnoreCase("boardUpdate")){
+		}else if(command.equalsIgnoreCase("/boardUpdate.board")){
 			//파라미터 받기: seq, title, content
 			String pseq=request.getParameter("seq");
 			int seq=Integer.parseInt(pseq);// String -> int 형변환
@@ -88,13 +93,13 @@ public class BoardController extends HttpServlet {
 			boolean isS=dao.updateBoard(new HkDto(seq,title,content));
 			
 			if(isS){
-				String url="boardController.jsp?command=boardDetail&seq="+seq;
+				String url="boardDetail.board?seq="+seq;
 				jsForward(url, "수정성공", response);
 			
 			}else{
 				response.sendRedirect("error.jsp");
 			}
-		}else if(command.equalsIgnoreCase("boardDelete")){//글삭제하기
+		}else if(command.equalsIgnoreCase("/boardDelete.board")){//글삭제하기
 			//파라미터 받기: seq
 			String pseq=request.getParameter("seq");
 			int seq=Integer.parseInt(pseq);// String -> int 형변환
@@ -103,18 +108,18 @@ public class BoardController extends HttpServlet {
 			
 			if(isS){
 				response
-				.sendRedirect("boardController.jsp?command=boardlist");
+				.sendRedirect("boardlist.board");
 			}else{
 				response.sendRedirect("error.jsp");
 			}
-		}else if(command.equalsIgnoreCase("muldel")){//여러글 삭제
+		}else if(command.equalsIgnoreCase("/muldel.board")){//여러글 삭제
 			//파라미터 받기:   대략 이런 형태라고 생각해보기 {seq: [1,32,4,5,6,7]}
 			// -> 파라미터가 같은 이름으로 여러개의 값을 전송할 경우 
 			String[] seqs = request.getParameterValues("seq");
 			
 			boolean isS=dao.mulDel(seqs);
 			if(isS){
-				response.sendRedirect("boardController.jsp?command=boardlist");
+				response.sendRedirect("boardlist.board");
 			}else{
 				response.sendRedirect("error.jsp");
 			}

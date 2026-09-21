@@ -13,8 +13,8 @@
 %>
 <body>
 	<h1>글 상세보기</h1>
-	<form action="boardController.jsp" method="post">
-		<input type="hidden" name="command" value="boardUpdate"/>
+	<form action="boardUpdate.board" method="post">
+<!-- 		<input type="hidden" name="command" value="boardUpdate"/> -->
 		<input type="hidden" name="seq" value="<%=dto.getSeq()%>" />
 		<table border="1">
 			<tr>
@@ -39,7 +39,7 @@
 				       onclick="boardDelete(<%=dto.getSeq()%>)"/>
 				        
 				<input type="button" value="글목록"
-					onclick="location.href='boardController.jsp?command=boardlist'" />
+					onclick="location.href='boardlist.board'" />
 				</td>
 			</tr>
 		</table>
@@ -47,8 +47,7 @@
 	<script type="text/javascript">
 		function boardDelete(seq){
 			if(confirm("정말 삭제하겠습니까?")){
-				location.href='boardController.jsp?'
-						     +'command=boardDelete&seq='+seq;
+				location.href='boardDelete.board?seq='+seq;
 			}
 		}
 	</script>

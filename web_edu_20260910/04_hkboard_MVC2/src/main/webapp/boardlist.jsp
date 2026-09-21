@@ -54,8 +54,8 @@
 <body>
 <h1>게시판</h1>
 <h2>글목록</h2>
-<form action="boardController.jsp" method="post" onsubmit="return isAllCheck()">
-<input type="hidden" name="command" value="muldel"/>
+<form action="muldel.board" method="post" onsubmit="return isAllCheck()">
+<!-- <input type="hidden" name="command" value="muldel"/> -->
 	<table border="1" id="boardList">
 		<tr>
 			<th><input type="checkbox" name="all" onclick="allSel(this.checked)"/></th>
@@ -73,7 +73,7 @@
 					<td><%=dto.getSeq()%></td>
 					<td><%=dto.getId()%></td>
 					<td>
-						<a href="boardController.jsp?command=boardDetail&seq=<%=dto.getSeq()%>">
+						<a href="boardDetail.board?seq=<%=dto.getSeq()%>">
 					    <%=dto.getTitle()%>
 					    </a>
 					</td>
