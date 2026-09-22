@@ -30,8 +30,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-				<input type="submit" value="글수정" />
-				
+				<input type="submit" value="글수정" />				
 				<input type="button" value="글삭제"
 				       onclick="boardDelete(${requestScope.dto.seq})"/>
 				        
