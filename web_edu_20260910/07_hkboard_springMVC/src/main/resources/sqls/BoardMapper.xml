@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성: 반드시 정의하자 -->
+<mapper namespace="com.hk.board.dao">
+ <!-- id는 쿼리 이름정의
+      resultType은 쿼리의 결과에 대한 타입 정의
+  -->
+ 	<select id="boardList" resultType="HkDto">
+ 		SELECT SEQ, ID, TITLE, CONTENT, REGDATE 
+		FROM HKBOARD ORDER BY REGDATE DESC 
+ 	</select>
+</mapper>
