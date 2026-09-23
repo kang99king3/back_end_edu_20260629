@@ -1,6 +1,8 @@
 package com.hk.board.daos;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,32 +27,39 @@ public class HkDao implements IHkDao{
 
 	@Override
 	public boolean insertBoard(HkDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+		int count=sqlSession.insert(namespace+"insertBoard", dto);
+		return count>0;
 	}
 
 	@Override
 	public HkDto getBoard(int seq) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(namespace+"getBoard", seq);
 	}
 
 	@Override
 	public boolean updateBoard(HkDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+		int count=sqlSession.update(namespace+"updateBoard", dto);
+		return count>0;
 	}
 
 	@Override
 	public boolean deleteBoard(HkDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+		int count=sqlSession.delete(namespace, dto);
+		return count>0;
 	}
 
 	@Override
 	public boolean mulDel(String[] seqs) {
-		// TODO Auto-generated method stub
-		return false;
+		// 동적쿼리에 파라미터를 전달할 경우 
+		// Map에 담아서 전달해줘야 한다.
+		Map<String, String[]> map = new HashMap<>();
+		map.put("seqs", seqs);
+
+		int count=sqlSession.delete(namespace+"mulDel", map);
+		return count>0;
 	}
 
 }
+
+
+
