@@ -19,7 +19,7 @@ public class BoardController {
 	@Autowired
 	private IHkService hkService;
 	
-	@RequestMapping(value = "/boardlist.do",
+	@RequestMapping(value = "/home.do",
 	               method = RequestMethod.GET )
 	public String home(Model model,
 					   String param,//"param"이라는 이름의 값이 넘어오면
@@ -39,6 +39,12 @@ public class BoardController {
 		model.addAttribute("list", list);
 		return "boardlist";//forward
 //		return "redirect:boardlist.do";// sendRedirect방식임
+	}
+	
+	@RequestMapping(value = "/boardInsertForm.do",
+					method = RequestMethod.GET)
+	public String boardInsertForm() {
+		return "boardInsertForm";
 	}
 	
 	
