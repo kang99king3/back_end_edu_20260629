@@ -51,7 +51,7 @@
 <body>
 <h1>게시판</h1>
 <h2>글목록</h2>
-<form action="muldel.board" method="post" onsubmit="return isAllCheck()">
+<form action="mulDel.do" method="post" onsubmit="return isAllCheck()">
 <!-- <input type="hidden" name="command" value="muldel"/> -->
 	<table border="1" id="boardList">
 		<tr>

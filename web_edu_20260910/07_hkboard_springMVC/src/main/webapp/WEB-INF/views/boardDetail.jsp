@@ -39,6 +39,7 @@
 			</tr>
 		</table>
 	</form>
+	
 	<script type="text/javascript">
 		function boardDelete(seq){
 			if(confirm("정말 삭제하겠습니까?")){

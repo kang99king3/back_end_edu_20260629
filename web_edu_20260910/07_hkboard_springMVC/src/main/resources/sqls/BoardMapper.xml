@@ -43,9 +43,13 @@
  		DELETE FROM HKBOARD WHERE SEQ IN 
  		<foreach collection="seqs" item="seq"
  		         open="(" close=")" separator=",">
- 			#{seq}
+ 			<include refid="param"/>
  		</foreach>
  	</delete>
+ 	
+ 	<sql id="param">
+ 		#{seq}
+ 	</sql>
 </mapper>
 
 
