@@ -11,12 +11,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.hk.board.dtos.HkDto;
 import com.hk.board.service.IHkService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 public class BoardController {
 	
 	@Autowired
 	private IHkService hkService;
 	
+	@RequestMapping(value = "/boardlist.do",
+	               method = RequestMethod.GET )
+	public String home(Model model,
+					   String param,//"param"이라는 이름의 값이 넘어오면
+					   HkDto dto,// dto에 맴버필드명과 일치하는 값이 넘어오면
+			           HttpServletRequest request) {
+//		request.setAttribute("param", "파람");
+		model.addAttribute("param", "파람");
+//		String param=request.getParameter("param");
+		return "home";//forward
+	}
+	
+	//메서드별로 url 맵핑을 함
 	@RequestMapping(value = "/boardlist.do",
 			        method = RequestMethod.GET )
 	public String boardList(Model model) {
@@ -26,7 +41,14 @@ public class BoardController {
 //		return "redirect:boardlist.do";// sendRedirect방식임
 	}
 	
+	
+	
 }
+
+
+
+
+
 
 
 

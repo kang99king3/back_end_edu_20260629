@@ -27,6 +27,12 @@ public class HkDao implements IHkDao{
 
 	@Override
 	public boolean insertBoard(HkDto dto) {
+		//파리미터가 4개라면? 4개를 전달하고 싶다
+		// -> dto에 담아서 전달
+		// -> dto에 없는 이름일 경우: num1, num2, num3
+		// Map을 활용 map.put("num1",5) .put("num2",10)...
+		// myBatis는 원래 Map을 통해 파리미터를 전달함
+		//insert(namespace+"insertBoard", seq, id, title, content)
 		int count=sqlSession.insert(namespace+"insertBoard", dto);
 		return count>0;
 	}

@@ -15,6 +15,7 @@ public class HkService implements IHkService{
 	//선언 타입이 IHkDao <-- HkDao
 	//                 <-- IHkDao를 구현한 HkDao2
 //                     <-- IHkDao를 구현한 HkDao3
+	// @Autowired : spring이 타입으로 구별해서 주입해준다.
 	@Autowired
 	private IHkDao hkDao;
 	
