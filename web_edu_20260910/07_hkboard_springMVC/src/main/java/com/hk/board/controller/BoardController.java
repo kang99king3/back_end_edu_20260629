@@ -61,6 +61,23 @@ public class BoardController {
 
 	}
 	
+	@RequestMapping(value = "/boardDetail.do",
+					method = RequestMethod.GET)
+	public String boardDetail(Model model, 
+//			          @RequestParam("seq") int seq) {
+					  HkDto pdto) {
+		HkDto dto=hkService.getBoard(pdto.getSeq());
+		model.addAttribute("dto", dto);
+		return "boardDetail";
+	}
+	
+	@RequestMapping(value = "/boardUpdate.do",
+			        method = RequestMethod.POST)
+	public String boardUpdate() {
+		
+		return "";
+	}
+	
 	
 	
 }

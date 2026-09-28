@@ -76,11 +76,12 @@
 						<td>${dto.seq}</td>
 						<td>${dto.id}</td>
 						<td>
-							<a href="boardDetail.board?seq=${dto.seq}">
+							<a href="boardDetail.do?seq=${dto.seq}">
 						    ${dto.title}
 						    </a>
 						</td>
-						<td>${dto.regDate}</td>
+						<td><fmt:formatDate value="${dto.regDate}"
+						                    pattern="yyyy년 MM월 dd일"/> </td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
