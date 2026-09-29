@@ -4,5 +4,24 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace속성: 반드시 정의하자 -->
 <mapper namespace="com.hk.ansboard.dao">
- 
+ 	
+ 	<select id="boardList" parameterType="Map" resultType="AnsDto" >
+ 		SELECT seq, id, title, content, regdate, refer, step, depth,
+	    readcount,delflag
+		FROM (
+			SELECT ROW_NUMBER() OVER(ORDER BY refer DESC,step ASC) rn,
+				    seq, id, title, content, regdate, refer, step, 
+				    depth,readcount,delflag
+			FROM answerboard
+		) a
+		WHERE ceil(rn/5) = #{pnum}
+ 	</select>  
+ 	
+ 	<insert id="boardInsert" parameterType="AnsDto">
+ 		INSERT INTO answerboard
+		VALUES(NULL,#{id},#{title},#{content},SYSDATE(),
+		        (SELECT nvl(MAX(refer),0)+1 FROM answerboard)
+			    ,0,0,0,'N')
+ 	</insert>
+ 	
 </mapper>
