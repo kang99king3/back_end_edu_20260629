@@ -39,10 +39,30 @@ public class AnsController {
 	@RequestMapping(value = "/boardList.do",
 			       method = RequestMethod.GET)
 	public String boardList(Model model, 
-			               @RequestParam("pnum") String pnum) {
+			               @RequestParam(value="pnum",
+			                         required = false) String pnum) {
+		if(pnum==null||pnum=="") {
+			pnum="1";
+		}
 		List<AnsDto>list=ansService.getAllList(pnum);
 		model.addAttribute("list", list);
 		return "boardList";
+	}
+	
+	@RequestMapping(value = "/boardInsertForm.do",
+		           method = RequestMethod.GET)
+	public String boardInsertForm() {
+		logger.info("글추가폼으로 이동");
+		return "boardInsertForm";
+	}
+	
+	@RequestMapping(value = "/boardInsert.do",
+	           method = RequestMethod.POST)
+	public String boardInsert(AnsDto dto) {
+		logger.info("글추가하기");
+		boolean isS=ansService.boardInsert(dto);
+		
+		return "redirect:boardList.do";
 	}
 }
 

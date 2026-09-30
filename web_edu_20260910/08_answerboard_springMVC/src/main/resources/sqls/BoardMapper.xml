@@ -24,4 +24,29 @@
 			    ,0,0,0,'N')
  	</insert>
  	
+ 	<select id="boardDetail" parameterType="Integer" resultType="AnsDto">
+ 		select seq, id, title, content, regdate
+ 		from answerboard
+ 		where seq = #{seq}
+ 	</select>
+ 	
+ 	<update id="boardUpdate" parameterType="AnsDto">
+ 		update answerboard
+ 		set title=#{title}, content=#{content}
+ 		where seq = #{seq}
+ 	</update>
+ 	
+ 	<!-- 동적쿼리 사용시 파리미터는 map에 담아서 전달하자 -->
+ 	<update id="mulDel" parameterType="Map">
+ 		update answerboard set delflag='Y'
+ 		where seq in 
+ 		<foreach collection="seqs" item="seq" 
+ 		         open="(" close=")" separator=",">
+ 		      #{seq}
+ 		</foreach>
+ 	</update>
+ 	
 </mapper>
+
+
+
