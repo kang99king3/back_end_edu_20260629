@@ -40,10 +40,10 @@ public class AnsController {
 			       method = RequestMethod.GET)
 	public String boardList(Model model, 
 			               @RequestParam(value="pnum",
-			                         required = false) String pnum) {
-		if(pnum==null||pnum=="") {
-			pnum="1";
-		}
+			               				 defaultValue = "1" //기본값 설정
+//			                            ,required = false  //값을 반드시 요구하지 않음
+			                            ) String pnum) {
+	
 		List<AnsDto>list=ansService.getAllList(pnum);
 		model.addAttribute("list", list);
 		return "boardList";

@@ -94,9 +94,16 @@
 						<td>${dto.seq}</td>
 						<td>${dto.id}</td>
 						<td>
-							<a href="boardDetail.do?seq=${dto.seq}">
-						    ${dto.title}
-						    </a>
+							<c:choose>
+								<c:when test="${dto.delflag eq 'Y'}">
+									---삭제된 글입니다.---
+								</c:when>
+								<c:otherwise>
+									<a href="boardDetail.do?seq=${dto.seq}">
+								    ${dto.title}
+								    </a>									
+								</c:otherwise>
+							</c:choose>
 						</td>
 						<td><fmt:formatDate value="${dto.regDate}"
 						                    pattern="yyyy-MM-dd"/> </td>

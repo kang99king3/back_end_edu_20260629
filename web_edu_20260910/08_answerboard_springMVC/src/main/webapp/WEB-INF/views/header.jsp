@@ -10,8 +10,8 @@
 	<style type="text/css">
 		#container {
 		   width: 1200px;
-		   margin: 0 auto;
-		   min-height: calc(90vh - 50px); /* 50px은 푸터 높이 */
+		   margin: 100px auto;
+		   min-height: calc(80vh - 50px); /* 50px은 푸터 높이 */
 		}
 		
 		.footer{
