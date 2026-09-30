@@ -1,3 +1,4 @@
+<%-- <jsp:include page="header.jsp" /> --%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,6 +11,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#boardList{
+/* 		width:1100px; */
 		width:800px;
 		border-collapse: collapse;
 	}
@@ -49,10 +51,23 @@
 </script>
 </head>
 <body>
+<!-- <div id="container"> -->
 <h1>게시판</h1>
 <h2>글목록</h2>
 <form action="mulDel.do" method="post" onsubmit="return isAllCheck()">
 	<table border="1" id="boardList">
+<%-- 		<colgroup> --%>
+<%-- 			<col style="width: 2%;"> <!-- 체크박스 --> --%>
+<%-- 			<col style="width: 8%;"> <!-- 번호 --> --%>
+<%-- 			<col style="width: 15%;"> <!-- 작성자 --> --%>
+<%-- 			<col style="width: 30%;"> <!-- 제목 (가장 넓게) --> --%>
+<%-- 			<col style="width: 10%;"> <!-- 작성일 --> --%>
+<%-- 			<col style="width: 7%;"> <!-- 조회수 --> --%>
+<%-- 			<col style="width: 10%;"> <!-- 삭제여부 --> --%>
+<%-- 			<col style="width: 6%;"> <!-- REFER --> --%>
+<%-- 			<col style="width: 6%;"> <!-- STEP --> --%>
+<%-- 			<col style="width: 6%;"> <!-- DEPTH --> --%>
+<%-- 		</colgroup> --%>
 		<tr>
 			<th><input type="checkbox" name="all" onclick="allSel(this.checked)"/></th>
 			<th>번호</th>
@@ -85,7 +100,7 @@
 						    </a>
 						</td>
 						<td><fmt:formatDate value="${dto.regDate}"
-						                    pattern="yyyy년 MM월 dd일"/> </td>
+						                    pattern="yyyy-MM-dd"/> </td>
 						<td>${dto.readCount}</td>
 						<td>${dto.delflag}</td>
 						<td>${dto.refer}</td>
@@ -100,12 +115,14 @@
 		</tr>
 		<tr>
 			<td colspan="10">
-				<button type="button" onclick="boardInsertForm()">글추가</button>
-				<button type="submit">글삭제</button>
+				<button class="btn btn-primary" type="button" onclick="boardInsertForm()">글추가</button>
+				<button class="btn btn-primary" type="submit">글삭제</button>
 				<span id="msg" style="color:red;"></span>
 			</td>
 		</tr>
 	</table>
 </form>
+<!-- </div> -->
+<%-- <jsp:include page="footer.jsp"/> --%>
 </body>
 </html>

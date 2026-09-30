@@ -17,8 +17,12 @@ import com.hk.ansboard.service.AnsService;
 @Controller
 public class AnsController {
 
-	@Autowired
+//	@Autowired
 	private AnsService ansService;
+	
+	public AnsController(AnsService ansService) {
+		this.ansService=ansService;
+	}
 	
 	//log 출력을 위한 선언: slf4j(로그출력할 준비작업), log4j(실제 출력 작업)
 	private static final Logger logger=
