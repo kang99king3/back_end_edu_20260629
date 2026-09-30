@@ -21,6 +21,18 @@ public class AnsService {
 	public boolean boardInsert(AnsDto dto) {
 		return ansDao.boardInsert(dto);
 	}
+	
+	public AnsDto boardDetail(int seq) {
+		return ansDao.boardDetail(seq);
+	}
+	
+	public boolean boardUpdate(AnsDto dto) {
+		return ansDao.boardUpdate(dto);
+	}
+	
+	public boolean mulDel(String[] seqs) {
+		return ansDao.mulDel(seqs);
+	}
 }
 
 

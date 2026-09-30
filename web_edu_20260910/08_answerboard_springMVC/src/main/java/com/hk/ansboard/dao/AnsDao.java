@@ -33,6 +33,25 @@ public class AnsDao {
 		int count=sqlSession.insert(namespace+"boardInsert", dto);
 		return count>0;
 	}
+	
+	//글 상세조회
+	public AnsDto boardDetail(int seq) {
+		return sqlSession.selectOne(namespace+"boardDetail", seq);
+	}
+	
+	//글 수정하기
+	public boolean boardUpdate(AnsDto dto) {
+		int count=sqlSession.update(namespace+"boardUpdate", dto);
+		return count>0;
+	}
+	
+	//글 삭제하기
+	public boolean mulDel(String[] seqs) {
+		Map<String, String[]> map = new HashMap<>();
+		map.put("seqs", seqs);
+		int count = sqlSession.update(namespace+"mulDel", map);
+		return count>0;
+	}
 }
 
 

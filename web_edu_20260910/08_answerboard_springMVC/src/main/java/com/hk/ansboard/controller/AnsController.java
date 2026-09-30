@@ -61,10 +61,57 @@ public class AnsController {
 	public String boardInsert(AnsDto dto) {
 		logger.info("글추가하기");
 		boolean isS=ansService.boardInsert(dto);
+		if(isS) {
+			return "redirect:boardList.do";			
+		}else {
+			return "error.jsp";
+		}
+	}
+	
+	//글 상세보기
+	@RequestMapping(value = "/boardDetail.do",
+			       method = RequestMethod.GET)
+	public String boardDetail(@RequestParam("seq")int seq,
+			                  Model model) {
+		AnsDto dto=ansService.boardDetail(seq);
+		model.addAttribute("dto", dto);
 		
-		return "redirect:boardList.do";
+		//객체 담아서 페이지로 이동하는 경우--> 페이지 이름만 써주면 됨
+		return "boardDetail";
+	}
+	//글 수정하기
+	@RequestMapping(value = "/boardUpdate.do",
+	           method = RequestMethod.POST)
+	public String boardUpdate(AnsDto dto) {
+		logger.info("글수정하기");
+		boolean isS=ansService.boardUpdate(dto);
+		if(isS) {
+			return "redirect:boardDetail.do?seq="+dto.getSeq();			
+		}else {
+			return "error.jsp";
+		}
+	}
+	//글 삭제하기
+	@RequestMapping(value = "/mulDel.do",
+	           method = RequestMethod.POST)
+	public String mulDel(@RequestParam("seq") String[] seq) {
+		logger.info("글삭제하기");
+		boolean isS=ansService.mulDel(seq);
+		if(isS) {
+			return "redirect:boardList.do";			
+		}else {
+			return "error.jsp";
+		}
 	}
 }
+
+
+
+
+
+
+
+
 
 
 
