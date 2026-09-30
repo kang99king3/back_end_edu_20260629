@@ -46,6 +46,12 @@
  		</foreach>
  	</update>
  	
+ 	<!-- 조회수 올리기 -->
+ 	<update id="readCount" parameterType="Integer">
+ 		update answerboard set readcount = readcount+1
+ 		where seq = #{seq}
+ 	</update>
+ 	
  	<!-- 답글달기 -->
  	
 </mapper>

@@ -33,6 +33,10 @@ public class AnsService {
 	public boolean mulDel(String[] seqs) {
 		return ansDao.mulDel(seqs);
 	}
+	
+	public boolean readCount(int seq) {
+		return ansDao.readCount(seq);
+	}
 }
 
 

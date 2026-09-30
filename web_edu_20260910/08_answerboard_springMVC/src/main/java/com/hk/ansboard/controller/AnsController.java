@@ -72,12 +72,22 @@ public class AnsController {
 	@RequestMapping(value = "/boardDetail.do",
 			       method = RequestMethod.GET)
 	public String boardDetail(@RequestParam("seq")int seq,
+			    @RequestParam(value="review",required = false)String review,
 			                  Model model) {
-		AnsDto dto=ansService.boardDetail(seq);
-		model.addAttribute("dto", dto);
 		
-		//객체 담아서 페이지로 이동하는 경우--> 페이지 이름만 써주면 됨
-		return "boardDetail";
+		// y값이 있는 경우가 글목록에서 요청된 경우
+		if(review!=null&&review.equals("y")) {
+			ansService.readCount(seq);//조회수 올리기
+			//한번요청에 2번 통신을 하게 되서 성능은 저하될 수 있음
+			return "redirect:boardDetail.do?seq="+seq;
+		}else {
+			AnsDto dto=ansService.boardDetail(seq);
+			model.addAttribute("dto", dto);
+			
+			//객체 담아서 페이지로 이동하는 경우--> 페이지 이름만 써주면 됨
+			return "boardDetail";
+		}
+		
 	}
 	//글 수정하기
 	@RequestMapping(value = "/boardUpdate.do",

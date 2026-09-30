@@ -52,6 +52,12 @@ public class AnsDao {
 		int count = sqlSession.update(namespace+"mulDel", map);
 		return count>0;
 	}
+	
+	//조회수 : 글목록에서 상세보기로 이동했을때 한번 올리기
+	public boolean readCount(int seq) {
+		int count = sqlSession.update(namespace+"readCount", seq);
+		return count>0;
+	}
 }
 
 

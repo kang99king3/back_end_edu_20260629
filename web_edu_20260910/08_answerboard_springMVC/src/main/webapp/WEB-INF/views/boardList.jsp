@@ -99,7 +99,7 @@
 									---삭제된 글입니다.---
 								</c:when>
 								<c:otherwise>
-									<a href="boardDetail.do?seq=${dto.seq}">
+									<a href="boardDetail.do?seq=${dto.seq}&review=y">
 								    ${dto.title}
 								    </a>									
 								</c:otherwise>
