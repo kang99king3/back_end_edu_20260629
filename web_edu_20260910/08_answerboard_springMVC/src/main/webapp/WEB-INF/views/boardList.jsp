@@ -119,9 +119,36 @@
 		<!-- 페이지 번호가 들어갈 부분 -->
 		<tr>
 			<td colspan="10" style="text-align: center;">
-				<c:forEach begin="1" end="${pCount}" var="i" step="1">
-					<a href="boardList.do?pnum=${i}">${i}</a>
-				</c:forEach>
+<%-- 				<c:forEach begin="1" end="${pCount}" var="i" step="1"> --%>
+<%-- 					<a href="boardList.do?pnum=${i}">${i}</a> --%>
+<%-- 				</c:forEach> --%>
+
+<%-- 				<a href="boardList.do?pnum=${pMap.prePageNum}">pre</a> --%>
+				
+<%-- 				<c:forEach begin="${pMap.startPage}"  --%>
+<%-- 				           end="${pMap.endPage}" var="i" step="1"> --%>
+<%-- 					<a href="boardList.do?pnum=${i}">${i}</a> --%>
+<%-- 				</c:forEach> --%>
+				
+<%-- 				<a href="boardList.do?pnum=${pMap.nextPageNum}">next</a> --%>
+			
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"><a class="page-link"
+							href="boardList.do?pnum=${pMap.prePageNum}">Previous</a>
+					</li>
+					<c:forEach begin="${pMap.startPage}"
+						end="${pMap.endPage}" var="i" step="1">
+						<li
+							class="page-item ${pnum==i?'active':''}">
+							<a class="page-link" href="boardList.do?pnum=${i}">${i}</a>
+						</li>
+					</c:forEach>
+					<li class="page-item"><a class="page-link"
+							href="boardList.do?pnum=${pMap.nextPageNum}">Next</a>
+					</li>
+				</ul>
+			</nav>
 			</td>
 		</tr>
 		<tr>

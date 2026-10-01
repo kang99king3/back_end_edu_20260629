@@ -1,6 +1,7 @@
 package com.hk.ansboard.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hk.ansboard.dtos.AnsDto;
 import com.hk.ansboard.service.AnsService;
+import com.hk.ansboard.util.Paging;
 
 @Controller
 public class AnsController {
@@ -44,12 +46,15 @@ public class AnsController {
 //			                            ,required = false  //값을 반드시 요구하지 않음
 			                            ) String pnum) {
 	
-		int pCount=ansService.getPcount();
-		List<AnsDto>list=ansService.getAllList(pnum);
+//		int pCount=ansService.getPcount();
+//		List<AnsDto>list=ansService.getAllList(pnum);
+//
+//		model.addAttribute("list", list);
+//		model.addAttribute("pCount", pCount);
+		//위 코드 작업을 AnsService에서 처리하자
+		Map<String, Object>result=ansService.getBoardListWithPaging(pnum);
 		
-		model.addAttribute("list", list);
-		model.addAttribute("pCount", pCount);
-		
+		model.addAllAttributes(result);
 		model.addAttribute("pnum", pnum);//현재 페이지상태를 유지하기 위해 전달
 		return "boardList";
 	}
