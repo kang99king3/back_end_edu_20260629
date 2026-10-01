@@ -18,7 +18,7 @@
 <script type="text/javascript">
 	// 글쓰기 폼 요청: controller를 통해 처리
 	function boardInsertForm(){
-		location.href="boardInsertForm.do";
+		location.href="boardInsertForm.do?pnum=${pnum}";
 	}
 	
 	//전체 선택 체크박스 기능
@@ -54,6 +54,7 @@
 <h1>게시판</h1>
 <h2>글목록</h2>   
 <form action="mulDel.do" method="post" onsubmit="return isAllCheck()">
+	<input type="hidden" name="pnum" value="${pnum}"/>
 	<table class="table table-striped" border="1" id="boardList">
 		<colgroup>
 			<col style="width: 2%;"> <!-- 체크박스 -->
@@ -99,7 +100,7 @@
 									---삭제된 글입니다.---
 								</c:when>
 								<c:otherwise>
-									<a href="boardDetail.do?seq=${dto.seq}&review=y">
+									<a href="boardDetail.do?seq=${dto.seq}&review=y&pnum=${pnum}">
 								    ${dto.title}
 								    </a>									
 								</c:otherwise>
@@ -132,23 +133,23 @@
 				
 <%-- 				<a href="boardList.do?pnum=${pMap.nextPageNum}">next</a> --%>
 			
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-					<li class="page-item"><a class="page-link"
-							href="boardList.do?pnum=${pMap.prePageNum}">Previous</a>
-					</li>
-					<c:forEach begin="${pMap.startPage}"
-						end="${pMap.endPage}" var="i" step="1">
-						<li
-							class="page-item ${pnum==i?'active':''}">
-							<a class="page-link" href="boardList.do?pnum=${i}">${i}</a>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+						 	<a class="page-link" href="boardList.do?pnum=${pMap.prePageNum}">Previous</a>
 						</li>
-					</c:forEach>
-					<li class="page-item"><a class="page-link"
-							href="boardList.do?pnum=${pMap.nextPageNum}">Next</a>
-					</li>
-				</ul>
-			</nav>
+						<c:forEach begin="${pMap.startPage}"
+							end="${pMap.endPage}" var="i" step="1">
+							<li
+								class="page-item ${pnum==i?'active':''}">
+								<a class="page-link" href="boardList.do?pnum=${i}">${i}</a>
+							</li>
+						</c:forEach>
+						<li class="page-item">
+							<a class="page-link" href="boardList.do?pnum=${pMap.nextPageNum}">Next</a>
+						</li>
+					</ul>
+				</nav>
 			</td>
 		</tr>
 		<tr>

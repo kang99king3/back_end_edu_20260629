@@ -61,8 +61,10 @@ public class AnsController {
 	
 	@RequestMapping(value = "/boardInsertForm.do",
 		           method = RequestMethod.GET)
-	public String boardInsertForm() {
+	public String boardInsertForm(Model model,
+								  @RequestParam("pnum") String pnum) {
 		logger.info("글추가폼으로 이동");
+		model.addAttribute("pnum", pnum);
 		return "boardInsertForm";
 	}
 	
@@ -82,18 +84,19 @@ public class AnsController {
 	@RequestMapping(value = "/boardDetail.do",
 			       method = RequestMethod.GET)
 	public String boardDetail(@RequestParam("seq")int seq,
-			    @RequestParam(value="review",required = false)String review,
+			                  @RequestParam(value="review",required = false)String review,
+			                  @RequestParam("pnum") String pnum,
 			                  Model model) {
 		
 		// y값이 있는 경우가 글목록에서 요청된 경우
 		if(review!=null&&review.equals("y")) {
 			ansService.readCount(seq);//조회수 올리기
 			//한번요청에 2번 통신을 하게 되서 성능은 저하될 수 있음
-			return "redirect:boardDetail.do?seq="+seq;
+			return "redirect:boardDetail.do?seq="+seq+"&pnum="+pnum;
 		}else {
 			AnsDto dto=ansService.boardDetail(seq);
 			model.addAttribute("dto", dto);
-			
+			model.addAttribute("pnum", pnum);
 			//객체 담아서 페이지로 이동하는 경우--> 페이지 이름만 써주면 됨
 			return "boardDetail";
 		}
@@ -102,11 +105,12 @@ public class AnsController {
 	//글 수정하기
 	@RequestMapping(value = "/boardUpdate.do",
 	           method = RequestMethod.POST)
-	public String boardUpdate(AnsDto dto) {
+	public String boardUpdate(AnsDto dto,
+							  @RequestParam("pnum") String pnum) {
 		logger.info("글수정하기");
 		boolean isS=ansService.boardUpdate(dto);
 		if(isS) {
-			return "redirect:boardDetail.do?seq="+dto.getSeq();			
+			return "redirect:boardDetail.do?seq="+dto.getSeq()+"&pnum="+pnum;			
 		}else {
 			return "error.jsp";
 		}
@@ -114,11 +118,12 @@ public class AnsController {
 	//글 삭제하기
 	@RequestMapping(value = "/mulDel.do",
 	           method = RequestMethod.POST)
-	public String mulDel(@RequestParam("seq") String[] seq) {
+	public String mulDel(@RequestParam("seq") String[] seq,
+						 @RequestParam("pnum") String pnum) {
 		logger.info("글삭제하기");
 		boolean isS=ansService.mulDel(seq);
 		if(isS) {
-			return "redirect:boardList.do";			
+			return "redirect:boardList.do?pnum="+pnum;			
 		}else {
 			return "error.jsp";
 		}
