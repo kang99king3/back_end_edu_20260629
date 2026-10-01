@@ -64,6 +64,14 @@ public class AnsDao {
 		int count = sqlSession.update(namespace+"readCount", seq);
 		return count>0;
 	}
+	
+	public int replyUpdate(AnsDto dto) {
+		return sqlSession.update(namespace+"replyUpdate", dto);
+	}
+	
+	public int replyInsert(AnsDto dto) {
+		return sqlSession.insert(namespace+"replyInsert", dto);
+	}
 }
 
 

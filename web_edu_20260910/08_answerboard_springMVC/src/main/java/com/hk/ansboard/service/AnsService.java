@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hk.ansboard.dao.AnsDao;
 import com.hk.ansboard.dtos.AnsDto;
@@ -60,6 +62,13 @@ public class AnsService {
 	
 	public boolean readCount(int seq) {
 		return ansDao.readCount(seq);
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public boolean boardReply(AnsDto dto) {
+		ansDao.replyUpdate(dto);//step 증가시키는 쿼리
+		int count=ansDao.replyInsert(dto);//답글 추가하는 쿼리
+		return count>0;
 	}
 }
 

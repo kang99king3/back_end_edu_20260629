@@ -128,6 +128,19 @@ public class AnsController {
 			return "error.jsp";
 		}
 	}
+	
+	@RequestMapping(value = "/boardReply.do",
+	               method = RequestMethod.POST)
+	public String boardReply(AnsDto dto,
+			                @RequestParam("pnum") String pnum) {
+		logger.info("답글추가하기");
+		boolean isS=ansService.boardReply(dto);
+		if(isS) {
+			return "redirect:boardList.do?pnum="+pnum;			
+		}else {
+			return "error.jsp";
+		}
+	}
 }
 
 
