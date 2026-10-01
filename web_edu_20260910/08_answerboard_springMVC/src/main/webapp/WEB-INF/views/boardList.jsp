@@ -116,8 +116,13 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
+		<!-- 페이지 번호가 들어갈 부분 -->
 		<tr>
-			<td colspan="10">--페이지 번호가 들어갈 부분--</td>
+			<td colspan="10" style="text-align: center;">
+				<c:forEach begin="1" end="${pCount}" var="i" step="1">
+					<a href="boardList.do?pnum=${i}">${i}</a>
+				</c:forEach>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="10">

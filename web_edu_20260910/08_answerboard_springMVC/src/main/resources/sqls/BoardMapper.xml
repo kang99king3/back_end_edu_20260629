@@ -14,8 +14,14 @@
 				    depth,readcount,delflag
 			FROM answerboard
 		) a
-		WHERE ceil(rn/10) = #{pnum}
+		WHERE ceil(rn/10) = #{pnum} 
  	</select>  
+ 	
+ 	<!-- page 개수 구하기 -->
+ 	<select id="getPcount" resultType="int">
+ 		select ceil(count(*)/10)
+ 		from answerboard
+ 	</select>
  	
  	<insert id="boardInsert" parameterType="AnsDto">
  		INSERT INTO answerboard

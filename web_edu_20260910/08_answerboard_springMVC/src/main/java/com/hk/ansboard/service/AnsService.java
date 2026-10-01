@@ -18,6 +18,10 @@ public class AnsService {
 		return ansDao.getAllList(pnum);
 	}
 	
+	public int getPcount() {
+		return ansDao.getPcount();
+	}
+	
 	public boolean boardInsert(AnsDto dto) {
 		return ansDao.boardInsert(dto);
 	}

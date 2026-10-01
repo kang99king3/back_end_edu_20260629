@@ -44,8 +44,13 @@ public class AnsController {
 //			                            ,required = false  //값을 반드시 요구하지 않음
 			                            ) String pnum) {
 	
+		int pCount=ansService.getPcount();
 		List<AnsDto>list=ansService.getAllList(pnum);
+		
 		model.addAttribute("list", list);
+		model.addAttribute("pCount", pCount);
+		
+		model.addAttribute("pnum", pnum);//현재 페이지상태를 유지하기 위해 전달
 		return "boardList";
 	}
 	
