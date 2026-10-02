@@ -100,6 +100,7 @@
 									---삭제된 글입니다.---
 								</c:when>
 								<c:otherwise>
+									<span>➡️</span>
 									<a href="boardDetail.do?seq=${dto.seq}&review=y&pnum=${pnum}">
 								    ${dto.title}
 								    </a>									

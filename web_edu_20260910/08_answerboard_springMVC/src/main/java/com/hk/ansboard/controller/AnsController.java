@@ -141,6 +141,7 @@ public class AnsController {
 			return "error.jsp";
 		}
 	}
+	//환경설정 확인: root-context.xml, servlet-context.xml
 }
 
 
