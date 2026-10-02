@@ -11,7 +11,10 @@
 	<!-- contextConfigLocation라는 이름을 리스너가 찾는다 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>
+					 /WEB-INF/spring/root-context.xml
+					 /WEB-INF/spring/aop-context.xml
+		</param-value>
 	</context-param>
 	
 	<!-- 리스너 설정: contextConfigLocation라는 이름의 값을 찾아서 읽어들인다. -->
@@ -26,7 +29,9 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+			<param-value>
+				/WEB-INF/spring/appServlet/servlet-context.xml
+			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
