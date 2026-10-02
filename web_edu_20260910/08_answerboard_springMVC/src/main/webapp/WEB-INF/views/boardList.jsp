@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="jakarta.tags.core" prefix="c" %>
 <%@taglib uri="jakarta.tags.fmt" prefix="fmt" %>
+<%@taglib uri="jakarta.tags.functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,9 +101,14 @@
 									---삭제된 글입니다.---
 								</c:when>
 								<c:otherwise>
-									<span>➡️</span>
+									<c:forEach begin="1" end="${dto.depth}" var="i" step="1">
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<c:if test="${i==dto.depth}">
+											<img alt="답글" src="resources/img/arrow.png">
+										</c:if>
+									</c:forEach>
 									<a href="boardDetail.do?seq=${dto.seq}&review=y&pnum=${pnum}">
-								    ${dto.title}
+								    ${fn:length(dto.title)>10?fn:substring(dto.title,0,10)+='...':dto.title}
 								    </a>									
 								</c:otherwise>
 							</c:choose>
