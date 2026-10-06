@@ -1,0 +1,45 @@
+DEBUG: org.springframework.test.context.web.WebTestContextBootstrapper - Using ContextCustomizerFactory implementations for test class [AnsDaoTest]: [MockServerContainerContextCustomizerFactory, DynamicPropertiesContextCustomizerFactory]:2026 10 06 13:54:10, 184
+DEBUG: org.springframework.test.context.web.WebTestContextBootstrapper - Using ContextCustomizers for test class [AnsDaoTest]: []:2026 10 06 13:54:10, 187
+DEBUG: org.springframework.test.context.util.TestContextSpringFactoriesUtils - Skipping candidate TestExecutionListener [org.springframework.test.context.observation.MicrometerObservationRegistryTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: io.micrometer.context.ThreadLocalAccessor. MicrometerObservationRegistryTestExecutionListener requires io.micrometer:micrometer-observation:1.10.8 or higher and io.micrometer:context-propagation:1.0.3 or higher.:2026 10 06 13:54:10, 199
+DEBUG: org.springframework.test.context.web.WebTestContextBootstrapper - Using TestExecutionListeners for test class [AnsDaoTest]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, EventPublishingTestExecutionListener]:2026 10 06 13:54:10, 207
+DEBUG: org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener - Before test class: class [AnsDaoTest], class annotated with @DirtiesContext [false] with mode [null]:2026 10 06 13:54:10, 208
+DEBUG: org.springframework.test.context.web.AbstractGenericWebContextLoader - Loading WebApplicationContext for test class com.hk.ansboard.dao.AnsDaoTest:2026 10 06 13:54:10, 217
+DEBUG: org.springframework.ui.context.support.UiApplicationContextUtils - Unable to locate ThemeSource with name 'themeSource': using default [org.springframework.ui.context.support.ResourceBundleThemeSource@403132fc]:2026 10 06 13:54:10, 608
+DEBUG: org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.:2026 10 06 13:54:10, 988
+DEBUG: _org.springframework.web.servlet.HandlerMapping.Mappings - 
+	c.h.a.c.AnsController:
+	{GET [/home.do]}: home()
+	{GET [/boardInsertForm.do]}: boardInsertForm(Model,String)
+	{POST [/boardUpdate.do]}: boardUpdate(AnsDto,String)
+	{POST [/boardInsert.do]}: boardInsert(AnsDto)
+	{GET [/boardDetail.do]}: boardDetail(int,String,String,Model)
+	{GET [/boardList.do]}: boardList(Model,String)
+	{POST [/mulDel.do]}: mulDel(String[],String)
+	{POST [/boardReply.do]}: boardReply(AnsDto,String):2026 10 06 13:54:11, 075
+DEBUG: _org.springframework.web.servlet.HandlerMapping.Mappings - 'org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping' {}:2026 10 06 13:54:11, 275
+DEBUG: _org.springframework.web.servlet.HandlerMapping.Mappings - 'org.springframework.web.servlet.handler.SimpleUrlHandlerMapping#0' {/**=ResourceHttpRequestHandler [ServletContext [/resources/]]}:2026 10 06 13:54:11, 310
+DEBUG: org.mybatis.spring.SqlSessionFactoryBean - Parsed configuration file: 'class path resource [sqls/Configuration.xml]':2026 10 06 13:54:11, 709
+DEBUG: org.mybatis.spring.SqlSessionFactoryBean - Property 'mapperLocations' was not specified.:2026 10 06 13:54:11, 710
+DEBUG: org.springframework.test.context.cache - Spring test ApplicationContext cache statistics: [DefaultContextCache@65d57e4e size = 1, maxSize = 32, parentContextCount = 0, hitCount = 0, missCount = 1, failureCount = 0]:2026 10 06 13:54:11, 950
+DEBUG: org.springframework.test.context.web.ServletTestExecutionListener - Setting up MockHttpServletRequest, MockHttpServletResponse, ServletWebRequest, and RequestContextHolder for test class com.hk.ansboard.dao.AnsDaoTest:2026 10 06 13:54:11, 951
+DEBUG: org.springframework.test.context.support.DependencyInjectionTestExecutionListener - Performing dependency injection for test class com.hk.ansboard.dao.AnsDaoTest:2026 10 06 13:54:11, 974
+DEBUG: org.springframework.test.context.cache - Spring test ApplicationContext cache statistics: [DefaultContextCache@65d57e4e size = 1, maxSize = 32, parentContextCount = 0, hitCount = 1, missCount = 1, failureCount = 0]:2026 10 06 13:54:11, 975
+DEBUG: org.springframework.test.context.cache - Spring test ApplicationContext cache statistics: [DefaultContextCache@65d57e4e size = 1, maxSize = 32, parentContextCount = 0, hitCount = 2, missCount = 1, failureCount = 0]:2026 10 06 13:54:11, 977
+DEBUG: org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener - Before test method: class [AnsDaoTest], method [testGetAllList], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]:2026 10 06 13:54:11, 984
+DEBUG: org.springframework.test.context.cache - Spring test ApplicationContext cache statistics: [DefaultContextCache@65d57e4e size = 1, maxSize = 32, parentContextCount = 0, hitCount = 3, missCount = 1, failureCount = 0]:2026 10 06 13:54:11, 987
+DEBUG: org.springframework.test.context.cache - Spring test ApplicationContext cache statistics: [DefaultContextCache@65d57e4e size = 1, maxSize = 32, parentContextCount = 0, hitCount = 4, missCount = 1, failureCount = 0]:2026 10 06 13:54:11, 990
+DEBUG: org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession:2026 10 06 13:54:12, 008
+DEBUG: org.mybatis.spring.SqlSessionUtils - SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@62e93c3a] was not registered for synchronization because synchronization is not active:2026 10 06 13:54:12, 021
+DEBUG: org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource:2026 10 06 13:54:12, 042
+DEBUG: org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [1708711928, URL=jdbc:mariadb://localhost:3306/hk, MariaDB Connector/J] will not be managed by Spring:2026 10 06 13:54:12, 264
+DEBUG: com.hk.ansboard.dao.boardList - ==>  Preparing: SELECT seq, id, title, content, regdate, refer, step, depth, readcount,delflag FROM ( SELECT ROW_NUMBER() OVER(ORDER BY refer DESC,step ASC) rn, seq, id, title, content, regdate, refer, step, depth,readcount,delflag FROM answerboard ) a WHERE ceil(rn/10) = ?:2026 10 06 13:54:12, 276
+DEBUG: com.hk.ansboard.dao.boardList - ==> Parameters: 1(String):2026 10 06 13:54:12, 307
+DEBUG: com.hk.ansboard.dao.boardList - <==      Total: 10:2026 10 06 13:54:12, 337
+DEBUG: org.mybatis.spring.transaction.SpringManagedTransaction - Committing JDBC Connection [1708711928, URL=jdbc:mariadb://localhost:3306/hk, MariaDB Connector/J]:2026 10 06 13:54:12, 347
+DEBUG: org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@62e93c3a]:2026 10 06 13:54:12, 347
+DEBUG: org.springframework.test.context.cache - Spring test ApplicationContext cache statistics: [DefaultContextCache@65d57e4e size = 1, maxSize = 32, parentContextCount = 0, hitCount = 5, missCount = 1, failureCount = 0]:2026 10 06 13:54:12, 359
+DEBUG: org.springframework.test.context.cache - Spring test ApplicationContext cache statistics: [DefaultContextCache@65d57e4e size = 1, maxSize = 32, parentContextCount = 0, hitCount = 6, missCount = 1, failureCount = 0]:2026 10 06 13:54:12, 360
+DEBUG: org.springframework.test.context.support.DirtiesContextTestExecutionListener - After test method: class [AnsDaoTest], method [testGetAllList], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null]:2026 10 06 13:54:12, 360
+DEBUG: org.springframework.test.context.web.ServletTestExecutionListener - Resetting RequestContextHolder for test class com.hk.ansboard.dao.AnsDaoTest:2026 10 06 13:54:12, 361
+DEBUG: org.springframework.test.context.cache - Spring test ApplicationContext cache statistics: [DefaultContextCache@65d57e4e size = 1, maxSize = 32, parentContextCount = 0, hitCount = 7, missCount = 1, failureCount = 0]:2026 10 06 13:54:12, 367
+DEBUG: org.springframework.test.context.support.DirtiesContextTestExecutionListener - After test class: class [AnsDaoTest], class annotated with @DirtiesContext [false] with mode [null]:2026 10 06 13:54:12, 368
