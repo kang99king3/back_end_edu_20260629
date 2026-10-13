@@ -12,11 +12,15 @@
         <div id="container">
             <h1>일정관리[달력]</h1>
             <div class="cal">
-                <div id="ctitle">      
+                <div id="ctitle">  
+                    <a href="#">◁</a>   
+                    <a href="#">◀</a> 
                     <span class="y" th:text="${calMap.year}"></span>
                     <span>년</span>
                     <span class="m" th:text="${calMap.month}"></span>
                     <span>월</span>
+                    <a href="#">▶</a>   
+                    <a href="#">▷</a>
                 </div>
                 <div id="thead">
                     <div>일</div><div>월</div><div>화</div><div>수</div>
