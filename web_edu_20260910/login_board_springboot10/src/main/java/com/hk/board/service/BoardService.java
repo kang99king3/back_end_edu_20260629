@@ -51,10 +51,13 @@ public class BoardService {
 		//증가된 board_seq값이 저장
 		boardMapper.insertBoard(boardDto);//새글 추가
 
+		//form에 <input type="file"/> 전송
+		// --> form에 의해 전송될 경우에는 파일이 실제 없어도
+		//    --> file 0개, 크기가0byte 내용으로 한개 전송됨
 		System.out.println("파일첨부여부:"+(!files.get(0).isEmpty()));
-					
+		
 		//첨부된 파일들이 있는 경우
-		if(!files.get(0).isEmpty()) {
+		if(files!=null&&!files.isEmpty()&&!files.get(0).isEmpty()) {
 			//파일 저장경로 설정: 절대경로, 상대경로
 //			String filepath=request.getSession().getServletContext()
 //					       .getRealPath("upload");

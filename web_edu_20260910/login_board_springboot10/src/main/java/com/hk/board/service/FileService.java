@@ -23,12 +23,13 @@ import com.hk.board.mapper.FileMapper;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor 
 @Service
 public class FileService {
 
-	@Autowired
-	private FileMapper fileMapper;
+	private final FileMapper fileMapper;
 	
 	//파일업로드하기
 	@Transactional

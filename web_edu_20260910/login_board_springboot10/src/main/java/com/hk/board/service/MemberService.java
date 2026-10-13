@@ -14,15 +14,16 @@ import com.hk.board.status.RoleStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
-//@RequiredArgsConstructor ;lombok 기능: final 필드를 초기화 - Autowired 생략가능
+@RequiredArgsConstructor //lombok 기능: final 필드를 초기화 - Autowired 생략가능
 @Service
 public class MemberService {
 	
-	@Autowired
-	private MemberMapper memberMapper;
-	@Autowired
-	private PasswordEncoder passwordEncoder;// <-- @Bean으로 등록:SecurityConfig클래스에서..
+	private final MemberMapper memberMapper;
+	private final PasswordEncoder passwordEncoder;// <-- @Bean으로 등록:SecurityConfig클래스에서..
 	
+	// public MemberService(MemberMapper memberMapper){
+	// 	this.memberMapper=memberMapper;
+	// }
 	public boolean addUser(AddUserCommand addUserCommand) {
 		
 		MemberDto mdto=new MemberDto();

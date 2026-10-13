@@ -26,15 +26,15 @@ import com.hk.board.service.FileService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping(value = "/board")
+@RequiredArgsConstructor 
 public class BoardController {
-	
-	@Autowired
-	private BoardService boardService;
-	@Autowired
-	private FileService fileService;
+
+	private final BoardService boardService;
+	private final FileService fileService;
 	
 	@GetMapping(value = "/boardList")
 	public String boardList(Model model) {
