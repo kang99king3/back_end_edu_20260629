@@ -9,6 +9,21 @@
     <div>
         <div id="container">
             <h1>일정관리[달력]</h1>
+            <div class="cal">
+                <div id="ctitle">      
+                    <span class="y" th:text="${calMap.year}"></span>
+                    <span>년</span>
+                    <span class="m" th:text="${calMap.month}"></span>
+                    <span>월</span>
+                </div>
+                <div id="thead">
+                    <div>일</div><div>월</div><div>화</div><div>수</div>
+                    <div>목</div><div>금</div><div>토</div>
+                </div>
+                <div id="tbody">
+                    
+                </div>
+            </div>
         </div>
     </div>
 </body>
