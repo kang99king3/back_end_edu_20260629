@@ -21,7 +21,14 @@
                     <div>목</div><div>금</div><div>토</div>
                 </div>
                 <div id="tbody">
-                    
+                    <th:block th:if= "${calMap.dayOfWeek>1}">
+                        <div th:each= "num:${#numbers.sequence(1,calMap.dayOfWeek-1)}">&nbsp;</div>
+                    </th:block>
+                    <th:block th:each= "i:${#numbers.sequence(1,calMap.lastDay)}">
+                        <div>
+                            <a href="#" th:text="${i}" class="d"></a>
+                        </div>
+                    </th:block>
                 </div>
             </div>
         </div>
