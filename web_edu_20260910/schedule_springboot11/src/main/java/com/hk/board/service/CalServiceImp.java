@@ -31,6 +31,18 @@ public class CalServiceImp {
         int month=(paramMonth==null)?cal.get(Calendar.MONTH)+1:
                                    Integer.parseInt(paramMonth);
 
+        //문제점: 월을 이동할때 년도가 바뀌면 11,12,13,14...
+        // year와 month를 상황에 맞게 값을 변경해준다.                           
+        if(month>12){
+            month=1;
+            year++;
+        }
+
+        if(month<1){
+            month=12;
+            year--;
+        }
+
         //1. 해당 월의 1일에 대한 요일을 구하기
         //  - 1~7 숫자를 반환: 1은 일요일 ~ 7은 토요일
         // --> 달력의 첫 시작 공백수를 출력하기 위해서..
@@ -50,4 +62,7 @@ public class CalServiceImp {
         // 일정목록 3개씩 출력하는 List 객체 구해서 map에 같이 전달할 예정임
         return map;
     }
+
+    // 일정 추가하기
+    
 }
