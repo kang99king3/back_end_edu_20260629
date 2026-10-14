@@ -75,4 +75,8 @@ public class CalController {
         return "redirect:/schedule/calendar";
     }
     
+    //과제
+    //일정 목록 조회
+    // 받을 파라미터: year, month, date 
+    // 응답페이지: calboardlist.html
 }
