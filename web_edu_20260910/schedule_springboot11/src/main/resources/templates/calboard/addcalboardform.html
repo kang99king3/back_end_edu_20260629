@@ -21,7 +21,7 @@
                                    type="text"
                                    name="id"
                                    class="form-control"/>
-                            <span th:if="${#field.hasErrors('id')}" 
+                            <span th:if="${#fields.hasErrors('id')}" 
                                   th:errors="*{id}"
                                   class="errorField"
                             ></span>
@@ -29,7 +29,43 @@
                     </tr>
                     <tr>
                         <th>일정</th>
-                        <td></td>
+                        <td>
+                            <select name="year" class="form-select w-auto">
+                                <th:block th:each="i:${#numbers.sequence(insertCalCommand.year-5,insertCalCommand.year+5)}">
+                                    <option th:value="${i}" th:text="${i}" 
+                                            th:selected="${insertCalCommand.year==i}"></option>
+                                </th:block>
+                            </select>
+                            <span>년</span>
+                            <select name="month">
+                                <th:block th:each="i:${#numbers.sequence(1,12)}">
+                                    <option th:value="${i}" th:text="${i}" 
+                                            th:selected="${insertCalCommand.month==i}"></option>
+                                </th:block>
+                            </select>
+                            <span>월</span>
+                            <select name="date">
+                                <th:block th:each="i:${#numbers.sequence(1,31)}">
+                                    <option th:value="${i}" th:text="${i}" 
+                                            th:selected="${insertCalCommand.date==i}"></option>
+                                </th:block>
+                            </select>
+                            <span>일</span>
+                            <select name="hour">
+                                <th:block th:each="i:${#numbers.sequence(0,23)}">
+                                    <option th:value="${i}" th:text="${i}" 
+                                            th:selected="${#temporals.hour(now)==i}"></option>
+                                </th:block>
+                            </select>
+                            <span>시</span>
+                            <select name="min">
+                                <th:block th:each="i:${#numbers.sequence(0,59)}">
+                                    <option th:value="${i}" th:text="${i}" 
+                                            th:selected="${#temporals.minute(now)==i}"></option>
+                                </th:block>
+                            </select>
+                            <span>분</span>
+                        </td>
                     </tr>
                     <tr>
                         <th>제목</th>
@@ -38,7 +74,7 @@
                                    type="text"
                                    name="title"
                                    class="form-control"/>
-                            <span th:if="${#field.hasErrors('title')}" 
+                            <span th:if="${#fields.hasErrors('title')}" 
                                   th:errors="*{title}"
                                   class="errorField"
                             ></span>
@@ -52,7 +88,7 @@
                                    type="text"
                                    name="content"
                                    class="form-control"></textarea>
-                            <span th:if="${#field.hasErrors('content')}" 
+                            <span th:if="${#fields.hasErrors('content')}" 
                                   th:errors="*{content}"
                                   class="errorField"
                             ></span>
