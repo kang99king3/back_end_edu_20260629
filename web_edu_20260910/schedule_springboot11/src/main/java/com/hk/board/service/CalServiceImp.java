@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.hk.board.command.InsertCalCommand;
+import com.hk.board.dtos.CalDto;
 import com.hk.board.mapper.CalMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -64,5 +66,29 @@ public class CalServiceImp {
     }
 
     // 일정 추가하기
-    
+    public boolean insertCalBoard(InsertCalCommand insertCalCommand){
+        //command = id, title, content, y,m,d,h,m 저장
+        // DB = id, title, content, mdate(yyyyMMddhhmm)12자리
+        // mdate 12자리로 변환처리하기: "202610140248"
+        String mdate = insertCalCommand.getYear()
+                      +(isTwo(insertCalCommand.getMonth()+""))
+                      +(isTwo(insertCalCommand.getDate()+""))
+                      +(isTwo(insertCalCommand.getHour()+""))
+                      +(isTwo(insertCalCommand.getMin()+""));
+        
+        // command객체 데이터 ---> Dto객체로 받기
+        CalDto dto=new CalDto();
+        dto.setId(insertCalCommand.getId());
+        dto.setTitle(insertCalCommand.getTitle());
+        dto.setContent(insertCalCommand.getContent());
+        dto.setMdate(mdate);
+
+        int count = calMapper.insertCalBoard(dto);
+        return count>0;
+    }
+
+    //문자열 2자리로 변환하는 메서드
+    public String isTwo(String s){
+        return s.length()<2?"0"+s:s;
+    }
 }

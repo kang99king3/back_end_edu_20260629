@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hk.board.command.InsertCalCommand;
@@ -16,6 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Slf4j 
 @Controller 
@@ -44,6 +50,29 @@ public class CalController {
         //현재시간 구하기
         model.addAttribute("now", LocalTime.now());
         return "calboard/addcalboardform";
+    }
+    
+    //일정추가하기 
+    @PostMapping("/addcalboardform")
+    public String addCalBoard(@Validated InsertCalCommand insertCalCommand, 
+                              BindingResult result,
+                              Model model,
+                              RedirectAttributes redirectAttributes
+                            ) {
+        //유효값 처리 결과를 받아서 에러를 확인
+        if(result.hasErrors()){
+            log.info("일정을 모두 입력해야 됨");
+            //시간의 대한 정보는 다시 보내줘야 함
+            model.addAttribute("now", LocalTime.now());
+            return "calboard/addcalboardform";
+        }
+
+        calService.insertCalBoard(insertCalCommand);
+        
+        //리다이렉트시 쿼리 스트링 자동 생성해주는 기능: ?year=2026&month=10
+        redirectAttributes.addAttribute("year",insertCalCommand.getYear());
+        redirectAttributes.addAttribute("month",insertCalCommand.getMonth());
+        return "redirect:/schedule/calendar";
     }
     
 }
