@@ -5,9 +5,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>일정추가하기</title>
 </head>
 <body>
-    
+    <div layout:fragment="content">
+        <div id="container">
+            <h1>일정 추가하기</h1>
+            <form th:action="@{/schedule/addcalboard}" method="post"
+                  th:object="${insertCalCommand}">
+                <table class="table">
+                    <tr>
+                        <th>아이디</th>
+                        <td>
+                            <input th:field="*{id}" 
+                                   type="text"
+                                   name="id"
+                                   class="form-control"/>
+                            <span th:if="${#field.hasErrors('id')}" 
+                                  th:errors="*{id}"
+                                  class="errorField"
+                            ></span>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
