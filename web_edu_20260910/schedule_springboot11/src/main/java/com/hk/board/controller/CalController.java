@@ -53,7 +53,7 @@ public class CalController {
     }
     
     //일정추가하기 
-    @PostMapping("/addcalboardform")
+    @PostMapping("/addcalboard")
     public String addCalBoard(@Validated InsertCalCommand insertCalCommand, 
                               BindingResult result,
                               Model model,
