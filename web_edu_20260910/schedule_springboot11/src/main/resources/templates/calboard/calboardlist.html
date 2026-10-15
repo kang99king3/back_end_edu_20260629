@@ -75,6 +75,10 @@
                                 th:onclick="|location.href='@{/schedule/calendar(year=${param.year},month=${param.month})}'|"
                             >
                                 <i class="bi bi-calendar-week"></i>달력</button>
+                            <span class="errorField"
+                                  th:if="${#fields.hasErrors('seq')}"
+                                  th:errors="*{seq}"
+                            ></span>
                         </td>
                     </tr>
                 </table>

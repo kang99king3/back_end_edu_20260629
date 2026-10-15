@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hk.board.command.DeleteCalCommand;
 import com.hk.board.command.InsertCalCommand;
 import com.hk.board.dtos.CalDto;
 import com.hk.board.service.CalServiceImp;
@@ -85,10 +86,41 @@ public class CalController {
     public String calBoardList(@RequestParam Map<String,String>map,
                                Model model
                               ) {
+        //일정목록 페이지에서 유효값처리 결과를 출력하는 기능을 실행중이라
+        // deleteCalCommand객체를 무조건 보내줘야 한다.
+        model.addAttribute("deleteCalCommand", new DeleteCalCommand());
+
         String id="hk";//로그인 기능이 있을 경우 세션으로부터 가져온다
         List<CalDto>list=calService.calBoardList(id, map); 
         model.addAttribute("list", list);                       
         return "calboard/calboardlist";
     }
+
+    @PostMapping("/calmuldel")
+    public String calMulDel(@Validated DeleteCalCommand deleteCalCommand,
+                            BindingResult result,
+                            Model model,
+                            // String year, String month, String date
+                            @RequestParam Map<String, String>map,
+                            RedirectAttributes redirectAttributes
+    ) {
+        
+        if(result.hasErrors()){
+            log.info("여러글 삭제시 오류가 발생");
+            String id="hk";
+            List<CalDto> list= calService.calBoardList(id, map);
+            model.addAttribute("list", list);
+            return "calboard/calboardlist";
+        }
+
+        calService.calMulDel(deleteCalCommand.getSeq());
+
+        //리다이렉트시 쿼리 스트링 자동생성
+        redirectAttributes.addAttribute("year", map.get("year"));
+        redirectAttributes.addAttribute("month", map.get("month"));
+        redirectAttributes.addAttribute("date", map.get("date"));
+        return "redirect:/schedule/calboardlist";
+    }
+    
     
 }

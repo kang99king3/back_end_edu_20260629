@@ -109,6 +109,17 @@ public class CalServiceImp {
 
         return calMapper.calBoardList(map);
     }
+
+    //일정삭제
+    public boolean calMulDel(String[] seqs){
+        //삭제할 일정 seq--> String[1,2,3,4]
+        Map<String, String[]> map=new HashMap<>();
+        map.put("seqs",seqs);
+
+        int count=calMapper.calMulDel(map);
+        return count>0;
+    }
+
     //문자열 2자리로 변환하는 메서드
     public String isTwo(String s){
         return s.length()<2?"0"+s:s;
