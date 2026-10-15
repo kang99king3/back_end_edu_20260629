@@ -25,11 +25,22 @@
 </script>
 </head>
 <body>
-    목록 내용: checkbox, mdate, title, regdate
     <div layout:fragment="content">
         <div id="container">
-            <form>
-                <table class="table">
+            <form th:action="@{/schedule/calmuldel}" 
+                  method="post"
+                  th:object="${deleteCalCommand}"
+                  onsubmit="return isConfirm()"                  
+            >
+                <input type="hidden" name="year" th:value="${param.year}"/>
+                <input type="hidden" name="month" th:value="${param.month}"/>
+                <input type="hidden" name="date" th:value="${param.date}"/>
+                <table class="table caption-top">
+                    <caption>
+                        <span th:text="${param.year}"></span>.
+                        <span th:text="${param.month}"></span>.
+                        <span th:text="${param.date}"></span>.
+                    </caption>
                     <tr>
                         <th><input class="form-check-input" type="checkbox" name="all" onclick="allSel(this.checked)"/>
                         <th>일정</th>
@@ -56,6 +67,16 @@
                             <td th:text="${#dates.format(dto.regdate,'yyyy.MM.dd') }"></td>
                         </tr>
                     </th:block>
+                    <tr>
+                        <td colspan="4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-trash3"></i>일정삭제</button>
+                            <button type="button" class="btn btn-primary"
+                                th:onclick="|location.href='@{/schedule/calendar(year=${param.year},month=${param.month})}'|"
+                            >
+                                <i class="bi bi-calendar-week"></i>달력</button>
+                        </td>
+                    </tr>
                 </table>
             </form>
         </div>
