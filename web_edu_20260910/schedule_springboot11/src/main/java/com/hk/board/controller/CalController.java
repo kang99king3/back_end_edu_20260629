@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class CalController {
 
     private final CalServiceImp calService;
+    private final ModelMapper modelMapper;
 
     @GetMapping("/calendar")
     public String calendar(Model model,String year, String month) {
@@ -135,7 +137,22 @@ public class CalController {
     ) {
         CalDto dto=
         calService.calBoardDetail(updateCalCommand.getSeq());
-        model.addAttribute("dto", dto);
+        // updateCalCommand로 출력하는 기능이 구현되어 있으므로 
+        // dto ---> command 데이터를 옮겨 담기
+        //dto --> command 값 이동
+		//상세보기 페이지에 command객체가 바인딩되어 있어 데이터를 옮겨줌
+//		updateCalCommand.setSeq(dto.getSeq());
+//		updateCalCommand.setId(dto.getId());// <--id 추가
+//		updateCalCommand.setTitle(dto.getTitle());
+//		updateCalCommand.setContent(dto.getContent());
+//		updateCalCommand.setYear(Integer.parseInt(dto.getMdate().substring(0, 4)));
+//		updateCalCommand.setMonth(Integer.parseInt(dto.getMdate().substring(4, 6)));
+//		updateCalCommand.setDate(Integer.parseInt(dto.getMdate().substring(6, 8)));
+//		updateCalCommand.setHour(Integer.parseInt(dto.getMdate().substring(8, 10)));
+//		updateCalCommand.setMin(Integer.parseInt(dto.getMdate().substring(10)));
+        modelMapper.map(dto, UpdateCalCommand.class);
+
+        model.addAttribute("updateCalCommand", updateCalCommand);
         return "calboard/calboarddetail";
     }
     
