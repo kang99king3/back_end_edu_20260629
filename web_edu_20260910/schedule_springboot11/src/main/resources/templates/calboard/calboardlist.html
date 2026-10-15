@@ -31,11 +31,31 @@
             <form>
                 <table>
                     <tr>
-                        <th><input type="checkbox" name="all" onclick="allSel(this.checked)"/>
+                        <th><input class="form-check-input" type="checkbox" name="all" onclick="allSel(this.checked)"/>
                         <th>일정</th>
                         <th>제목</th>
                         <th>작성일</th>
                     </tr>
+                    <th:block th:if="${#lists.isEmpty(list)}">
+                        <tr>
+                            <td colspan="4">일정이 없습니다.</td>
+                        </tr>
+                    </th:block>
+                    <th:block th:unless="${#lists.isEmpty(list)}">
+                        <tr th:each="dto:${list}">
+                            <td><input class="form-check-input" 
+                                       type="checkbox"
+                                       name="seq"
+                                       th:value="${dto.seq}"
+                                /> </td>
+                            <td th:text="${dto.mdate}"></td>
+                            <td>
+                                <a th:href="@{/schedule/calboarddetail(seq=${dto.seq})}" 
+                                   th:text="${dto.title}"></a>
+                            </td>
+                            <td th:text="${#dates.format(dto.regdate,'yyyy.MM.dd') }"></td>
+                        </tr>
+                    </th:block>
                 </table>
             </form>
         </div>

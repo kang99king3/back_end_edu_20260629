@@ -14,7 +14,7 @@
         SELECT seq, id,title, content,mdate,regdate 
         FROM calboard
         WHERE id = #{id}
-        ADN MDATE LIKE CONCAT(#{yyyyMMdd}, '%')
+        AND MDATE LIKE CONCAT(#{yyyyMMdd}, '%')
         order by mdate asc
     </select>
     <select id="calBoardDetail" parameterType="Integer"

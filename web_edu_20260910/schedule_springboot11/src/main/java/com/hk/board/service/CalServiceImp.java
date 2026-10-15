@@ -99,9 +99,9 @@ public class CalServiceImp {
 
         //java 15이상  : String.formatted()
         String yyyyMMdd2="%04d%02d%02d".formatted(
-                                        paramMap.get("year"),
-                                        paramMap.get("month"),
-                                        paramMap.get("date")
+                                        Integer.parseInt(paramMap.get("year")) ,
+                                        Integer.parseInt(paramMap.get("month")),
+                                        Integer.parseInt(paramMap.get("date"))
                                         ); 
         Map<String, String>map=new HashMap<>();
         map.put("id",id);
