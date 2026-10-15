@@ -2,6 +2,7 @@ package com.hk.board.controller;
 
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hk.board.command.InsertCalCommand;
+import com.hk.board.dtos.CalDto;
 import com.hk.board.service.CalServiceImp;
 
 import lombok.RequiredArgsConstructor;
@@ -79,4 +81,14 @@ public class CalController {
     //일정 목록 조회
     // 받을 파라미터: year, month, date 
     // 응답페이지: calboardlist.html
+    @GetMapping("/calboardlist")
+    public String calBoardList(@RequestParam Map<String,String>map,
+                               Model model
+                              ) {
+        String id="hk";//로그인 기능이 있을 경우 세션으로부터 가져온다
+        List<CalDto>list=calService.calBoardList(id, map); 
+        model.addAttribute("list", list);                       
+        return "calboard/calboardlist";
+    }
+    
 }

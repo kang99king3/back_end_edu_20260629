@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,5 +9,19 @@
 </head>
 <body>
     목록 내용: checkbox, mdate, title, regdate
+    <div layout:fragment="content">
+        <div id="container">
+            <form>
+                <table>
+                    <tr>
+                        <th><input type="checkbox" name="all" onclick="allSel(this.checked)"/>
+                        <th>일정</th>
+                        <th>제목</th>
+                        <th>작성일</th>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

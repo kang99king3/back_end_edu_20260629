@@ -32,7 +32,7 @@
                     </th:block>
                     <th:block th:each= "i:${#numbers.sequence(1,calMap.lastDay)}">
                         <div>
-                            <a href="#" th:text="${i}" class="d"></a>
+                            <a th:href="@{/schedule/calboardlist(year=${calMap.year},month=${calMap.month},date=${i})}" th:text="${i}" class="d"></a>
                             <a th:href="@{/schedule/addcalboardform(year=${calMap.year},month=${calMap.month},date=${i})}">추가</a>
                         </div>
                     </th:block>
