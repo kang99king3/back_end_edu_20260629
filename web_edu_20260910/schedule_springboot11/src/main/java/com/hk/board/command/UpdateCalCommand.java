@@ -28,4 +28,13 @@ public class UpdateCalCommand {
     private Integer hour;
     @NotNull(message = "분 입력하세요") 
     private Integer min;
+
+    //mdate값을 년월일시분으로 분리해서 해당필드에 담아주기
+    public void mdateToYMDHM(String mdate){
+        this.year=Integer.parseInt(mdate.substring(0, 4));
+        this.month=Integer.parseInt(mdate.substring(4, 6));
+        this.date=Integer.parseInt(mdate.substring(6, 8));
+        this.hour=Integer.parseInt(mdate.substring(8, 10));
+        this.min=Integer.parseInt(mdate.substring(10));
+    }
 }

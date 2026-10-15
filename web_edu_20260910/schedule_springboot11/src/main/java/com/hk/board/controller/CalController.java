@@ -150,7 +150,10 @@ public class CalController {
 //		updateCalCommand.setDate(Integer.parseInt(dto.getMdate().substring(6, 8)));
 //		updateCalCommand.setHour(Integer.parseInt(dto.getMdate().substring(8, 10)));
 //		updateCalCommand.setMin(Integer.parseInt(dto.getMdate().substring(10)));
-        modelMapper.map(dto, UpdateCalCommand.class);
+        //modelMapper를 이용한 값 복사 자동화
+        updateCalCommand=modelMapper.map(dto, UpdateCalCommand.class);
+        // 필드명이 다른 것들은 직접 맵핑처리를 해야함
+        updateCalCommand.mdateToYMDHM(dto.getMdate());
 
         model.addAttribute("updateCalCommand", updateCalCommand);
         return "calboard/calboarddetail";

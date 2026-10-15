@@ -25,4 +25,6 @@ public class Util {
         //4. 포맷 처리한 문자열을 반환
         return ldt.format(outputFormatter);
     }
+
+    // 파리미터(list객체, 해당 일(date))
 }
