@@ -120,6 +120,11 @@ public class CalServiceImp {
         return count>0;
     }
 
+    //상세보기
+    public CalDto calBoardDetail(int seq){
+        return calMapper.calBoardDetail(seq);
+    }
+
     //문자열 2자리로 변환하는 메서드
     public String isTwo(String s){
         return s.length()<2?"0"+s:s;

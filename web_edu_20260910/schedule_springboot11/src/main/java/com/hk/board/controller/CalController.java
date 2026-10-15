@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hk.board.command.DeleteCalCommand;
 import com.hk.board.command.InsertCalCommand;
+import com.hk.board.command.UpdateCalCommand;
 import com.hk.board.dtos.CalDto;
 import com.hk.board.service.CalServiceImp;
 
@@ -104,7 +105,12 @@ public class CalController {
                             @RequestParam Map<String, String>map,
                             RedirectAttributes redirectAttributes
     ) {
-        
+        // 유효값 처리 추가
+        if(deleteCalCommand.getSeq()!=null &&
+           deleteCalCommand.getSeq().length >10){
+            result.rejectValue("seq", "MaxLimit","한번에 최대 10개까지만 삭제 가능함");
+           }
+
         if(result.hasErrors()){
             log.info("여러글 삭제시 오류가 발생");
             String id="hk";
@@ -122,5 +128,15 @@ public class CalController {
         return "redirect:/schedule/calboardlist";
     }
     
+    //일정상세조회
+    @GetMapping("/calboarddetail")
+    public String calBoardDetail(UpdateCalCommand updateCalCommand,
+                                Model model
+    ) {
+        CalDto dto=
+        calService.calBoardDetail(updateCalCommand.getSeq());
+        model.addAttribute("dto", dto);
+        return "calboard/calboarddetail";
+    }
     
 }
