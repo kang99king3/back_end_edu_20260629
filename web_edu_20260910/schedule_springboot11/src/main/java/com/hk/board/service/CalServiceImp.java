@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.hk.board.command.InsertCalCommand;
+import com.hk.board.command.UpdateCalCommand;
 import com.hk.board.dtos.CalDto;
 import com.hk.board.mapper.CalMapper;
 
@@ -19,6 +21,7 @@ public class CalServiceImp {
 
     //생성자 주입 방식
     private final CalMapper calMapper;
+    private final ModelMapper modelMapper;
     
     //request같은 요청 처리 객체를 제외한 기능들은 서비스에 구현
     public Map<String, Object> makeCalendar(String paramYear,
@@ -63,6 +66,13 @@ public class CalServiceImp {
         map.put("lastDay",lastDay);
 
         // 일정목록 3개씩 출력하는 List 객체 구해서 map에 같이 전달할 예정임
+        //한달 단위 일일별 일정 구하기
+		String id="hk";//session에서 가져오기
+		String yyyyMM=year+String.format("%02d", month);//년월 6자리
+        
+		List<CalDto>clist=calViewList(id, yyyyMM);
+		
+		map.put("clist", clist);
         return map;
     }
 
@@ -124,6 +134,31 @@ public class CalServiceImp {
     public CalDto calBoardDetail(int seq){
         return calMapper.calBoardDetail(seq);
     }
+
+    //일정 수정하기
+	public int calBoardUpdate(UpdateCalCommand updateCalCommand) {
+		//Client                Server
+		//      ------> command --> dto --> mapper전달
+		//  commad--> dto로 값 복사
+		CalDto dto=modelMapper.map(updateCalCommand, CalDto.class);
+		//"202510230939"--> mdate 12자리로 저장
+		String mdate=updateCalCommand.getYear()
+				    +isTwo(updateCalCommand.getMonth()+"")
+				    +isTwo(updateCalCommand.getDate()+"")
+				    +isTwo(updateCalCommand.getHour()+"")
+				    +isTwo(updateCalCommand.getMin()+"");			
+		dto.setMdate(mdate);//필드매칭이 안되는 값은 따로 처리해준다.
+		
+		return calMapper.calBoardUpdate(dto);
+	}
+
+    //일일별 일정 가져오기
+	public List<CalDto> calViewList(String id, String yyyyMM){
+		Map<String,String> map=new HashMap<String, String>();
+		map.put("id", id);
+		map.put("yyyyMM", yyyyMM);
+		return calMapper.calViewList(map);
+	}
 
     //문자열 2자리로 변환하는 메서드
     public String isTwo(String s){

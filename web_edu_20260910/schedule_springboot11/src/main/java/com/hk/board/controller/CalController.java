@@ -99,6 +99,7 @@ public class CalController {
         return "calboard/calboardlist";
     }
 
+    //삭제하기
     @PostMapping("/calmuldel")
     public String calMulDel(@Validated DeleteCalCommand deleteCalCommand,
                             BindingResult result,
@@ -158,5 +159,22 @@ public class CalController {
         model.addAttribute("updateCalCommand", updateCalCommand);
         return "calboard/calboarddetail";
     }
+
+    //수정하기
+	@PostMapping("/calboardupdate")
+	public String calBoardUpdate(@Validated UpdateCalCommand updateCalCommand,
+			   				    BindingResult result,
+                                RedirectAttributes redirectAttributes
+                            ) {
+		if(result.hasErrors()) {
+			log.info("수정오류");
+			
+			return "calboard/calboarddetail";
+		}
+		
+		calService.calBoardUpdate(updateCalCommand);
+		redirectAttributes.addAttribute("seq", updateCalCommand.getSeq());
+		return "redirect:/schedule/calboarddetail";
+	}
     
 }

@@ -33,9 +33,14 @@
                     <th:block th:each= "i:${#numbers.sequence(1,calMap.lastDay)}">
                         <div>
                             <a th:href="@{/schedule/calboardlist(year=${calMap.year},month=${calMap.month},date=${i})}" th:text="${i}" class="d"></a>
-                            <a th:href="@{/schedule/addcalboardform(year=${calMap.year},month=${calMap.month},date=${i})}">추가</a>
+                            <a th:href="@{/schedule/addcalboardform(year=${calMap.year},month=${calMap.month},date=${i})}">
+                                <img class="pen" th:src="@{/img/pen.png}" alt="일정추가"/>
+                            </a>
                             <!-- 일정 목록이 출력되는 부분-->
-                             
+                             <!-- i값하고 clist의 날짜와 비교해서 일정 출력 -->
+                            <th:block th:with="calList=${@util.getCalViewList(i, calMap.clist)}">
+                                [(${calList})]
+                            </th:block>
                         </div>
                     </th:block>
                 </div>

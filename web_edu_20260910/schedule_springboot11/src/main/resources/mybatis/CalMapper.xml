@@ -38,4 +38,17 @@
             #{seq}
         </foreach>
     </delete>
+
+    <select id="calViewList" parameterType="Map" resultType="CalDto">
+		SELECT SEQ, ID, TITLE, CONTENT, MDATE, REGDATE
+		FROM 
+			(
+			SELECT 
+			ROW_NUMBER() OVER(PARTITION BY substr(mdate,1,8) ORDER BY mdate) 'rn', 
+			 seq, id, title, content, mdate, regdate
+			FROM CALBOARD
+			WHERE id = #{id} AND SUBSTRING(mdate,1,6) = #{yyyyMM}
+			) a
+		WHERE rn BETWEEN 1 AND 3
+	</select>
 </mapper>

@@ -2,8 +2,11 @@ package com.hk.board.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import com.hk.board.dtos.CalDto;
 
 // thymeleaf에서 호출할때 "util"불러주면 됨 (알아서 Util util 정의해줌)
 @Component("util") // <-- 내가 따로 이름을 정의한다면 
@@ -27,4 +30,24 @@ public class Util {
     }
 
     // 파리미터(list객체, 해당 일(date))
+    //일일별 일정 목록을 출력해주는 기능
+	// calendar.html에서 날짜 출력할때 사용된 변수 i
+	public String getCalViewList(int i,List<CalDto> clist) {
+		if(clist == null || clist.isEmpty()){
+			return "";
+		}
+
+		String d=String.format("%02d", i);
+        StringBuilder sb = new StringBuilder();//"<p>일정제목</p><p>일정제목</p>"
+
+		for (int j = 0; j < clist.size(); j++) {
+			if(clist.get(j).getMdate().substring(6, 8).equals(d)) {
+				String ctitle=clist.get(j).getTitle();
+                sb.append("<p>")
+                  .append(ctitle.length()>7?ctitle.substring(0, 7)+"..":ctitle)
+                  .append("</p>");
+			}
+		}
+		return sb.toString();
+	}
 }
