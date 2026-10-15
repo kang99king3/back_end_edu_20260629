@@ -29,7 +29,7 @@
     <div layout:fragment="content">
         <div id="container">
             <form>
-                <table>
+                <table class="table">
                     <tr>
                         <th><input class="form-check-input" type="checkbox" name="all" onclick="allSel(this.checked)"/>
                         <th>일정</th>
@@ -48,7 +48,7 @@
                                        name="seq"
                                        th:value="${dto.seq}"
                                 /> </td>
-                            <td th:text="${dto.mdate}"></td>
+                            <td th:text="${@util.toDates(dto.mdate,'yyyy.MM.dd HH:mm')}"></td>
                             <td>
                                 <a th:href="@{/schedule/calboarddetail(seq=${dto.seq})}" 
                                    th:text="${dto.title}"></a>
