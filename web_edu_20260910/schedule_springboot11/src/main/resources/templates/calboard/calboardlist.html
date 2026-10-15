@@ -6,6 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>일정목록(calboardlist.html)</title>
+    <script type="text/javascript">
+
+	function isConfirm(){
+		if(confirm("정말 삭제 하시겠습니까?")){
+			return true;
+		}
+		return false;
+	}
+	
+	//전체선택 체크박스 기능 구현
+	function allSel(bool){
+		var chks=document.getElementsByName("seq");//[chk,chk,chk..]
+		for (var i = 0; i < chks.length; i++) {
+			chks[i].checked=bool;//true:체크, false:체크해제
+		}
+	}
+</script>
 </head>
 <body>
     목록 내용: checkbox, mdate, title, regdate
