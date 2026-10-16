@@ -39,7 +39,7 @@ public class Util {
 
 		String d=String.format("%02d", i);
         StringBuilder sb = new StringBuilder();//"<p>일정제목</p><p>일정제목</p>"
-
+     
 		for (int j = 0; j < clist.size(); j++) {
 			if(clist.get(j).getMdate().substring(6, 8).equals(d)) {
 				String ctitle=clist.get(j).getTitle();

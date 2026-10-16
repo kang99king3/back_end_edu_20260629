@@ -152,7 +152,7 @@ public class CalServiceImp {
 		return calMapper.calBoardUpdate(dto);
 	}
 
-    //일일별 일정 가져오기
+    //월별 일정 가져오기
 	public List<CalDto> calViewList(String id, String yyyyMM){
 		Map<String,String> map=new HashMap<String, String>();
 		map.put("id", id);
