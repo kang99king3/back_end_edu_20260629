@@ -1,5 +1,6 @@
 # main.py
 # 서버 실행 안될경우 : python -m uvicorn main:app --reload 
+from fastapi import HTTPException
 from fastapi import FastAPI
 
 app = FastAPI(title="나만의 첫 API 서버")
@@ -131,3 +132,46 @@ def create_members(member:Member):
 @app.get("/members")
 def list_members():
     return {"count": len(members_db), "members": members_db}
+
+#============================================================
+# page17.chapter4.[실습] 종합 : 상품 관리 API (CRUD)
+
+class Product(BaseModel):
+    name: str
+    price: int
+    in_stock: bool = True
+
+products_db = {1: {"name": "노트북", "price": 1200000, "in_stock": True}}
+
+# [1번 문제] GET "/products/{product_id}" : products_db에 해당 id가 없으면
+# HTTPException(404, "상품을 찾을 수 없습니다.")를 발생시키고, 있으면 그 상품을 반환하세요.
+@app.get("/products17/{product_id}")
+def detail_products17(product_id:int):
+    if product_id not in products_db:
+        raise HTTPException(
+            status_code=404,
+            detail="상품을 찾을 수 없습니다."
+        )
+    return products_db[product_id]
+# [2번 문제] PUT "/products/{product_id}" : Product 데이터를 Body로 받아
+# products_db[product_id]를 새 값으로 덮어쓰고 {"message": "수정 완료"} 를 반환하세요.
+@app.put("/products17/{product_id}")
+def update_products17(product:Product,product_id:int):
+    if product_id not in products_db:
+        raise HTTPException(
+            status_code=404,
+            detail="상품을 찾을 수 없습니다."
+        )
+    products_db[product_id]=product.model_dump()
+    return {"message":"수정완료"}
+# [도전 문제] DELETE "/products/{product_id}" : 없는 id면 404, 있으면 삭제 후
+# {"message": "삭제 완료"} 를 반환하는 함수까지 작성해 CRUD를 완성하세요.
+@app.delete("/products17/{product_id}")
+def update_products17(product_id:int):
+    if product_id not in products_db:
+        raise HTTPException(
+            status_code=404,
+            detail="상품을 찾을 수 없습니다."
+        )
+    del products_db[product_id]
+    return {"message":"삭제완료"}
