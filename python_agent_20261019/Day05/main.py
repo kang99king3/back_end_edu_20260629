@@ -63,3 +63,37 @@ def courses(course_id:int):
 @app.get("/students/{grade}/{number}/score")
 def students(grade:int, number:int):
     return {"grade": grade, "number": number, "score": 90}
+
+
+#========================================================================
+# page12.chapter3.[실습] Path + Query 파라미터 종합
+
+# [1번 문제]
+# "/products/{product_id}" 경로에서 product_id(정수)와, 쿼리 파라미터로
+# discount(정수, 기본값 0)를 받아 {"product_id": product_id, "discount": discount}
+# 를 반환하는 함수를 작성하세요.
+@app.get("/products/{product_id}")
+def products(product_id:int,discount:int = 0):
+    return {"product_id": product_id, "discount": discount}
+
+# [2번 문제]
+# 위 함수에 쿼리 파라미터 show_tax(불리언, 기본값 False)를 추가하고,
+# show_tax가 True이면 반환 딕셔너리에 "tax_included": True를 추가로
+# 넣어서 응답하도록 조건문으로 수정하세요.
+@app.get("/products/{product_id}")
+def products(product_id:int,discount:int = 0,show_tax:bool = False):
+    result = {"product_id": product_id, "discount": discount}
+    if show_tax :
+        result["tax_include"]=show_tax
+    return result
+
+# [도전 문제]
+# "/classes/{class_id}/students" 경로에서 class_id(정수)와 쿼리 파라미터
+# keyword(문자열, 기본값 "")를 받아, keyword가 빈 문자열이 아니면 검색하는
+# 상황을 가정한 메시지를 반환하는 함수를 작성하세요.
+@app.get("/classes/{class_id}/students")
+def classes(class_id:int, keyword:str = ""):
+    result={"class_id":class_id,"message":"모든 학생 목록입니다."}
+    if(keyword !=""):
+        result["message"]=f'{keyword}에 대한 내용입니다.'
+    return result
