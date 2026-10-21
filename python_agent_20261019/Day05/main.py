@@ -72,9 +72,9 @@ def students(grade:int, number:int):
 # "/products/{product_id}" 경로에서 product_id(정수)와, 쿼리 파라미터로
 # discount(정수, 기본값 0)를 받아 {"product_id": product_id, "discount": discount}
 # 를 반환하는 함수를 작성하세요.
-@app.get("/products/{product_id}")
-def products(product_id:int,discount:int = 0):
-    return {"product_id": product_id, "discount": discount}
+# @app.get("/products/{product_id}")
+# def products(product_id:int,discount:int = 0):
+#     return {"product_id": product_id, "discount": discount}
 
 # [2번 문제]
 # 위 함수에 쿼리 파라미터 show_tax(불리언, 기본값 False)를 추가하고,
@@ -97,3 +97,37 @@ def classes(class_id:int, keyword:str = ""):
     if(keyword !=""):
         result["message"]=f'{keyword}에 대한 내용입니다.'
     return result
+
+#===========================================================
+from pydantic import BaseModel
+from typing import Optional
+
+# 임시 DB 설정: 실제로는 DB에 저장하는 기능을 구현해야 함
+members_db = []
+
+# [1번 문제]
+# name(문자열), age(정수), club(문자열), phone(문자열, 없을 수도 있음)을 갖는
+# Member 라는 이름의 Pydantic 모델을 정의하세요. (phone은 Optional 사용)
+class Member(BaseModel):
+    name:str
+    age:int
+    club:str
+    phone:Optional[str] = None
+    # phone:str | None = None
+
+# [2번 문제]
+# POST 방식으로 "/members" 경로에 접속하면 Member 데이터를 받아 
+# member.model_dump(): 딕셔너리로 변환해서 members_db에 추가 하기
+# members_db 리스트에 추가하고, {"message": "등록 완료", "data": 등록내용}
+# 을 반환하는 함수를 작성하세요.
+@app.post("/members")
+def create_members(member:Member):
+    members_db.append(member.model_dump())# 딕셔너리로 변환해서 추가
+    return {"message":"등록완료","data":member}
+
+# [도전 문제]
+# GET 방식으로 "/members" 경로에 접속하면 {"count": 인원수, "members": 목록}
+# 을 반환하는 함수를 작성하세요.
+@app.get("/members")
+def list_members():
+    return {"count": len(members_db), "members": members_db}
