@@ -175,3 +175,9 @@ def update_products17(product_id:int):
         )
     del products_db[product_id]
     return {"message":"삭제완료"}
+
+# 요청/응답을 처리하는 Controller 구현
+# DB연결 -> Database:Table 연동 -> 실제 요청했을때 반영되도록 구현
+# 상품관리하는 시스템 : id, name, 수량, 가격 ..
+# AI 활용해서 구현해보기: 자신의 개발환경, 구현하려는 기능 등등
+
